@@ -27,10 +27,12 @@
       "publisher": {"@type": "Organization", "name": "Gaia Arts Co., Ltd.", "url": "https://gaiaarts.org"}
     } | tojson }}</script>
 {% endblock %}
-{% block content %}
+{% block page_header %}
         <nav class="breadcrumb" aria-label="パンくず"><a href="{{ url_for('site_root') }}">Home</a> / <a href="{{ url_for('gaia_jp_insights') }}">日本語コラム</a> / {{ article.title }}</nav>
+        <h1>{{ article.title }}</h1>
+{% endblock %}
+{% block content %}
         <article>
-          <h1>{{ article.title }}</h1>
           <div class="insight-body sub-section">
             {{ article.body_html | safe }}
           </div>

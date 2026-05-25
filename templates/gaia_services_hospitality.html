@@ -6,10 +6,12 @@
 {% block json_ld %}
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Hospitality Training in Asia | Service Quality and Team Development | Gaia Arts","description":"Practical hospitality training for teams in Asia, focused on service quality, mindset, teamwork, and customer experience. Led by Kenji Katagiri.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
 {% endblock %}
-{% block content %}
+{% block page_header %}
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Services / Hospitality training</nav>
         <h1>Hospitality Training for Service Teams in Asia</h1>
         <p class="sub-lead">Great service is not created by technique alone. It is built through mindset, team alignment, communication, and the ability to respond to customers with consistency and care. At Gaia Arts, our hospitality training programs are designed to help service teams strengthen both their skills and their internal condition, so quality can be delivered in a natural and sustainable way.</p>
+{% endblock %}
+{% block content %}
 
         <section class="sub-section" aria-labelledby="hosp-focus">
           <h2 id="hosp-focus">What this training focuses on</h2>

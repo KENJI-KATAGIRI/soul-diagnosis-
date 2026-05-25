@@ -6,10 +6,12 @@
 {% block json_ld %}
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Kenji Katagiri | Founder of Gaia Arts | Trainer and Human Development Professional","description":"Learn more about Kenji Katagiri, founder of Gaia Arts, with more than 30 years of experience in Japan's beauty, service, and people development fields.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
 {% endblock %}
-{% block content %}
+{% block page_header %}
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / About / Kenji Katagiri</nav>
         <h1>About Kenji Katagiri</h1>
         <p class="sub-lead">Kenji Katagiri is the founder of Gaia Arts and a human development professional with more than 30 years of experience in Japan’s beauty and service industries. His work combines practical field knowledge, people development, service quality, and a deep interest in internal alignment and decision-making.</p>
+{% endblock %}
+{% block content %}
 
         <section class="sub-section" aria-labelledby="kenji-bg">
           <h2 id="kenji-bg">Background</h2>

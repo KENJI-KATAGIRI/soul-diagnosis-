@@ -6,10 +6,12 @@
 {% block json_ld %}
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Workforce Training Cambodia | Hospitality, Service and Leadership | Gaia Arts","description":"Workforce training and service quality development for Cambodia, combining Japanese practical experience with local collaboration and human-centered learning.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
 {% endblock %}
-{% block content %}
+{% block page_header %}
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Regions / Cambodia</nav>
         <h1>Workforce Training and Human Development for Cambodia</h1>
         <p class="sub-lead">Cambodia is growing quickly, and many organizations are looking for practical ways to strengthen people, service quality, and workplace capability. Gaia Arts aims to contribute through training programs that combine Japanese field experience with local collaboration, especially in hospitality, beauty, service, and leadership development.</p>
+{% endblock %}
+{% block content %}
 
         <section class="sub-section" aria-labelledby="kh-why">
           <h2 id="kh-why">Why Cambodia</h2>

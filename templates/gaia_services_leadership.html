@@ -6,10 +6,12 @@
 {% block json_ld %}
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Leadership Development in Asia | Inner Leadership and Decision-Making | Gaia Arts","description":"Leadership development programs focused on inner alignment, decision-making, communication, and team growth for organizations across Asia.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
 {% endblock %}
-{% block content %}
+{% block page_header %}
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Services / Leadership development</nav>
         <h1>Leadership Development Through Inner Alignment and Decision-Making</h1>
         <p class="sub-lead">Leadership is not only about strategy, instruction, or authority. Sustainable leadership also depends on internal condition, clarity, communication, and the ability to make aligned decisions under pressure. Gaia Arts offers leadership development programs that combine practical training with a deeper focus on internal leadership.</p>
+{% endblock %}
+{% block content %}
 
         <section class="sub-section" aria-labelledby="lead-why">
           <h2 id="lead-why">Why inner leadership matters</h2>

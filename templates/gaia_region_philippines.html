@@ -6,10 +6,12 @@
 {% block json_ld %}
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Service Training Philippines | Hospitality and Team Development | Gaia Arts","description":"Service training and team development for businesses and organizations in the Philippines, focused on hospitality, mindset, and practical quality improvement.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
 {% endblock %}
-{% block content %}
+{% block page_header %}
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Regions / Philippines</nav>
         <h1>Service Training and Team Development for the Philippines</h1>
         <p class="sub-lead">The Philippines has strong potential in hospitality, service, customer care, and people-centered industries. Gaia Arts supports organizations that want to strengthen service quality, team culture, and practical human development through training that connects mindset, professionalism, and action.</p>
+{% endblock %}
+{% block content %}
 
         <section class="sub-section" aria-labelledby="ph-focus">
           <h2 id="ph-focus">Training focus</h2>

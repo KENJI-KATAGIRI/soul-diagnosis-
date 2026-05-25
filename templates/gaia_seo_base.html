@@ -31,34 +31,84 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      :root { --text: #1a1a2e; --muted: #555; --light: #888; --bg: #fff; --bg-alt: #f7f8fa; --accent: #2c3e8f; --border: #e0e2e8; --max-w: 720px; }
+      :root {
+        --text: #0f172a; --muted: #64748b; --light: #94a3b8;
+        --bg: #fff; --bg-alt: #f8fafc; --accent: #c9a97a;
+        --accent-light: #fdf6ec; --border: #e2e8f0;
+        --dark: #070d1a; --dark-2: #0f1827; --max-w: 760px;
+      }
       body { font-family: Inter, system-ui, sans-serif; color: var(--text); background: var(--bg); line-height: 1.75; font-size: 16px; -webkit-font-smoothing: antialiased; }
+      img { max-width: 100%; display: block; }
       .wrap { width: min(var(--max-w), calc(100% - 40px)); margin: 0 auto; }
-      .site-header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+
+      /* ── Header (dark) ── */
+      .site-header { position: sticky; top: 0; z-index: 10; background: var(--dark); border-bottom: 1px solid rgba(255,255,255,.07); backdrop-filter: blur(12px); }
       .site-header .wrap { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 12px; flex-wrap: wrap; }
-      .site-logo { font-weight: 700; font-size: 17px; color: var(--accent); text-decoration: none; }
+      .site-logo { font-weight: 700; font-size: 17px; color: #fff; text-decoration: none; letter-spacing: .02em; flex-shrink: 0; }
       .site-nav { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
-      .site-nav a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; }
+      .site-nav a { color: rgba(255,255,255,.6); text-decoration: none; font-size: 13px; font-weight: 500; transition: color .15s; }
       .site-nav a:hover { color: var(--accent); }
-      .lang-sw { display: flex; gap: 4px; margin-left: 6px; border-left: 1px solid var(--border); padding-left: 10px; }
-      .lang-btn { appearance: none; border: 1px solid var(--border); background: var(--bg); padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; color: var(--muted); cursor: pointer; }
+      .lang-sw { display: flex; gap: 4px; margin-left: 6px; border-left: 1px solid rgba(255,255,255,.12); padding-left: 10px; }
+      .lang-btn { appearance: none; border: 1px solid rgba(255,255,255,.18); background: transparent; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; color: rgba(255,255,255,.55); cursor: pointer; transition: all .15s; }
+      .lang-btn:hover { color: #fff; border-color: rgba(255,255,255,.4); }
       .lang-btn--active { background: var(--accent); color: #fff; border-color: var(--accent); }
-      .sub-main { padding: 36px 0 72px; }
-      .breadcrumb { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
-      .breadcrumb a { color: var(--accent); text-decoration: none; }
-      .sub-main h1 { font-size: clamp(26px, 4vw, 34px); font-weight: 700; line-height: 1.25; margin-bottom: 20px; color: var(--text); }
-      .sub-lead { font-size: 17px; color: var(--muted); margin-bottom: 28px; line-height: 1.7; }
-      .sub-section { margin-top: 28px; }
-      .sub-section h2 { font-size: 19px; font-weight: 700; margin-bottom: 12px; color: var(--accent); }
-      .sub-section p { margin-bottom: 14px; color: var(--text); }
-      .sub-section ul { margin: 12px 0 14px 1.2em; }
-      .sub-links { margin-top: 20px; font-size: 15px; line-height: 1.65; }
-      .sub-links a { color: var(--accent); }
-      .btn { display: inline-block; margin-top: 20px; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; background: var(--accent); color: #fff; }
-      .btn:hover { opacity: 0.93; }
-      .site-footer { padding: 28px 0; text-align: center; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 48px; }
-      .site-footer a { color: var(--accent); }
-      @media (max-width: 640px) { .site-nav a { font-size: 12px; } }
+
+      /* ── Page header (dark strip) ── */
+      .sub-page-header {
+        background: var(--dark); padding: 48px 0 44px;
+        position: relative; overflow: hidden;
+      }
+      .sub-page-header::before {
+        content: ''; position: absolute; inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+        background-size: 64px 64px; pointer-events: none;
+      }
+      .sub-page-header .wrap { position: relative; }
+      .breadcrumb { font-size: 12px; color: rgba(255,255,255,.4); margin-bottom: 18px; letter-spacing: .02em; }
+      .breadcrumb a { color: rgba(255,255,255,.4); text-decoration: none; transition: color .15s; }
+      .breadcrumb a:hover { color: var(--accent); }
+      .sub-page-header h1 { font-size: clamp(24px, 4vw, 40px); font-weight: 800; letter-spacing: -.035em; line-height: 1.18; color: #fff; margin-bottom: 0; }
+      .sub-page-header .sub-lead { font-size: 15px; color: rgba(255,255,255,.58); margin-top: 16px; margin-bottom: 0; line-height: 1.78; }
+
+      /* ── Main content ── */
+      .sub-main { padding: 48px 0 80px; }
+      .sub-lead { font-size: 16px; color: var(--muted); margin-bottom: 28px; line-height: 1.75; }
+      .sub-section { margin-top: 36px; padding-top: 36px; border-top: 1px solid var(--border); }
+      .sub-section:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+      .sub-section h2 { font-size: 19px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 14px; color: var(--text); }
+      .sub-section p { margin-bottom: 14px; color: var(--text); font-size: 15px; line-height: 1.75; }
+      .sub-section ul, .sub-section ol { margin: 12px 0 14px 1.3em; }
+      .sub-section li { margin-bottom: 8px; font-size: 15px; color: var(--text); line-height: 1.7; }
+      .sub-links { margin-top: 24px; font-size: 15px; line-height: 1.65; }
+      .sub-links a { color: var(--accent); text-decoration: none; font-weight: 600; }
+      .sub-links a:hover { text-decoration: underline; }
+
+      /* ── Button (silver) ── */
+      .btn {
+        display: inline-block; margin-top: 20px;
+        background: linear-gradient(145deg, #dde0e6 0%, #a8adb8 100%);
+        color: #0f172a; padding: 12px 28px; border-radius: 7px;
+        font-weight: 700; font-size: 14px; letter-spacing: .05em; text-decoration: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.6);
+        transition: all .2s;
+      }
+      .btn:hover {
+        background: linear-gradient(145deg, #cdd0d8 0%, #989daa 100%);
+        transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.22); opacity: 1;
+      }
+
+      /* ── Footer (dark) ── */
+      .site-footer { background: #040810; color: rgba(255,255,255,.3); border-top: 1px solid rgba(255,255,255,.07); padding: 28px 0; text-align: center; font-size: 13px; }
+      .site-footer a { color: var(--accent); text-decoration: none; }
+      .site-footer a:hover { text-decoration: underline; }
+
+      @media (max-width: 640px) {
+        .site-nav a { font-size: 12px; }
+        .sub-page-header { padding: 36px 0 32px; }
+        .sub-main { padding: 36px 0 60px; }
+      }
     </style>
     {% block head_extra %}{% endblock %}
     <script type="application/ld+json">
@@ -130,6 +180,9 @@
   </head>
   <body>
     {% include '_gaia_header.html' %}
+    <div class="sub-page-header">
+      <div class="wrap">{% block page_header %}{% endblock %}</div>
+    </div>
     <main class="sub-main">
       <div class="wrap">{% block content %}{% endblock %}</div>
     </main>

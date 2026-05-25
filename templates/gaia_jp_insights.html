@@ -27,10 +27,12 @@
 {% block json_ld %}
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"経営者向け日本語コラム | Gaia Arts","description":"経営、リーダーシップ、人材育成、意思決定に関する考え方をまとめた日本語コラム一覧。現場や組織づくりに活かせる視点を、状態や人の育ち方も含めてお届けします。","url":"{{ seo_canonical_url }}","inLanguage":"ja","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
 {% endblock %}
-{% block content %}
+{% block page_header %}
         <nav class="breadcrumb" aria-label="パンくず"><a href="{{ url_for('site_root') }}">Home</a> / <a href="{{ url_for('gaia_jp_insights') }}">日本語コラム</a></nav>
         <h1>日本語コラム</h1>
         <p class="sub-lead">経営者・リーダー向けに、経営・人材育成・意思決定・組織づくりの考え方を静かな読みものとしてまとめています。現場で活かせる視点や、状態・人の育ち方にも触れます。日記やニュースではなく内容中心です。英語の <a href="{{ url_for('gaia_insights') }}">Insights</a> とは別一覧です。</p>
+{% endblock %}
+{% block content %}
 
         <section class="sub-section insight-index-section" aria-labelledby="jp-col-list">
           <h2 id="jp-col-list">読みもの一覧</h2>

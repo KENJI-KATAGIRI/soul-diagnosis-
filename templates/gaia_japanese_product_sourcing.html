@@ -6,10 +6,12 @@
 {% block json_ld %}
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Japanese Product Sourcing for Beauty and Service Businesses | Gaia Arts","description":"Gaia Arts helps connect beauty and service businesses with suitable Japanese products, focusing on quality, practicality, and market fit.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
 {% endblock %}
-{% block content %}
+{% block page_header %}
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Japanese product sourcing</nav>
         <h1>Japanese Product Sourcing for Beauty and Service Businesses</h1>
         <p class="sub-lead">Not every market needs the most famous product. In many cases, what matters more is the right balance of quality, usability, price, and market fit. Gaia Arts helps connect businesses with Japanese products that are practical, relevant, and well suited to the target market.</p>
+{% endblock %}
+{% block content %}
 
         <section class="sub-section" aria-labelledby="src-support">
           <h2 id="src-support">What we support</h2>

@@ -6,10 +6,12 @@
 {% block json_ld %}
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Leadership and Service Training Indonesia | Gaia Arts","description":"Leadership and service training programs for Indonesia, focused on internal alignment, communication, hospitality, and people development.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
 {% endblock %}
-{% block content %}
+{% block page_header %}
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Regions / Indonesia</nav>
         <h1>Leadership and Service Training for Indonesia</h1>
         <p class="sub-lead">Indonesia offers strong opportunities for service development, leadership training, and human-centered education. Gaia Arts provides practical programs designed to support organizations that want to strengthen both performance and people.</p>
+{% endblock %}
+{% block content %}
 
         <section class="sub-section" aria-labelledby="id-themes">
           <h2 id="id-themes">Key themes</h2>

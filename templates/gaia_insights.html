@@ -34,10 +34,12 @@
 {% block json_ld %}
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Insights | Gaia Arts","description":"Articles and practical perspectives from Gaia Arts on leadership, hospitality, service quality, and human development across Asia.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
 {% endblock %}
-{% block content %}
+{% block page_header %}
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Insights</nav>
         <h1>Insights</h1>
         <p class="sub-lead">Insights brings together articles, perspectives, and practical reflections from Gaia Arts. These readings are meant to support people who care about leadership, hospitality, service quality, decision-making, and human development—especially where teams are growing, crossing cultures, or working under real operational pressure. They are not updates or announcements; they are working notes from the field, offered in a calm, direct voice.</p>
+{% endblock %}
+{% block content %}
 
         <section class="sub-section" aria-labelledby="ins-cat">
           <h2 id="ins-cat">Topics we explore</h2>

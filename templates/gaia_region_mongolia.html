@@ -6,10 +6,12 @@
 {% block json_ld %}
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Training and Human Development Mongolia | Gaia Arts","description":"Training and human development programs for Mongolia, focused on leadership, service quality, and practical professional growth.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
 {% endblock %}
-{% block content %}
+{% block page_header %}
         <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Regions / Mongolia</nav>
         <h1>Training and Human Development for Mongolia</h1>
         <p class="sub-lead">Gaia Arts is interested in supporting people development in Mongolia through practical, human-centered training programs. Areas of focus may include leadership, communication, service quality, and professional development that help people grow with clarity and confidence.</p>
+{% endblock %}
+{% block content %}
 
         <section class="sub-section" aria-labelledby="mn-why">
           <h2 id="mn-why">Why Mongolia matters</h2>
