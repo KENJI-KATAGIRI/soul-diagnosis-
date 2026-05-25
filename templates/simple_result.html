@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}8問の結果 | 魂のナビ診断{% endblock %}
+
+{% block content %}
+  <section class="card simpleResult simpleResult--{{ level }}" data-track-view="simple_result">
+    <div class="card__header">
+      <div class="pill">8問の結果</div>
+      <h1 class="h1 simpleResult__title">{{ template.title }}</h1>
+    </div>
+    <div class="panel simpleResult__panel">
+      <p class="lead simpleResult__oneLiner">{{ template.one_liner }}</p>
+
+      <div class="simpleResult__block">
+        <h2 class="simpleResult__subheading">なぜそうなるか</h2>
+        <p class="simpleResult__text">{{ template.why }}</p>
+      </div>
+
+      <div class="simpleResult__block simpleResult__block--accent">
+        <h2 class="simpleResult__subheading">この結果が意味すること</h2>
+        <p class="simpleResult__text">{{ template.deeper }}</p>
+      </div>
+
+      <div class="simpleResult__block">
+        <h2 class="simpleResult__subheading">最初の一歩</h2>
+        <p class="simpleResult__text">{{ template.next_step }}</p>
+      </div>
+
+      <div class="simpleResult__closing fineprint">
+        <p class="simpleResult__closingGap">
+          なぜこのズレが起きているのか。<br />
+          どうすれば整うのか。<br />
+          それは、30問の本診断で初めて見えてきます。
+        </p>
+      </div>
+    </div>
+    <div class="actions actions--footer simpleResult__actions">
+      <a class="btn btn--primary btn--large" href="{{ url_for('diagnosis_email_gate') }}" data-track-click="simple_result_to_email_gate">30問でズレの正体を診断する（無料）→</a>
+    </div>
+    <p class="fineprint simpleResult__hint">診断後、結果をメールでお届けします。</p>
+  </section>
+{% endblock %}

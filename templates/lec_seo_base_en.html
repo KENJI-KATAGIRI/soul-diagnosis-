@@ -1,0 +1,106 @@
+{# life-energy-coaching.net 英語サブページ用。lang=en 固定。日本語版へのリンクは子テンプレで lec_header_ja_href を上書き。 #}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{% block seo_title %}{% endblock %}</title>
+    <link rel="canonical" href="{{ seo_canonical_url }}" />
+    <meta name="description" content="{% block seo_description %}{% endblock %}" />
+    {% block robots_meta %}{% endblock %}
+    {%- if search_console_verification %}
+    <meta name="google-site-verification" content="{{ search_console_verification }}" />
+    {%- endif %}
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='lec-hero.png') }}" />
+    <meta property="og:title" content="{% block og_title %}{% endblock %}" />
+    <meta property="og:description" content="{% block og_description %}{% endblock %}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ seo_canonical_url }}" />
+    <meta property="og:image" content="{{ url_for('static', filename='lec-flow-wide.png', _external=True) }}" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {%- if ga_measurement_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_measurement_id }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ ga_measurement_id }}');
+    </script>
+    {%- endif %}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --text: #333; --muted: #555; --light: #888;
+        --bg: #fff; --bg-alt: #f7faf5; --card: #ffffff;
+        --accent: #3a7d44; --accent-light: #e8f5e9;
+        --border: #d5e5d0; --max-w: 800px;
+      }
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Noto Sans JP', system-ui, sans-serif; color: var(--text); background: var(--bg); line-height: 1.9; font-size: 15px; -webkit-font-smoothing: antialiased; }
+      .wrap { width: min(var(--max-w), calc(100% - 32px)); margin: 0 auto; }
+      .site-header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+      .site-header .wrap { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; gap: 10px; flex-wrap: wrap; }
+      .brand { text-decoration: none; display: flex; align-items: center; gap: 8px; }
+      .brand img { height: 40px; width: auto; }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+      .site-nav a { color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 500; }
+      .site-nav a:hover { color: var(--accent); }
+      .lec-header-ja { font-size: 11px; font-weight: 700; margin-left: 8px; padding-left: 10px; border-left: 1px solid var(--border); }
+      .lec-header-ja a { color: var(--accent); }
+      .sub-main { padding: 32px 0 64px; }
+      .breadcrumb { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+      .breadcrumb a { color: var(--accent); text-decoration: none; }
+      .sub-main h1 { font-size: clamp(22px, 4vw, 28px); color: var(--accent); margin-bottom: 20px; line-height: 1.4; }
+      .sub-lead { font-size: 16px; color: var(--muted); margin-bottom: 28px; line-height: 1.85; }
+      .sub-section { margin-top: 32px; }
+      .sub-section h2 { font-size: 18px; color: var(--accent); margin-bottom: 12px; }
+      .sub-section p, .sub-section ul { font-size: 15px; color: var(--text); margin-bottom: 12px; }
+      .sub-section ul { padding-left: 1.2em; }
+      .sub-links { margin-top: 16px; font-size: 14px; }
+      .sub-links a { color: var(--accent); }
+      .btn { display: inline-block; margin-top: 20px; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 14px; text-decoration: none; background: var(--accent); color: #fff; }
+      .btn:hover { opacity: 0.92; }
+      .site-footer { padding: 24px 0; text-align: center; font-size: 12px; color: var(--light); border-top: 1px solid var(--border); margin-top: 48px; }
+      .site-footer a { color: var(--muted); }
+      @media (max-width: 700px) { .site-nav { gap: 8px 10px; } .site-nav a { font-size: 11px; } }
+    </style>
+    {% block head_extra %}{% endblock %}
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a href="{{ url_for('lec_landing') }}" class="brand">
+          <picture>
+            <source type="image/webp" srcset="{{ url_for('static', filename='gaia-logo.webp') }}" />
+            <img src="{{ url_for('static', filename='gaia-logo.png') }}" alt="GaiaArtsCreation" width="1024" height="1024" decoding="async" />
+          </picture>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <a href="{{ url_for('lec_landing') }}#about">Treatment</a>
+          <a href="{{ url_for('lec_landing') }}#profile">Profile</a>
+          <a href="{{ url_for('lec_landing') }}#voices">Client voices</a>
+          <a href="{{ url_for('lec_landing') }}#details">Session details</a>
+          <a href="{{ url_for('lec_page_kinesiology_en_lec') }}">Kinesiology</a>
+          <a href="{{ url_for('lec_page_chakra_healing_en_lec') }}">Energy &amp; chakras</a>
+          <a href="{{ url_for('lec_page_blog_en_lec') }}">Heart column</a>
+          <a href="{{ url_for('lec_landing') }}#contact">Contact</a>
+          <span class="lec-header-ja"><a href="{% block lec_header_ja_href %}{{ url_for('lec_landing') }}{% endblock %}">日本語</a></span>
+        </nav>
+      </div>
+    </header>
+    <main class="sub-main">
+      <div class="wrap">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p><a href="{{ url_for('lec_landing') }}#contact">Contact &amp; booking</a> · <a href="{{ url_for('lec_page_blog_en_lec') }}">Heart column</a> · <a href="https://gaiaarts.org/" target="_blank" rel="noopener noreferrer">Gaia Arts (training)</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+{% extends "lec_seo_base_en.html" %}
+{% block seo_title %}Heart column | Life Energy Coaching NAGOYA | Kenji Katagiri{% endblock %}
+{% block og_title %}Heart column | Life Energy Coaching NAGOYA{% endblock %}
+{% block seo_description %}Short essays on doubt, inner mismatch, and how we work in session—personal reflections, not a diary. Leadership topics live on Gaia Arts (Japanese column).{% endblock %}
+{% block og_description %}Heart column—inner life and Life Energy Coaching. Business &amp; leadership reading: Gaia Arts Japanese insights.{% endblock %}
+{% block head_extra %}
+    <style>
+      .column-list { list-style: none; padding: 0; margin: 12px 0 0; }
+      .column-list > li { margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid var(--border); }
+      .column-list > li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+      .column-item__link { font-weight: 700; color: var(--accent); text-decoration: none; font-size: 16px; line-height: 1.5; display: inline-block; }
+      .column-item__link:hover { text-decoration: underline; }
+      .column-item__teaser { font-size: 14px; color: var(--muted); line-height: 1.75; margin: 8px 0 0; }
+      .cta-row { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+      .cta-row .btn { margin-top: 0; }
+      .cta-row .sub-links { margin-top: 0; }
+      .lp-cta-block .sub-links { margin-top: 14px; line-height: 2; }
+    </style>
+    <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Heart column | Life Energy Coaching NAGOYA","description":"Personal heart column on doubt, alignment, and session philosophy.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Life Energy Coaching NAGOYA","url":"https://life-energy-coaching.net/"}}
+    </script>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Heart column</nav>
+        <p class="breadcrumb" style="margin-top:-12px;margin-bottom:8px;font-size:13px"><a href="{{ url_for('lec_page_blog_lec') }}" hreflang="ja" lang="ja">日本語の心のコラム</a></p>
+        <h1>Heart column</h1>
+        <p class="sub-lead">These pieces are quiet reflections on doubt, inner mismatch, and how we hold space in coaching—not a news feed or diary. Articles on leadership, training, and organizations are on <a href="https://gaiaarts.org/jp/insights/" target="_blank" rel="noopener noreferrer">Gaia Arts (Japanese insights)</a>. Choose a title below to read in English.</p>
+
+        <section class="sub-section" aria-labelledby="sec-latest">
+          <h2 id="sec-latest">Articles</h2>
+          {% if column_entries %}
+          <ul class="column-list">
+            {% for e in column_entries %}
+            <li>
+              <a class="column-item__link" href="{{ url_for('lec_page_column_en_lec', slug=e.slug) }}">{{ e.title_en }}</a>
+              {% if e.list_teaser_en %}
+              <p class="column-item__teaser">{{ e.list_teaser_en }}</p>
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p>English articles are being prepared. Please check back, or read the <a href="{{ url_for('lec_page_blog_lec') }}">Japanese column</a>.</p>
+          {% endif %}
+        </section>
+
+        <section class="sub-section lp-cta-block" aria-labelledby="sec-lp">
+          <h2 id="sec-lp">Considering a session?</h2>
+          <p>The column is supplementary reading. Fees, flow, and location are on the main landing page.</p>
+          <div class="cta-row">
+            <a class="btn" href="{{ url_for('lec_landing') }}#details">Session details &amp; fees</a>
+          </div>
+          <p class="sub-links">
+            <a href="{{ url_for('lec_landing') }}#details">What happens in a session</a> ·
+            <a href="{{ url_for('lec_landing') }}">First visit</a> ·
+            <a href="{{ url_for('lec_landing') }}#contact">Contact</a>
+          </p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="sec-related">
+          <h2 id="sec-related">Related</h2>
+          <p class="sub-links"><a href="{{ url_for('lec_page_kinesiology_en_lec') }}">Kinesiology</a> · <a href="{{ url_for('lec_page_chakra_healing_en_lec') }}">Energy &amp; chakras</a></p>
+        </section>
+{% endblock %}

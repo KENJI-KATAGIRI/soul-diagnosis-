@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- 毎週月曜日 09:00 に実行 -->
+  <key>Label</key>
+  <string>com.gaiaarts.weekly-report</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/katagirikenji/魂のナビ講座/.venv/bin/python3</string>
+    <string>/Users/katagirikenji/魂のナビ講座/mcp-google-insights/weekly_report.py</string>
+  </array>
+
+  <!-- 毎週月曜 09:00 -->
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Weekday</key>
+    <integer>1</integer>
+    <key>Hour</key>
+    <integer>9</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/katagirikenji/魂のナビ講座/mcp-google-insights</string>
+
+  <!-- ログ出力先 -->
+  <key>StandardOutPath</key>
+  <string>/Users/katagirikenji/魂のナビ講座/mcp-google-insights/logs/weekly_report.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/katagirikenji/魂のナビ講座/mcp-google-insights/logs/weekly_report_error.log</string>
+
+  <key>RunAtLoad</key>
+  <false/>
+</dict>
+</plist>

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}{{ premium_bundle_name }} · 生成 | 魂のナビ診断{% endblock %}
+
+{% block content %}
+  <section class="card">
+    {% set funnel_done = 1 %}
+    {% set funnel_emphasis = 2 %}
+    {% include '_funnel_rail.html' %}
+    <div class="card__header">
+      <div class="pill">{{ premium_bundle_name }} · 生成</div>
+      <h1 class="h1">本格レポートを生成</h1>
+      <p class="lead">魂タイプ「{{ soul_type.name }}」の診断（30問）回答をもとに、OpenAI が<strong>講座の地図に沿った長文</strong>を作成します。生成後は<strong>同じパックに含まれる魂のナビAI</strong>へ進み、体感で整える練習につなげられます。</p>
+      <p class="fineprint" style="margin-top:8px;">
+        テーマ・自由記述は任意ですが、書くほどレポートが寄ります。記入がある場合（または診断の「いまの課題」のみ記入の場合）は、<strong>同じ内容で魂のナビAIの第1ターンも自動生成</strong>します。ナビ側で同じ話を二重に書く必要はありません。
+      </p>
+    </div>
+
+    {% if not openai_configured %}
+      <div class="panel" style="border-color: rgba(239,68,68,.35); background: rgba(239,68,68,.08); margin: 0 22px 12px;">
+        <p class="lead" style="margin:0;">
+          {{ premium_bundle_name }}の本格レポートは <strong>OpenAI API でのみ</strong> 生成します（定型の代替文は出しません）。
+          <code>OPENAI_API_KEY</code> と <code>openai</code> パッケージを整え、アプリを再起動してください。
+        </p>
+      </div>
+    {% endif %}
+
+    {% if error %}
+      <div class="panel" style="border-color: rgba(239,68,68,.35); background: rgba(239,68,68,.08);">
+        <p class="lead">{{ error }}</p>
+      </div>
+    {% endif %}
+
+    <form
+      id="premiumGenForm"
+      method="post"
+      action="{{ url_for('premium_ai_report_generate') }}"
+      class="form"
+      data-track-submit="premium_generate_submit"
+      style="padding: 0 22px 22px;"
+      onsubmit="(function(){var o=document.getElementById('genWorkingOverlay');var b=document.getElementById('genBtn');if(b){b.disabled=true;}if(o){o.classList.add('genWorking--on');o.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}})();"
+    >
+      <div class="q">
+        <div class="q__title">いま深めたいテーマ（任意）</div>
+        <input
+          type="text"
+          name="focus"
+          maxlength="500"
+          placeholder="例：転職／パートナーシップ／起業の迷い など"
+          style="width:100%; border-radius:12px; padding:10px 12px; border:1px solid rgba(255,255,255,.16); background:rgba(0,0,0,.18); color:inherit;"
+        />
+      </div>
+      <div class="q">
+        <div class="q__title">自由記述（任意）</div>
+        <textarea
+          name="free_text"
+          rows="6"
+          maxlength="4000"
+          placeholder="状況や質問を書いてください"
+          style="width:100%; border-radius:12px; padding:10px; border:1px solid rgba(255,255,255,.16); background:rgba(0,0,0,.18); color:inherit;"
+        ></textarea>
+      </div>
+      <div class="actions">
+        <button id="genBtn" class="btn btn--primary" type="submit" {% if not openai_configured %}disabled aria-disabled="true"{% endif %}>レポートを生成する</button>
+        <a class="btn" href="{{ url_for('premium_ai_report') }}">戻る</a>
+      </div>
+    </form>
+
+    <div
+      id="genWorkingOverlay"
+      class="genWorking"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="genWorkingTitle"
+      aria-hidden="true"
+    >
+      <div class="genWorking__panel">
+        <div class="genWorking__spinner" aria-hidden="true"></div>
+        <p id="genWorkingTitle" class="genWorking__title">レポートを生成しています</p>
+        <p class="genWorking__hint">
+          OpenAI が長文レポートを作成しています。<strong>数分</strong>かかることがあります。完了までこのタブを閉じず、ページを離れないでください。
+        </p>
+        <p class="genWorking__dots" aria-hidden="true"><span></span><span></span><span></span></p>
+      </div>
+    </div>
+  </section>
+{% endblock %}

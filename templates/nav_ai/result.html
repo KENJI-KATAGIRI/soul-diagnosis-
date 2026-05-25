@@ -1,0 +1,171 @@
+{% extends "nav_ai/base.html" %}
+
+{% block content %}
+  <article class="navAi__card navAi__card--result">
+    <header class="navAi__resultHead">
+      <p class="navAi__eyebrow">無料診断結果</p>
+      <div class="navAi__resultBadgeRow">
+        <span class="navAi__pill navAi__pill--{{ result.verdict_key }}">{{ result.verdict_label }}</span>
+      </div>
+      <h1 class="navAi__h1 navAi__h1--result">いまの判断の向き</h1>
+      <p class="navAi__resultCaption">{{ result.alignment_state }}</p>
+      <p class="navAi__muted navAi__muted--tight">これは評価ではなく、<strong>いまの自分の状態を知るための現在地</strong>です。</p>
+    </header>
+
+    {# ふたつのナビ：先出し説明 #}
+    <div class="navAi__introBox" style="background:#f5f0eb;border-radius:10px;padding:16px 20px;margin-bottom:8px;">
+      <p class="navAi__proseLabel" style="margin-bottom:6px;">この診断の前提</p>
+      <p class="navAi__prose" style="margin:0;font-size:0.93em;">
+        わたしたちの内側には、ふたつの判断の仕組みがあります。
+        <strong>「心のナビ」</strong>は安全・評価・正しさを優先し、損しない・嫌われない方向へ誘導します。
+        <strong>「魂のナビ」</strong>は他者評価に関係なく「自分にとって本当か」を基準に方向を示します。
+        この診断は、いまどちらの声が出やすいかを身体感覚から読み取るものです。
+      </p>
+    </div>
+
+    <section class="navAi__block navAi__block--soft" aria-labelledby="state-title">
+      <div class="navAi__blockHead">
+        <span class="navAi__stepMark" aria-hidden="true">1</span>
+        <h2 id="state-title" class="navAi__h2 navAi__h2--block">今回の入力内容</h2>
+      </div>
+      <p class="navAi__prose navAi__prose--comfort">{{ result.state_organization | safe }}</p>
+    </section>
+
+    <section class="navAi__block" aria-labelledby="energy-title">
+      <div class="navAi__blockHead">
+        <span class="navAi__stepMark" aria-hidden="true">2</span>
+        <h2 id="energy-title" class="navAi__h2 navAi__h2--block">いまの受信状態</h2>
+      </div>
+      <p class="navAi__proseLabel">判断のしやすさの目安</p>
+      <p class="navAi__prose navAi__prose--comfort">
+        エネルギースコア：<strong>{{ result.energy_score }}点</strong>（0〜100）
+      </p>
+      <p class="navAi__muted" style="margin-top:6px;">
+        スコアが高いほど判断しやすく、低いほど消耗や迷いが前に出やすい状態です。
+        重要なのは数値より、<strong>身体感覚と自分の本音が一致しているか</strong>です。
+      </p>
+      {% if result.energy_score < 50 %}
+      <p class="navAi__muted" style="margin-top:8px;">
+        スコアが低く出ても失敗ではありません。いまの状態を知ることが、次の一歩を決める起点になります。
+      </p>
+      {% endif %}
+    </section>
+
+    <section class="navAi__block" aria-labelledby="body-title">
+      <div class="navAi__blockHead">
+        <span class="navAi__stepMark" aria-hidden="true">3</span>
+        <h2 id="body-title" class="navAi__h2 navAi__h2--block">身体のサイン</h2>
+      </div>
+      <p class="navAi__prose navAi__prose--comfort">{{ result.body_signal_summary }}</p>
+    </section>
+
+    <section class="navAi__block" aria-labelledby="mis-title">
+      <div class="navAi__blockHead">
+        <span class="navAi__stepMark" aria-hidden="true">4</span>
+        <h2 id="mis-title" class="navAi__h2 navAi__h2--block">本音とのズレ</h2>
+      </div>
+      <p class="navAi__proseLabel">いま引っかかっているポイント</p>
+      <p class="navAi__prose navAi__prose--comfort">{{ result.misalignment_reason }}</p>
+      <p class="navAi__prose navAi__prose--comfort" style="margin-top:12px;">{{ result.misalignment_tendency | safe }}</p>
+    </section>
+
+    <section class="navAi__block navAi__block--practice" aria-labelledby="future-title">
+      <div class="navAi__blockHead">
+        <span class="navAi__stepMark" aria-hidden="true">5</span>
+        <h2 id="future-title" class="navAi__h2 navAi__h2--block">本音と一致したとき</h2>
+      </div>
+      <p class="navAi__prose navAi__prose--comfort">{{ result.future_if_aligned }}</p>
+    </section>
+
+    <section class="navAi__quote" aria-labelledby="next-title">
+      <h2 id="next-title" class="navAi__quoteLabel">今日の一歩</h2>
+      <blockquote class="navAi__quoteBody">
+        <p>{{ result.next_step }}</p>
+      </blockquote>
+    </section>
+
+    <section class="navAi__block" aria-labelledby="mirror-title">
+      <div class="navAi__blockHead">
+        <span class="navAi__stepMark" aria-hidden="true">確認</span>
+        <h2 id="mirror-title" class="navAi__h2 navAi__h2--block">あなたが書いた内容</h2>
+      </div>
+      <p class="navAi__blockIntro">結果と感覚がズレていれば、体感のほうを優先してください。</p>
+      <div class="navAi__mirrorGrid">
+        <div class="navAi__mirrorCard">
+          <h3 class="navAi__mirrorLabel">テーマ</h3>
+          <p class="navAi__mirrorText">{{ result.theme }}</p>
+        </div>
+        <div class="navAi__mirrorCard">
+          <h3 class="navAi__mirrorLabel">いまの状態</h3>
+          <p class="navAi__mirrorText">{{ result.current_state }}</p>
+        </div>
+        {% if result.supplement %}
+          <div class="navAi__mirrorCard navAi__mirrorCard--wide">
+            <h3 class="navAi__mirrorLabel">補足</h3>
+            <p class="navAi__mirrorText">{{ result.supplement }}</p>
+          </div>
+        {% endif %}
+      </div>
+    </section>
+
+    <div class="navAi__theoryPanel" aria-labelledby="theory-title">
+      <p id="theory-title" class="navAi__theoryKicker">この診断の考え方</p>
+
+      <h3 class="navAi__theoryH3">ふたつのナビと、迷いの意味</h3>
+      {% for p in result.theory_core %}
+        <p class="navAi__theoryPara">{{ p | safe }}</p>
+      {% endfor %}
+
+      <h3 class="navAi__theoryH3">あなたの結果（{{ result.verdict_label }}）をもう少し詳しく</h3>
+      {% for p in result.theory_verdict %}
+        <p class="navAi__theoryPara">{{ p | safe }}</p>
+      {% endfor %}
+
+      {% if result.theory_q2_note %}
+        <h3 class="navAi__theoryH3">あなたの選択（Q2）から読み取れること</h3>
+        <p class="navAi__theoryPara">{{ result.theory_q2_note | safe }}</p>
+      {% endif %}
+    </div>
+
+    <section class="navAi__block" aria-labelledby="yn-title">
+      <div class="navAi__blockHead">
+        <span class="navAi__stepMark" aria-hidden="true">補助</span>
+        <h2 id="yn-title" class="navAi__h2 navAi__h2--block">YES / NO の読み方</h2>
+      </div>
+      <p class="navAi__prose navAi__prose--comfort">{{ result.yesno_hypothesis | safe }}</p>
+    </section>
+
+    <section class="navAi__block navAi__block--practice" aria-labelledby="pr-title">
+      <div class="navAi__blockHead">
+        <span class="navAi__stepMark" aria-hidden="true">補助</span>
+        <h2 id="pr-title" class="navAi__h2 navAi__h2--block">体への問いかけ</h2>
+      </div>
+      <p class="navAi__theoryPara">{{ result.theory_practice_intro | safe }}</p>
+      <ol class="navAi__practiceList">
+        {% for item in result.theory_practice_items %}
+          <li>{{ item | safe }}</li>
+        {% endfor %}
+      </ol>
+    </section>
+
+    <section class="navAi__quote" aria-labelledby="one-title">
+      <h2 id="one-title" class="navAi__quoteLabel">今日の一文</h2>
+      <blockquote class="navAi__quoteBody">
+        <p>{{ result.one_liner | safe }}</p>
+      </blockquote>
+    </section>
+
+    <section class="navAi__ctaPanel" aria-labelledby="cta-title">
+      <h2 id="cta-title" class="navAi__ctaTitle">さらに深く整えたい方へ</h2>
+      <p class="navAi__ctaText">{{ result.cta_lead }}</p>
+      <a class="navAi__btn navAi__btn--light navAi__btn--block" href="{{ url_for('nav_diagnosis_ai.premium') }}">有料・深掘り版のご案内</a>
+    </section>
+
+    <div class="navAi__footerActions">
+      <a class="navAi__btn navAi__btn--secondary navAi__btn--block" href="{{ url_for('soul_nav_from_nav_ai') }}">対話型「魂のナビAI」で続ける</a>
+      <form method="post" action="{{ url_for('nav_diagnosis_ai.reset') }}">
+        <button class="navAi__btn navAi__btn--ghost navAi__btn--block" type="submit">最初からやり直す</button>
+      </form>
+    </div>
+  </article>
+{% endblock %}

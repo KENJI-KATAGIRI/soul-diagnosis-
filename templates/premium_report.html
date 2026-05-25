@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}本格レポート結果 | 魂のナビ診断{% endblock %}
+
+{% block content %}
+  <section class="card">
+    {% set funnel_done = 2 %}
+    {% set funnel_emphasis = 3 %}
+    {% include '_funnel_rail.html' %}
+    <div class="card__header">
+      <div class="pill">本格レポート</div>
+      <div class="pill" style="margin-left:8px; background: rgba(34,197,94,.14); border-color: rgba(34,197,94,.35);">OpenAI</div>
+      <h1 class="h1">{{ soul_type.name }}</h1>
+      <p class="lead" style="white-space: pre-line;">{{ report.opening }}</p>
+    </div>
+
+    {% if report.get('_bundled_first_turn') %}
+    <div class="panel panel--accent" style="margin: 0 22px 12px;">
+      <div class="panel__title">{{ premium_bundle_name }} · 魂のナビ1ターン目</div>
+      <p class="fineprint" style="margin:0; line-height:1.7;">
+        生成時に、レポート用の入力と<strong>同じ文章</strong>で魂のナビの第1ターンをまとめて作成済みです。「魂のナビAIへ引き継ぐ」を押すと、<strong>続きのターンから</strong>入力できます。
+      </p>
+    </div>
+    {% endif %}
+
+    <div class="panel">
+      <h2 class="h2">タイプの深掘り</h2>
+      <p style="white-space: pre-line; line-height:1.65; color:var(--muted);">{{ report.type_in_depth }}</p>
+    </div>
+
+    <div class="panel">
+      <h2 class="h2">ナビの地図で見るいま</h2>
+      <p style="white-space: pre-line; line-height:1.65; color:var(--muted);">{{ report.navigation_map }}</p>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <h2 class="h2">共感</h2>
+        <p>{{ report.empathy }}</p>
+      </div>
+      <div class="panel">
+        <h2 class="h2">いま起きていそうなこと</h2>
+        <p>{{ report.problem }}</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <h2 class="h2">背景の読み</h2>
+        <p>{{ report.cause }}</p>
+      </div>
+      <div class="panel">
+        <h2 class="h2">このまま進んだ場合</h2>
+        <p>{{ report.if_unchanged }}</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <h2 class="h2">魂のナビで進んだとき</h2>
+        <p>{{ report.with_course }}</p>
+      </div>
+      <div class="panel panel--accent">
+        <h2 class="h2">今週の一歩</h2>
+        <p>{{ report.this_week_action }}</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <h2 class="h2">強み</h2>
+        <ul>
+          {% for x in report.strengths %}
+            <li>{{ x }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="panel">
+        <h2 class="h2">つまずきやすさ</h2>
+        <ul>
+          {% for x in report.pitfalls %}
+            <li>{{ x }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2 class="h2">次の具体アクション</h2>
+      <ol>
+        {% for x in report.next_actions %}
+          <li>{{ x }}</li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <div class="panel">
+      <p class="lead">{{ report.closing }}</p>
+    </div>
+
+    <div class="flowAfterDive" style="margin-top: 1rem;">
+      <h2 class="flowAfterDive__title">{{ premium_bundle_tagline }}の次の一歩</h2>
+      <ol class="flowSteps">
+        <li class="flowSteps__li flowSteps__li--done">
+          <span class="flowSteps__badge">ステップ2 · 完了</span>
+          <strong>本格レポート</strong>（いま表示中）— {{ premium_bundle_name }}の前半です。
+        </li>
+        <li class="flowSteps__li flowSteps__li--next">
+          <span class="flowSteps__badge flowSteps__badge--accent">ステップ3 · 次</span>
+          <strong>魂のナビAIへ引き継ぎ</strong> — レポート要約＋診断回答を載せ、<strong>講座で鍛える聞き方</strong>に近い形で対話します（パック後半）。
+        </li>
+        <li class="flowSteps__li">
+          <span class="flowSteps__badge">ステップ4</span>
+          対話で「続きが欲しい」と感じたら <strong>魂のナビ講座</strong>へ。ナビAIはその<strong>下見・体験版</strong>です。
+        </li>
+      </ol>
+      <p class="flowAfterDive__legal">
+        {% if nav_handoff_payment_live %}
+          本番では利用条件が異なる場合があります。
+        {% else %}
+          いまは下のボタンから<strong>無料</strong>でお試しいただけます。
+        {% endif %}
+      </p>
+    </div>
+
+    <div class="panel panel--accent">
+      <h2 class="h2">魂のナビAIで続ける（{{ premium_bundle_name }}の後半）</h2>
+      <p class="lead" style="margin-top:0;">
+        レポートを「読むだけ」で終わらせず、<strong>体感で整える練習</strong>に入ります。さらに継続して整えたい方は<strong>魂のナビ講座</strong>で深められます。
+      </p>
+      <form method="post" action="{{ url_for('soul_nav_from_premium_report') }}">
+        <button class="btn btn--primary" type="submit">魂のナビAIへ引き継ぐ</button>
+      </form>
+    </div>
+
+    {% if soul_course_purchase_url %}
+      <div class="panel panel--courseCta">
+        <div class="panel__title">ステップ4 · 魂のナビ講座</div>
+        <p class="fineprint" style="margin:0; line-height:1.65;">AIは短い対話に最適化されています。<strong>継続・カリキュラム・仲間</strong>が欲しい方は講座へ。</p>
+        <div class="courseCta__actions">
+          <a class="btn btn--primary" href="{{ soul_course_purchase_url }}" rel="noopener noreferrer" target="_blank">{{ soul_course_cta_label }}</a>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="actions">
+      <form method="post" action="{{ url_for('premium_ai_report_regenerate') }}">
+        <button class="btn" type="submit">条件を変えて再生成</button>
+      </form>
+      <a class="btn" href="{{ url_for('index') }}">診断トップへ</a>
+    </div>
+  </section>
+{% endblock %}

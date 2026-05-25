@@ -1,0 +1,30 @@
+{% extends "gaia_seo_base.html" %}
+{% block seo_title %}Training and Human Development Mongolia | Gaia Arts{% endblock %}
+{% block og_title %}Training and Human Development Mongolia | Gaia Arts{% endblock %}
+{% block seo_description %}Training and human development programs for Mongolia, focused on leadership, service quality, and practical professional growth.{% endblock %}
+{% block og_description %}Training and human development for Mongolia—leadership, service quality, and professional growth.{% endblock %}
+{% block json_ld %}
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Training and Human Development Mongolia | Gaia Arts","description":"Training and human development programs for Mongolia, focused on leadership, service quality, and practical professional growth.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Regions / Mongolia</nav>
+        <h1>Training and Human Development for Mongolia</h1>
+        <p class="sub-lead">Gaia Arts is interested in supporting people development in Mongolia through practical, human-centered training programs. Areas of focus may include leadership, communication, service quality, and professional development that help people grow with clarity and confidence.</p>
+
+        <section class="sub-section" aria-labelledby="mn-why">
+          <h2 id="mn-why">Why Mongolia matters</h2>
+          <p>Mongolia has unique cultural strengths and growing opportunities for education, training, and professional development. Gaia Arts sees value in creating programs that respect local context while sharing practical experience from Japan.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="mn-poss">
+          <h2 id="mn-poss">Training possibilities</h2>
+          <p>Depending on the organization and audience, programs may include leadership mindset, service standards, communication, customer-facing professionalism, and decision-making development. These themes can be adapted for businesses, schools, and collaborative projects.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="mn-cta">
+          <h2 id="mn-cta">Next step</h2>
+          <p>If you are in Mongolia and interested in a partnership, pilot program, or training collaboration, please contact Gaia Arts.</p>
+          <a class="btn" href="{{ url_for('site_root') }}#contact">Contact Gaia Arts</a>
+          <p class="sub-links"><a href="{{ url_for('gaia_services_leadership') }}">Leadership development</a> · <a href="{{ url_for('gaia_about_kenji') }}">About Kenji Katagiri</a> · <a href="{{ url_for('gaia_insights') }}">Insights</a> · <a href="{{ url_for('gaia_region_indonesia') }}">Indonesia</a></p>
+        </section>
+{% endblock %}

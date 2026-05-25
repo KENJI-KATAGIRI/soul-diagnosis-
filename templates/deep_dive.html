@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}深掘り診断 | 魂のナビ診断{% endblock %}
+
+{% block content %}
+  <section class="card">
+    <div class="card__header">
+      <div class="pill">深掘り診断（有料版想定）</div>
+      <h1 class="h1">{{ soul_type.name }}をさらに深く見る</h1>
+      <p class="lead">
+        いまの診断結果をベースに、あなたの状況に合わせた文章をGPTで生成します。<br />
+        以下の3つだけ教えてください。
+      </p>
+      <form class="form" method="post" action="{{ url_for('soul_nav_from_diagnosis') }}" style="margin-top:14px;">
+        <input type="hidden" name="best_key" value="{{ soul_type.key }}" />
+        {% for name, score in scores %}
+          <input type="hidden" name="score_{{ loop.index0 }}" value="{{ name }}::{{ score }}" />
+        {% endfor %}
+        {% if questions is defined and quiz_answers is defined %}
+          {% for q in questions %}
+            {% if quiz_answers.get(q.key) is not none %}
+              <input type="hidden" name="{{ q.key }}" value="{{ quiz_answers[q.key] }}" />
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        <button class="btn btn--primary" type="submit">魂のナビAIへ（診断を引き継いでYES/NO）</button>
+      </form>
+    </div>
+
+    <form class="form" method="post" action="{{ url_for('deep_dive_result') }}">
+      {% if questions is defined and quiz_answers is defined %}
+        {% for q in questions %}
+          {% if quiz_answers.get(q.key) is not none %}
+            <input type="hidden" name="{{ q.key }}" value="{{ quiz_answers[q.key] }}" />
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      <div class="q">
+        <div class="q__title">1. いま一番深掘りしたいテーマはどれですか？</div>
+        <div class="choices">
+          <label class="choice">
+            <input type="radio" name="focus" value="work" required />
+            <span class="choice__label">
+              <span class="choice__num">1</span>
+              <span class="choice__text">仕事・キャリア・働き方</span>
+            </span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="focus" value="relationship" />
+            <span class="choice__label">
+              <span class="choice__num">2</span>
+              <span class="choice__text">人間関係（家族・パートナー・職場など）</span>
+            </span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="focus" value="money" />
+            <span class="choice__label">
+              <span class="choice__num">3</span>
+              <span class="choice__text">お金・豊かさ・仕事とのバランス</span>
+            </span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="focus" value="life" />
+            <span class="choice__label">
+              <span class="choice__num">4</span>
+              <span class="choice__text">生き方全体（使命・方向性）</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="q">
+        <div class="q__title">2. いまの状況や気になっていることを、自由に教えてください。（200〜400字くらいが目安）</div>
+        <textarea name="free_text" rows="6" style="width:100%; border-radius:12px; padding:10px; border:1px solid rgba(255,255,255,.16); background:rgba(0,0,0,.18); color:inherit;" required></textarea>
+      </div>
+
+      <div class="q">
+        <div class="q__title">3. 深掘りメッセージの雰囲気はどれが近いですか？</div>
+        <div class="choices">
+          <label class="choice">
+            <input type="radio" name="tone" value="gentle" required />
+            <span class="choice__label">
+              <span class="choice__num">A</span>
+              <span class="choice__text">やさしく寄り添ってほしい</span>
+            </span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="tone" value="realistic" />
+            <span class="choice__label">
+              <span class="choice__num">B</span>
+              <span class="choice__text">現実的・ビジネス寄りに整理してほしい</span>
+            </span>
+          </label>
+          <label class="choice">
+            <input type="radio" name="tone" value="sharp" />
+            <span class="choice__label">
+              <span class="choice__num">C</span>
+              <span class="choice__text">ズバッと本音を突いてほしい</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      {# 元の魂タイプとスコアを hidden で持ち運ぶ #}
+      <input type="hidden" name="best_key" value="{{ soul_type.key }}" />
+      {% for name, score in scores %}
+        <input type="hidden" name="score_{{ loop.index0 }}" value="{{ name }}::{{ score }}" />
+      {% endfor %}
+
+      <div class="actions">
+        <button class="btn" type="submit">深掘りメッセージを生成する（GPT）</button>
+      </div>
+    </form>
+  </section>
+{% endblock %}
+

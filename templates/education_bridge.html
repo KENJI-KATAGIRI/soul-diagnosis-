@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}次のステップ | 魂のナビ診断{% endblock %}
+
+{% block content %}
+  <section class="card">
+    <div class="card__header">
+      <div class="pill">次のステップ</div>
+      <h1 class="h1">あなたの傾向を、どう整えるか</h1>
+      <p class="lead">
+        先ほどの診断では<strong>{{ soul_type.name }}</strong>の傾向が見えました。このズレは能力の問題ではなく、<strong>判断の起点がどこにあるかの問題</strong>です。次の動画では、同じタイプがどう整えていくかを具体的にお話しします。<strong>結果を読んだ後に見ると、より腑に落ちやすい</strong>内容です。
+      </p>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="utageFlash" role="status">
+          {% for category, message in messages %}
+            <p class="utageFlash__msg utageFlash__msg--{{ category }}">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <div class="panel panel--videoBridge" data-track-view="next_step_bridge">
+      <div class="panel__title">動画でお伝えすること</div>
+      <ul class="bullets" style="margin:0;">
+        <li>なぜ「正しい選択」をしても、しっくりこないのか</li>
+        <li>心と魂、2つのナビの違いをどう見分けるか</li>
+        <li>あなたのタイプに合った、最初の整え方</li>
+      </ul>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <h2 class="h2">あなたの診断結果</h2>
+        <p><strong>{{ soul_type.name }}</strong></p>
+        <p class="fineprint" style="line-height:1.65;">{{ consciousness.alignment_state }}</p>
+        <p class="fineprint" style="line-height:1.65;">次の一歩: {{ consciousness.next_action }}</p>
+      </div>
+      <div class="panel">
+        <h2 class="h2">動画の前に</h2>
+        <p>「いま自分がどこで止まりやすいか」を1つだけ思い出しておくと、動画の内容がより腑に落ちやすくなります。</p>
+      </div>
+    </div>
+
+    <div class="actions actions--bridge">
+      <a class="btn btn--primary" href="{{ url_for('education_video') }}" data-track-click="bridge_to_video">動画を開く（無料）</a>
+      <a class="btn btn--secondary" href="{{ url_for('result_view') }}" data-track-click="bridge_back_to_result">診断結果に戻る</a>
+    </div>
+  </section>
+{% endblock %}

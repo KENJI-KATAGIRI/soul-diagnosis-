@@ -1,0 +1,64 @@
+{% extends "lec_seo_base_en.html" %}
+{% block lec_header_ja_href %}{{ url_for('lec_page_kinesiology_lec') }}{% endblock %}
+{% block seo_title %}Kinesiology (muscle testing) &amp; Life Energy Coaching | Nagoya | Life Energy Coaching NAGOYA{% endblock %}
+{% block og_title %}Kinesiology (muscle testing) &amp; Life Energy Coaching{% endblock %}
+{% block seo_description %}How kinesiology (muscle reflex testing) works with Life Energy Coaching (EC) in Nagoya. We listen to the body’s signals, chakras, and stress patterns—not a medical service; sessions support self-understanding and wellbeing.{% endblock %}
+{% block og_description %}Kinesiology and Life Energy Coaching in Nagoya. Body-led sessions combining chiropractic, energy work, psychology, and muscle testing.{% endblock %}
+{% block head_extra %}
+    <style>
+      .sub-section h3 { font-size: 16px; font-weight: 700; color: var(--accent); margin: 22px 0 10px; line-height: 1.45; }
+      .sub-section ol.steps { margin: 12px 0 16px 1.2em; padding: 0; }
+      .sub-section ol.steps li { margin-bottom: 14px; }
+    </style>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Kinesiology</nav>
+        <h1>Kinesiology (muscle testing) &amp; Life Energy Coaching</h1>
+        <p class="sub-lead">Kinesiology uses muscle response as a gentle way to explore balance in the body and how stress is held. In our <strong>Life Energy Coaching (EC)</strong> sessions in Nagoya, we combine chiropractic care, psychology, and energy work with this approach to follow <strong>the body’s voice</strong> and clarify what kind of support you need right now.</p>
+        <p>This is not medical treatment. It is a session space to unpack deeper themes, support self-understanding, and move toward wellbeing in body and mind.</p>
+
+        <section class="sub-section" aria-labelledby="sec-voice">
+          <h2 id="sec-voice">Why we work with “the body’s voice”</h2>
+          <p>Signs such as neck and shoulder tension, fatigue, or emotional ups and downs are often linked to stress held below everyday awareness or emotions that have not yet been fully processed. In session we may notice differences in tone between arms or shoulders, or changes in muscle reflex, and put those responses into words (numbers or sensory language) so you can work with your system at a pace that feels honest and manageable.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="sec-chakra">
+          <h2 id="sec-chakra">Chakras and energy—a deeper layer</h2>
+          <p>Chakras can be thought of as energy gateways in the body. In Life Energy Coaching we use muscle testing to sense which chakra most wants attention now, and to receive the essential message coming through that center—supporting release and integration in body and mind.</p>
+          <p>Each chakra often reflects everyday life themes. Do any of these feel familiar?</p>
+          <h3>1st chakra (foundation, survival)</h3>
+          <p>Feeling trapped by loneliness within family or an organization, or losing yourself under rules and expectations—being caught in a state where you no longer feel like yourself.</p>
+          <h3>2nd chakra (abundance, energy)</h3>
+          <p>Your relationship with money (earning and spending), and the balance between masculine energy (action, independence) and feminine energy (emotion, intuition).</p>
+          <h3>3rd chakra (self, emotion)</h3>
+          <p>Putting off what you truly want (lowered self-regard), difficulty trusting yourself, obsessive thoughts, or pressure from an overdeveloped sense of duty.</p>
+          <h3>4th chakra (love, receiving)</h3>
+          <p>Fear of criticism; releasing suppressed anger, grief, or frustration and allowing difficult feelings to transform toward love, joy, and warmth.</p>
+          <h3>5th chakra (expression, decisions)</h3>
+          <p>Indecision, holding back feelings for fear of disapproval (expressive inhibition), or distance in communication with others.</p>
+          <h3>6th chakra (intuition, perception)</h3>
+          <p>Fixed beliefs about yourself or others; anxiety or anger about events; and subtle effects from the environment such as electromagnetic stress.</p>
+          <h3>7th chakra (purpose, trust)</h3>
+          <p>Courage to take the next step beyond fear, acting from intuition, and restoring a deep trust that life brings what your soul needs for growth.</p>
+          <p style="margin-top:16px">Related: <a href="{{ url_for('lec_page_chakra_healing_en_lec') }}">Energy &amp; chakras</a> (English)</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="sec-flow">
+          <h2 id="sec-flow">Session flow—what happens in a session?</h2>
+          <p>Sessions generally move through steps like these:</p>
+          <ol class="steps">
+            <li><strong>Check the body’s response:</strong> Using muscle reflex tests, we identify which theme or chakra most needs support today.</li>
+            <li><strong>Insight keywords:</strong> From keywords linked to that chakra, we clarify what you may be afraid of or resisting.</li>
+            <li><strong>Energy balancing (EC):</strong> We adjust energy so muscle responses can settle, and gently release fear and fixed stories.</li>
+            <li><strong>Re-check and integration:</strong> We test again to notice whether tension has eased and balance feels more coherent.</li>
+          </ol>
+          <p>Many people report more vitality, clearer motivation, and choices that feel aligned—less regret, more forward motion—in daily life.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="sec-cta">
+          <h2 id="sec-cta">Related pages &amp; contact</h2>
+          <p class="sub-links"><a href="{{ url_for('lec_page_blog_en_lec') }}">Heart column</a> · <a href="https://gaiaarts.org/" target="_blank" rel="noopener noreferrer">Training &amp; Gaia Arts</a></p>
+          <p>Questions or bookings: please use the contact section on the main landing page.</p>
+          <a class="btn" href="{{ url_for('lec_landing') }}#contact">Contact &amp; booking</a>
+        </section>
+{% endblock %}

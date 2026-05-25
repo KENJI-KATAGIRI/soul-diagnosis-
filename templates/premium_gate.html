@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}{{ premium_bundle_name }} | 魂のナビ診断{% endblock %}
+
+{% block content %}
+  <section class="card">
+    {% set funnel_done = 1 %}
+    {% set funnel_emphasis = 2 %}
+    {% include '_funnel_rail.html' %}
+    <div class="card__header">
+      <div class="pill">有料 · {{ premium_bundle_price_label }}</div>
+      <h1 class="h1">{{ premium_bundle_name }}</h1>
+      <p class="lead">
+        <strong>{{ premium_bundle_tagline }}</strong>を、<strong>ひとつのアクセスコード</strong>で解放します。先に<strong>本格レポート（長文・OpenAI）</strong>で地図を受け取り、続けて<strong>魂のナビAI</strong>で体感の対話へ進められます（講座の下見・深掘り用）。
+      </p>
+      <p class="fineprint" style="margin-top:10px; line-height:1.6;">魂タイプ「{{ soul_type.name }}」の診断はセッションに保持済みです。購入済みの方はコードを入力してください。</p>
+    </div>
+
+    {% if not openai_configured %}
+      <div class="panel" style="border-color: rgba(239,68,68,.35); background: rgba(239,68,68,.08); margin: 0 22px 12px;">
+        <p class="lead" style="margin:0;">
+          <strong>{{ premium_bundle_name }}の本格レポート本文は OpenAI API のみで生成します</strong>（定型のダミー文は出しません）。
+          いまの環境では <code>OPENAI_API_KEY</code> が無いか <code>openai</code> パッケージが使えないため、<strong>下の「解放」はサーバ側でも拒否されます</strong>。
+          VPS なら <code>.env</code> にキーを書き、<code>pip install -r requirements.txt</code> と <code>systemctl restart …</code> を実行してください。
+        </p>
+      </div>
+    {% endif %}
+
+    {% if not access_hint and not demo_allowed %}
+      <div class="panel" style="border-color: rgba(245,158,11,.45); background: rgba(245,158,11,.10); margin: 0 22px 12px;">
+        <p class="lead" style="margin:0;">
+          このサーバーでは <code>PREMIUM_ACCESS_CODE</code> が未設定で、<code>ALLOW_PREMIUM_DEMO=1</code> も無効です。
+          <strong>コード入力もデモ解放も使えず、この画面から先に進めません。</strong>
+          運営側で購入者用コードを設定するか、検証用にデモを有効にしてください。
+        </p>
+      </div>
+    {% endif %}
+
+    {% if error %}
+      <div class="panel" style="border-color: rgba(239,68,68,.35); background: rgba(239,68,68,.08);">
+        <p class="lead">{{ error }}</p>
+      </div>
+    {% endif %}
+
+    <div class="panel">
+      <h2 class="h2">アクセスコード</h2>
+      <form method="post" action="{{ url_for('premium_ai_report_unlock') }}" class="form" style="padding:0;" data-track-submit="premium_unlock_submit">
+        <div class="q" style="margin-bottom:12px;">
+          <div class="q__title">購入後にお送りするコード</div>
+          <input
+            type="password"
+            name="access_code"
+            autocomplete="off"
+            placeholder="コードを入力"
+            {% if not access_hint %}disabled{% endif %}
+            style="width:100%; border-radius:12px; padding:10px 12px; border:1px solid rgba(255,255,255,.16); background:rgba(0,0,0,.18); color:inherit;"
+          />
+        </div>
+        {% if access_hint %}
+          <button class="btn btn--primary" type="submit" {% if not openai_configured %}disabled aria-disabled="true"{% endif %}>解放する</button>
+          {% if not openai_configured %}
+            <p class="fineprint" style="margin-top:10px;">OpenAI が使える状態になるまで解放できません。</p>
+          {% endif %}
+        {% else %}
+          <p class="lead">サーバーに <code>PREMIUM_ACCESS_CODE</code> が未設定のため、コード入力は無効です。デモ環境の場合は下のボタンを利用してください。</p>
+        {% endif %}
+      </form>
+    </div>
+
+    {% if demo_allowed %}
+      <div class="panel panel--accent">
+        <h2 class="h2">開発デモ</h2>
+        <p class="lead">環境変数 <code>ALLOW_PREMIUM_DEMO=1</code> が有効です。課金をスキップしてレポート生成まで試せます。</p>
+        <form method="post" action="{{ url_for('premium_ai_report_unlock') }}" data-track-submit="premium_demo_unlock_submit">
+          <input type="hidden" name="demo_unlock" value="1" />
+          <button class="btn" type="submit" {% if not openai_configured %}disabled aria-disabled="true"{% endif %}>デモとして解放する</button>
+          {% if not openai_configured %}
+            <p class="fineprint" style="margin-top:10px;">OpenAI 未設定時はデモ解放もできません（ダミーレポートを出さないため）。</p>
+          {% endif %}
+        </form>
+      </div>
+    {% endif %}
+
+    <div class="actions">
+      <a class="btn" href="{{ url_for('index') }}">診断トップへ</a>
+    </div>
+  </section>
+{% endblock %}

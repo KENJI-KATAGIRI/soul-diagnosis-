@@ -1,0 +1,81 @@
+# 例: 同一 VPS・同一アプリに3ドメインを載せる（SSL は certbot 等で取得したパスに差し替え）
+# sudo ln -sf /etc/nginx/sites-available/soul-multi /etc/nginx/sites-enabled/
+# sudo nginx -t && sudo systemctl reload nginx
+#
+# 前提: Gunicorn が 127.0.0.1:8000 で待ち受け（soul-diagnosis.service.example 参照）
+
+upstream soul_diagnosis_upstream {
+    server 127.0.0.1:8000;
+    keepalive 16;
+}
+
+# 共通 proxy 用（任意で snippets に切り出し可）
+# proxy_set_header Host $host;
+# proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+# proxy_set_header X-Forwarded-Proto $scheme;
+
+# --- 魂のナビ診断（日本語LP: / → /navi へリダイレクトはアプリ側）---
+# 証明書の「Common Name / SAN」に server_name と同じホスト名が含まれていること。
+# ERR_CERT_COMMON_NAME_INVALID のときは certbot の対象ドメインとこの server_name を一致させる。
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name tamashiinavi.com www.tamashiinavi.com;
+
+    ssl_certificate     /etc/letsencrypt/live/tamashiinavi.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/tamashiinavi.com/privkey.pem;
+
+    client_max_body_size 20m;
+
+    location / {
+        proxy_pass http://soul_diagnosis_upstream;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+# --- Gaia Arts（英語トップ: Host で en_landing）---
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name gaiaarts.org www.gaiaarts.org;
+
+    ssl_certificate     /etc/letsencrypt/live/gaiaarts.org/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/gaiaarts.org/privkey.pem;
+
+    client_max_body_size 20m;
+
+    location / {
+        proxy_pass http://soul_diagnosis_upstream;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+# --- ライフエネルギーコーチング名古屋（/ が lec_landing）---
+# 証明書は certbot で apex + www 両方を SAN に含める。www と非www の間のリダイレクトは nginx では行わない（Host を維持）。
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name life-energy-coaching.net www.life-energy-coaching.net;
+
+    ssl_certificate     /etc/letsencrypt/live/life-energy-coaching.net/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/life-energy-coaching.net/privkey.pem;
+
+    client_max_body_size 20m;
+
+    location / {
+        proxy_pass http://soul_diagnosis_upstream;
+        proxy_http_version 1.1;
+        proxy_set_header Connection "";
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}

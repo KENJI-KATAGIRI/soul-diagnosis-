@@ -1,0 +1,37 @@
+{% extends "gaia_seo_base.html" %}
+{% block seo_title %}{{ article.title }} | Insights | Gaia Arts{% endblock %}
+{% block og_title %}{{ article.title }} | Gaia Arts{% endblock %}
+{% block seo_description %}{{ article.seo_description }}{% endblock %}
+{% block og_description %}{{ article.seo_description }}{% endblock %}
+{% block head_extra %}
+    <style>
+      .insight-body p { margin-bottom: 1em; }
+      .insight-body a { color: var(--accent); }
+    </style>
+{% endblock %}
+{% block json_ld %}
+    <script type="application/ld+json">{{ {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": article.title,
+      "description": article.seo_description,
+      "datePublished": article.date_published,
+      "dateModified": article.date_published,
+      "url": seo_canonical_url,
+      "author": {"@type": "Person", "name": "Kenji Katagiri"},
+      "publisher": {"@type": "Organization", "name": "Gaia Arts Co., Ltd.", "url": "https://gaiaarts.org"}
+    } | tojson }}</script>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / <a href="{{ url_for('gaia_insights') }}">Insights</a> / {{ article.title }}</nav>
+        <article>
+          <h1>{{ article.title }}</h1>
+          <div class="insight-body sub-section">
+            {{ article.body_html | safe }}
+          </div>
+        </article>
+        <section class="sub-section" aria-labelledby="ins-art-footer">
+          <h2 id="ins-art-footer">Also worth exploring</h2>
+          <p class="sub-links"><a href="{{ url_for('gaia_insights') }}">All Insights readings</a> · <a href="{{ url_for('gaia_services_hospitality') }}">Hospitality training</a> · <a href="{{ url_for('gaia_services_leadership') }}">Leadership development</a> · <a href="{{ url_for('gaia_region_cambodia') }}">Cambodia</a> · <a href="{{ url_for('gaia_about_kenji') }}">About Kenji Katagiri</a> · <a href="{{ url_for('site_root') }}#contact">Contact</a></p>
+        </section>
+{% endblock %}

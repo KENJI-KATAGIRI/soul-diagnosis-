@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}無料診断 | 魂のナビ診断{% endblock %}
+
+{% block content %}
+  {% set simple_href = url_for('simple_diagnosis') %}
+
+  {# ── FV：パターンインタラプト ── #}
+  <section class="lpHero card" data-track-view="diagnosis_lp_hero">
+    <div class="card__header lpHero__header">
+      <h1 class="h1" style="font-size:clamp(22px,5.5vw,38px); line-height:1.32;">日曜の夜、来週の予定を見て<br />なんとなく胸が重くなる。<br />でも、理由がわからない。</h1>
+      <p class="lead lpHero__lead" style="margin-top:18px;">
+        仕事も回っている。人間関係も破綻していない。<br />
+        なのに、ずっとどこかが噛み合わない。<br />
+        その感覚の正体がわかれば、判断が変わります。
+      </p>
+      <div class="actions lpHero__actions">
+        <a class="btn btn--primary btn--large" href="{{ simple_href }}" data-track-click="diagnosis_lp_primary_cta">8問でズレを診断する（無料）→</a>
+      </div>
+      <p class="lpHero__microcopy">約1分 / 無料 / スマホ完結</p>
+    </div>
+  </section>
+
+  {# ── 共感：具体的な生活描写 ── #}
+  <section class="lpSection card" data-track-view="diagnosis_lp_scenes">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">こういう瞬間、ありませんか</h2>
+    </div>
+    <div class="lpSceneList">
+      <article class="panel lpScene">
+        <div class="panel__title">転職サイトを開いて、何も応募せずに閉じる</div>
+        <p>変えたいのか、逃げたいのか、自分でもわからない。でもこのままでいいとも思えない。</p>
+      </article>
+      <article class="panel lpScene">
+        <div class="panel__title">「すごいね」と言われるほど、違和感が増す</div>
+        <p>周囲が認めてくれるルートほど、身体が重くなる。正しいはずなのに、息がしにくい。</p>
+      </article>
+      <article class="panel lpScene">
+        <div class="panel__title">相談されるのは得意なのに、自分のことは誰にも話せない</div>
+        <p>説明しようとすると「贅沢な悩み」に聞こえる気がして、口を閉じてしまう。</p>
+      </article>
+      <article class="panel lpScene">
+        <div class="panel__title">やりたいことを聞かれると、頭が真っ白になる</div>
+        <p>選択肢はある。情報もある。なのに「これだ」と思えるものがひとつもない。</p>
+      </article>
+      <article class="panel lpScene">
+        <div class="panel__title">夜、ふと「このままでいいのかな」が浮かぶ</div>
+        <p>翌朝には忘れる。でも数日後、また同じ問いが戻ってくる。ずっとループしている。</p>
+      </article>
+    </div>
+  </section>
+
+  {# ── 転換：共感から気づきへ ── #}
+  <section class="lpSection card" data-track-view="diagnosis_lp_reframe">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">それは「弱さ」ではなく、判断の基準が外側にズレているサインです</h2>
+      <p class="lead" style="margin-top:12px;">
+        頑張れていないわけではありません。<br />
+        むしろ頑張り続けた結果、<strong>判断の基準が外側に寄りすぎた</strong>だけです。
+      </p>
+      <p class="lead" style="margin-top:12px;">
+        期待に応えること。損をしないこと。嫌われないこと。<br />
+        それらを優先し続けると、本音が後回しになるのは自然なことです。<br />
+        問題は性格ではなく、<strong>いま何を基準に選んでいるか</strong>。<br />
+        それが見えるだけで、同じ選択肢でも体感は変わります。
+      </p>
+      <p class="lead" style="margin-top:12px;">
+        整え方がわかれば、判断は変わります。<br />
+        この診断では、<strong>いまの自分に必要な調整ポイント</strong>まで見えてきます。
+      </p>
+    </div>
+  </section>
+
+  {# ── CTA中間 ── #}
+  <section class="lpSection card" data-track-view="diagnosis_lp_mid_cta">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">8問で、いまのズレの正体が見えます</h2>
+      <p class="lead" style="margin-top:12px;">
+        今の選び方の傾向から、ズレが起きている場所と理由を見ます。
+      </p>
+    </div>
+    <div class="lpValueList">
+      <article class="panel">
+        <div class="panel__title">ズレがどこで起きているか</div>
+        <p>心の基準で動いているのか、それとも内側で別の声が鳴り始めているのか——今の状態がわかります。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">なぜ動けない・決められないのか</div>
+        <p>意志の問題ではなく、判断基準がどこにズレているかが見えると、理由が腑に落ちます。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">最初にどこを整えるか</div>
+        <p>結果を見たあとに、いま何を意識するとよいかの入口が見えます。</p>
+      </article>
+    </div>
+    <div class="actions lpSection__actions">
+      <a class="btn btn--primary btn--large" href="{{ simple_href }}" data-track-click="diagnosis_lp_mid_cta">8問でズレを診断する（無料）→</a>
+    </div>
+  </section>
+
+  {# ── 信頼・安心 ── #}
+  <section class="lpSection card" data-track-view="diagnosis_lp_trust">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">よくある心配について</h2>
+    </div>
+    <div class="lpFaq">
+      <details class="details">
+        <summary>営業メールや電話が来ませんか？</summary>
+        <p>電話はありません。30問の本診断に進む方には、結果を受け取りやすくするためメール登録をお願いしていますが、解除はいつでも可能です。</p>
+      </details>
+      <details class="details">
+        <summary>スピリチュアルに偏っていませんか？</summary>
+        <p>いいえ。選び方の傾向を整理する実用的な診断です。神秘的な演出はありません。</p>
+      </details>
+      <details class="details">
+        <summary>結果を見たら何か買わされませんか？</summary>
+        <p>いいえ。診断結果は無料で完結します。</p>
+      </details>
+      <details class="details">
+        <summary>本当に1〜2分で終わりますか？</summary>
+        <p>はい。8問に直感で答えるだけなので、1〜2分ほどで終わります。</p>
+      </details>
+    </div>
+  </section>
+
+  {# ── 最終CTA ── #}
+  <section class="lpSection card lpSection--final" data-track-view="diagnosis_lp_final">
+    <div class="card__header">
+      <p class="lead" style="margin-top:0;">
+        違和感があるうちは、まだ感覚が生きている証拠です。<br />
+        慣れてしまう前に、いまの自分の状態を一度言葉にしてみてください。
+      </p>
+      <p class="fineprint" style="margin-top:12px; line-height:1.7;">
+        いまの違和感を、そのままにしないための短い確認です。
+      </p>
+    </div>
+    <div class="actions lpSection__actions">
+      <a class="btn btn--primary btn--large" href="{{ simple_href }}" data-track-click="diagnosis_lp_final_cta">8問でズレを診断する（無料）→</a>
+    </div>
+  </section>
+{% endblock %}

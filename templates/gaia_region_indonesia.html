@@ -1,0 +1,30 @@
+{% extends "gaia_seo_base.html" %}
+{% block seo_title %}Leadership and Service Training Indonesia | Gaia Arts{% endblock %}
+{% block og_title %}Leadership and Service Training Indonesia | Gaia Arts{% endblock %}
+{% block seo_description %}Leadership and service training programs for Indonesia, focused on internal alignment, communication, hospitality, and people development.{% endblock %}
+{% block og_description %}Leadership and service training for Indonesia—alignment, communication, hospitality, and people development.{% endblock %}
+{% block json_ld %}
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Leadership and Service Training Indonesia | Gaia Arts","description":"Leadership and service training programs for Indonesia, focused on internal alignment, communication, hospitality, and people development.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Regions / Indonesia</nav>
+        <h1>Leadership and Service Training for Indonesia</h1>
+        <p class="sub-lead">Indonesia offers strong opportunities for service development, leadership training, and human-centered education. Gaia Arts provides practical programs designed to support organizations that want to strengthen both performance and people.</p>
+
+        <section class="sub-section" aria-labelledby="id-themes">
+          <h2 id="id-themes">Key themes</h2>
+          <p>Possible training themes include hospitality, leadership development, communication, team alignment, decision-making, and service mindset. Programs are designed to be practical, adaptable, and relevant to real workplace needs.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="id-approach">
+          <h2 id="id-approach">Approach</h2>
+          <p>Gaia Arts combines Japanese field experience with a human-centered training philosophy. The aim is not only to transfer information, but to create learning that supports sustainable change in individuals and teams.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="id-cta">
+          <h2 id="id-cta">Next step</h2>
+          <p>For organizations in Indonesia that are interested in collaborative training or pilot workshops, please get in touch.</p>
+          <a class="btn" href="{{ url_for('site_root') }}#contact">Contact Gaia Arts</a>
+          <p class="sub-links"><a href="{{ url_for('gaia_services_leadership') }}">Leadership development</a> · <a href="{{ url_for('gaia_services_hospitality') }}">Hospitality training</a> · <a href="{{ url_for('gaia_region_mongolia') }}">Mongolia</a> · <a href="{{ url_for('gaia_region_philippines') }}">Philippines</a></p>
+        </section>
+{% endblock %}

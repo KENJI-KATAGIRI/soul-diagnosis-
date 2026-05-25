@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="{% block html_lang %}en{% endblock %}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{% block seo_title %}{% endblock %}</title>
+    <link rel="canonical" href="{{ seo_canonical_url }}" />
+    <meta name="description" content="{% block seo_description %}{% endblock %}" />
+    {%- if search_console_verification %}
+    <meta name="google-site-verification" content="{{ search_console_verification }}" />
+    {%- endif %}
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='gaia-logo.png') }}" />
+    <meta property="og:title" content="{% block og_title %}{% endblock %}" />
+    <meta property="og:description" content="{% block og_description %}{% endblock %}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ seo_canonical_url }}" />
+    <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='hero-workshop.png', _external=True) }}{% endblock %}" />
+    <meta property="og:locale" content="{% block og_locale %}en_US{% endblock %}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {%- if ga_measurement_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_measurement_id }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ ga_measurement_id }}');
+    </script>
+    {%- endif %}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root { --text: #1a1a2e; --muted: #555; --light: #888; --bg: #fff; --bg-alt: #f7f8fa; --accent: #2c3e8f; --border: #e0e2e8; --max-w: 720px; }
+      body { font-family: Inter, system-ui, sans-serif; color: var(--text); background: var(--bg); line-height: 1.75; font-size: 16px; -webkit-font-smoothing: antialiased; }
+      .wrap { width: min(var(--max-w), calc(100% - 40px)); margin: 0 auto; }
+      .site-header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+      .site-header .wrap { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 12px; flex-wrap: wrap; }
+      .site-logo { font-weight: 700; font-size: 17px; color: var(--accent); text-decoration: none; }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+      .site-nav a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; }
+      .site-nav a:hover { color: var(--accent); }
+      .lang-sw { display: flex; gap: 4px; margin-left: 6px; border-left: 1px solid var(--border); padding-left: 10px; }
+      .lang-btn { appearance: none; border: 1px solid var(--border); background: var(--bg); padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; color: var(--muted); cursor: pointer; }
+      .lang-btn--active { background: var(--accent); color: #fff; border-color: var(--accent); }
+      .sub-main { padding: 36px 0 72px; }
+      .breadcrumb { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+      .breadcrumb a { color: var(--accent); text-decoration: none; }
+      .sub-main h1 { font-size: clamp(26px, 4vw, 34px); font-weight: 700; line-height: 1.25; margin-bottom: 20px; color: var(--text); }
+      .sub-lead { font-size: 17px; color: var(--muted); margin-bottom: 28px; line-height: 1.7; }
+      .sub-section { margin-top: 28px; }
+      .sub-section h2 { font-size: 19px; font-weight: 700; margin-bottom: 12px; color: var(--accent); }
+      .sub-section p { margin-bottom: 14px; color: var(--text); }
+      .sub-section ul { margin: 12px 0 14px 1.2em; }
+      .sub-links { margin-top: 20px; font-size: 15px; line-height: 1.65; }
+      .sub-links a { color: var(--accent); }
+      .btn { display: inline-block; margin-top: 20px; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; background: var(--accent); color: #fff; }
+      .btn:hover { opacity: 0.93; }
+      .site-footer { padding: 28px 0; text-align: center; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 48px; }
+      .site-footer a { color: var(--accent); }
+      @media (max-width: 640px) { .site-nav a { font-size: 12px; } }
+    </style>
+    {% block head_extra %}{% endblock %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://gaiaarts.org/#organization",
+          "name": "Gaia Arts",
+          "url": "https://gaiaarts.org",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://gaiaarts.org/static/gaia-logo.png"
+          },
+          "description": "Japan-based consulting firm specializing in hospitality training and leadership development across Southeast Asia. Operating in Cambodia, Philippines, Indonesia, and Mongolia.",
+          "founder": {
+            "@type": "Person",
+            "@id": "https://gaiaarts.org/about/kenji-katagiri/#person",
+            "name": "Kenji Katagiri",
+            "url": "https://gaiaarts.org/about/kenji-katagiri/",
+            "jobTitle": "Founder & Chief Consultant",
+            "knowsAbout": ["Hospitality Training", "Leadership Development", "Southeast Asia Business", "Cross-cultural Management"]
+          },
+          "areaServed": [
+            {"@type": "Country", "name": "Cambodia"},
+            {"@type": "Country", "name": "Philippines"},
+            {"@type": "Country", "name": "Indonesia"},
+            {"@type": "Country", "name": "Mongolia"},
+            {"@type": "Country", "name": "Japan"}
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Gaia Arts Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Hospitality Training",
+                  "description": "Professional service excellence programs for hotels, restaurants, and tourism businesses in Southeast Asia.",
+                  "url": "https://gaiaarts.org/services/hospitality-training/"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Leadership Development",
+                  "description": "Executive coaching and organizational development for Japanese companies and international teams in Asia.",
+                  "url": "https://gaiaarts.org/services/leadership-development/"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://gaiaarts.org/#website",
+          "url": "https://gaiaarts.org",
+          "name": "Gaia Arts",
+          "publisher": {"@id": "https://gaiaarts.org/#organization"},
+          "inLanguage": ["en", "ja"]
+        }
+      ]
+    }
+    </script>
+    {% block json_ld %}{% endblock %}
+  </head>
+  <body>
+    {% include '_gaia_header.html' %}
+    <main class="sub-main">
+      <div class="wrap">{% block content %}{% endblock %}</div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p><a href="{{ url_for('site_root') }}#contact">Schedule a Meeting</a> · <a href="https://life-energy-coaching.net/" target="_blank" rel="noopener noreferrer">Life Energy Coaching (Nagoya)</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

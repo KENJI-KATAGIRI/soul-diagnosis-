@@ -1,0 +1,70 @@
+{% extends "gaia_seo_base.html" %}
+{% block html_lang %}ja{% endblock %}
+{% block og_locale %}ja_JP{% endblock %}
+{% block seo_title %}経営者向け日本語コラム｜人材育成・意思決定・組織づくり | Gaia Arts{% endblock %}
+{% block og_title %}経営者向け日本語コラム｜人材育成・意思決定・組織づくり | Gaia Arts{% endblock %}
+{% block seo_description %}経営、リーダーシップ、人材育成、意思決定に関する考え方をまとめた日本語コラム一覧です。現場や組織づくりに活かせる視点を、状態や人の育ち方も含めてお届けします。{% endblock %}
+{% block og_description %}経営、リーダーシップ、人材育成、意思決定に関する考え方をまとめた日本語コラム一覧です。現場や組織づくりに活かせる視点を、状態や人の育ち方も含めてお届けします。{% endblock %}
+{% block head_extra %}
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      body { font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; }
+      .insight-index-section { margin-top: 32px; }
+      .insight-index-section:first-of-type { margin-top: 0; }
+      .insight-index-section__lead { font-size: 15px; color: var(--muted); margin: -6px 0 14px; line-height: 1.75; max-width: 52em; }
+      .insight-index-list { list-style: none; padding: 0; margin: 12px 0 0; }
+      .insight-index-list li { margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid var(--border); }
+      .insight-index-list li:last-child { border-bottom: none; }
+      .insight-index-list a.title { font-weight: 700; color: var(--accent); text-decoration: none; font-size: 17px; }
+      .insight-index-list a.title:hover { text-decoration: underline; }
+      .insight-index-list .excerpt { font-size: 14px; color: var(--muted); margin-top: 8px; line-height: 1.7; }
+      .jp-insight-nav-strip { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--border); font-size: 14px; line-height: 1.75; color: var(--muted); }
+      .jp-insight-nav-strip a { color: var(--accent); font-weight: 500; text-decoration: none; }
+      .jp-insight-nav-strip a:hover { text-decoration: underline; }
+      .jp-insight-nav-strip__label { display: block; font-size: 12px; font-weight: 700; letter-spacing: .04em; color: var(--light); margin-bottom: 8px; }
+    </style>
+{% endblock %}
+{% block json_ld %}
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"経営者向け日本語コラム | Gaia Arts","description":"経営、リーダーシップ、人材育成、意思決定に関する考え方をまとめた日本語コラム一覧。現場や組織づくりに活かせる視点を、状態や人の育ち方も含めてお届けします。","url":"{{ seo_canonical_url }}","inLanguage":"ja","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="パンくず"><a href="{{ url_for('site_root') }}">Home</a> / <a href="{{ url_for('gaia_jp_insights') }}">日本語コラム</a></nav>
+        <h1>日本語コラム</h1>
+        <p class="sub-lead">経営者・リーダー向けに、経営・人材育成・意思決定・組織づくりの考え方を静かな読みものとしてまとめています。現場で活かせる視点や、状態・人の育ち方にも触れます。日記やニュースではなく内容中心です。英語の <a href="{{ url_for('gaia_insights') }}">Insights</a> とは別一覧です。</p>
+
+        <section class="sub-section insight-index-section" aria-labelledby="jp-col-list">
+          <h2 id="jp-col-list">読みもの一覧</h2>
+          <p class="insight-index-section__lead">気になるタイトルからお読みください。各項目の下の短い文は、内容の選び方の手がかりです。</p>
+          {% if jp_insight_articles %}
+          <ul class="insight-index-list">
+            {% for a in jp_insight_articles %}
+            <li>
+              <a class="title" href="{{ url_for('gaia_jp_insight_article', slug=a.slug) }}">{{ a.title }}</a>
+              {% if a.list_teaser %}<p class="excerpt">{{ a.list_teaser }}</p>{% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p>現在、公開中の読みものはありません。</p>
+          {% endif %}
+        </section>
+
+        <nav class="jp-insight-nav-strip" aria-label="関連ページ">
+          <span class="jp-insight-nav-strip__label">サイト内の関連</span>
+          <a href="{{ url_for('gaia_insights') }}">English Insights</a>
+          <span aria-hidden="true"> · </span>
+          <a href="{{ url_for('gaia_services_leadership') }}">リーダーシップ開発</a>
+          <span aria-hidden="true"> · </span>
+          <a href="{{ url_for('gaia_services_hospitality') }}">ホスピタリティ研修</a>
+          <span aria-hidden="true"> · </span>
+          <a href="{{ url_for('gaia_about_kenji') }}">片桐健治について</a>
+          <span aria-hidden="true"> · </span>
+          <a href="{{ url_for('site_root') }}#contact">お問い合わせ</a>
+        </nav>
+
+        <section class="sub-section" aria-labelledby="jp-col-cta">
+          <h2 id="jp-col-cta">ご相談</h2>
+          <p>チーム研修、リーダー育成、サービス文化の整備など、組織向けのご相談はお気軽にどうぞ。</p>
+          <a class="btn" href="{{ url_for('site_root') }}#contact">Gaia Arts へお問い合わせ</a>
+        </section>
+{% endblock %}

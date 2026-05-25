@@ -1,0 +1,65 @@
+{% extends "lec_seo_base.html" %}
+{% block seo_title %}心のコラム｜ライフエネルギーコーチング名古屋｜片桐健治 | Life Energy Coaching NAGOYA{% endblock %}
+{% block og_title %}心のコラム｜ライフエネルギーコーチング名古屋{% endblock %}
+{% block seo_description %}迷い、内面のズレ、セッションの考え方など、個人向けの「心のコラム」。経営・組織に関する読みものは Gaia Arts の日本語コラムをご覧ください。{% endblock %}
+{% block og_description %}心のコラム——内面とライフエネルギーコーチング。経営者向けは gaiaarts.org の日本語コラムへ。{% endblock %}
+{% block head_extra %}
+    <style>
+      .column-list { list-style: none; padding: 0; margin: 12px 0 0; }
+      .column-list > li { margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid var(--border); }
+      .column-list > li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+      .column-item__link { font-weight: 700; color: var(--accent); text-decoration: none; font-size: 16px; line-height: 1.5; display: inline-block; }
+      .column-item__link:hover { text-decoration: underline; }
+      .column-item__teaser { font-size: 14px; color: var(--muted); line-height: 1.75; margin: 8px 0 0; }
+      .cta-row { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+      .cta-row .btn { margin-top: 0; }
+      .cta-row .sub-links { margin-top: 0; }
+      .lp-cta-block .sub-links { margin-top: 14px; line-height: 2; }
+    </style>
+    <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"心のコラム｜ライフエネルギーコーチング名古屋","description":"迷いや内面の整え方など個人向けの心のコラム。経営・組織向けは Gaia Arts 日本語コラム。","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Life Energy Coaching NAGOYA","url":"https://life-energy-coaching.net/"}}
+    </script>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="パンくず"><a href="{{ url_for('site_root') }}">トップ</a> ／ 心のコラム</nav>
+        <p class="breadcrumb" style="margin-top:-12px;margin-bottom:8px;font-size:13px"><a href="{{ url_for('lec_page_blog_en_lec') }}" hreflang="en" lang="en">Heart column (English)</a></p>
+        <h1>心のコラム</h1>
+        <p class="sub-lead">迷い、内面のズレ、セッションの考え方など、個人として向き合うテーマを、心のコラムとして静かにまとめています。日記やお知らせではなく、内容そのものを味わっていただくことを意図しています。経営・人材育成・組織づくりに関する読みものは、<a href="https://gaiaarts.org/jp/insights/" target="_blank" rel="noopener noreferrer">Gaia Arts の日本語コラム</a>でご紹介しています。気になるタイトルからお読みください。</p>
+
+        <section class="sub-section" aria-labelledby="sec-latest">
+          <h2 id="sec-latest">一覧</h2>
+          {% set live_posts = column_entries | selectattr('status', 'equalto', 'live') | list %}
+          {% if live_posts %}
+          <ul class="column-list">
+            {% for e in live_posts %}
+            <li>
+              <a class="column-item__link" href="{{ url_for('lec_column_post_lec', slug=e.slug) }}">{{ e.title }}</a>
+              {% if e.list_teaser %}
+              <p class="column-item__teaser">{{ e.list_teaser }}</p>
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p>現在、心のコラムの公開記事はありません。順次お届けする予定です。</p>
+          {% endif %}
+        </section>
+
+        <section class="sub-section lp-cta-block" aria-labelledby="sec-lp">
+          <h2 id="sec-lp">セッションを検討されている方へ</h2>
+          <p>心のコラムはあくまで補助です。料金・流れ・場所などのご案内は、メインのページをご覧ください。</p>
+          <div class="cta-row">
+            <a class="btn" href="{{ url_for('lec_landing') }}#details">ライフエネルギーコーチングの詳細はこちら</a>
+          </div>
+          <p class="sub-links">
+            <a href="{{ url_for('lec_landing') }}#details">セッション内容を詳しく見る</a> ／
+            <a href="{{ url_for('lec_landing') }}">初めての方はこちら</a> ／
+            <a href="{{ url_for('lec_landing') }}#contact">お問い合わせはこちら</a>
+          </p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="sec-related">
+          <h2 id="sec-related">関連ページ</h2>
+          <p class="sub-links"><a href="{{ url_for('lec_page_kinesiology_lec') }}">キネシオロジー（筋反射学）</a> ／ <a href="{{ url_for('lec_page_chakra_healing_lec') }}">エネルギー・チャクラ</a></p>
+        </section>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}統合1枚レポート | 魂のナビ診断{% endblock %}
+
+{% block content %}
+  <section class="card">
+    <div class="card__header">
+      <div class="pill">最終出力 · ステップ4</div>
+      <div class="pill" style="margin-left:8px; background: rgba(124,92,255,.2); border-color: rgba(124,92,255,.45);">{{ report_price_label }}</div>
+      <h1 class="h1">{{ sheet.title }}</h1>
+      <p class="lead">{{ sheet.subtitle }}</p>
+      <p class="fineprint">診断AI（5問）→ 魂のナビAI（対話）を、実行に使える1枚へ圧縮した版です。</p>
+    </div>
+
+    <div class="panel panel--accent">
+      <h2 class="h2">1. 現在の状態（わかりやすく）</h2>
+      <p class="lead">{{ sheet.current_state }}</p>
+      <p class="fineprint">診断AI判定: {{ sheet.nav_verdict }} / テーマ: {{ sheet.nav_focus }}</p>
+    </div>
+
+    <div class="panel">
+      <h2 class="h2">2. 意識レベルの位置</h2>
+      <p>
+        <strong>レベル {{ sheet.consciousness_level }}</strong>
+        （{{ sheet.consciousness_label }} / {{ sheet.consciousness_emotion }}）
+        / エネルギー {{ sheet.energy_score }}点
+      </p>
+      <p>{{ sheet.consciousness_position }}</p>
+      <p class="fineprint" style="margin-top:10px; line-height:1.65;">
+        ※意識レベルは評価点ではありません。<strong>魂のナビ受信状態の目安</strong>です。高いか低いかより、<strong>その状態と行動が一致しているか</strong>を優先して見ます。
+      </p>
+      <p class="fineprint" style="margin-top:8px; line-height:1.65;">
+        参考: David R. Hawkins, <em>Power vs. Force</em>（本システムでは意思決定ナビゲーション用途として再構成した指標です）。
+      </p>
+      <div class="panel" style="margin-top:12px;">
+        <div class="panel__title">200境界の意味（短く）</div>
+        <ul class="bullets" style="margin:0;">
+          <li><strong>200以上（Power）</strong>：受容・建設のモードに入りやすく、落ち着いて選びやすい目安。</li>
+          <li><strong>200未満（Force）</strong>：防衛反応が先に立ち、焦って判断しやすい目安。</li>
+          <li>評価ではなく、いまの判断モードを見るための現在地です。状態は固定ではありません。</li>
+        </ul>
+        {% if sheet.consciousness_level < 200 %}
+          <p class="fineprint" style="margin:10px 0 0; line-height:1.65;">
+            いまは「決断力不足」ではなく、整え直しの準備段階です。大きな結論より、身体が軽くなる小さな選択を先に実行してください。
+          </p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2 class="h2">3. 身体感覚の説明</h2>
+      <p>{{ sheet.body_signal_summary }}</p>
+      <p class="fineprint" style="margin-top:10px;"><strong>対話ログ補足:</strong> {{ sheet.soul_state_organization }}</p>
+    </div>
+
+    <div class="panel">
+      <h2 class="h2">4. ズレの特定</h2>
+      <p>{{ sheet.misalignment_reason }}</p>
+      <p class="fineprint" style="margin-top:10px;"><strong>魂のナビAIでのズレ指摘:</strong> {{ sheet.soul_discrepancy }}</p>
+    </div>
+
+    <div class="panel">
+      <h2 class="h2">5. 一致した場合の未来</h2>
+      <p>{{ sheet.future_if_aligned }}</p>
+      <p class="fineprint" style="margin-top:10px;">{{ sheet.unified_summary }}</p>
+    </div>
+
+    <div class="panel panel--accent">
+      <h2 class="h2">6. 今やるべき一歩</h2>
+      <p>{{ sheet.next_step }}</p>
+      <p class="fineprint" style="margin-top:10px;">
+        対話で出た一致行動: {{ sheet.soul_action }}<br />
+        このあと7日間は、実行前後の身体感覚（軽い / 重い）を1行ずつ記録すると意思決定が安定します。
+      </p>
+    </div>
+
+    <div class="panel">
+      <h2 class="h2">統合メモ（診断AI × 魂のナビAI）</h2>
+      <ul class="bullets">
+        <li><strong>現在テーマ:</strong> {{ sheet.nav_state }}</li>
+        <li><strong>YES/NO仮説:</strong> {{ sheet.soul_yesno }}</li>
+        <li><strong>次の問い:</strong> {{ sheet.soul_question }}</li>
+        <li><strong>診断AIの一文:</strong> {{ sheet.nav_one_liner|safe }}</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2 class="h2">管理用メモ</h2>
+      <p class="fineprint mono">soul_nav_session_id: {{ sheet.session_id }}</p>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn--primary" href="{{ url_for('soul_nav', session_id=sheet.session_id) }}">魂のナビAIに戻る</a>
+      <a class="btn" href="{{ url_for('premium_ai_report') }}">本格レポートへ戻る</a>
+      <a class="btn" href="{{ url_for('index') }}">診断トップへ</a>
+    </div>
+  </section>
+{% endblock %}

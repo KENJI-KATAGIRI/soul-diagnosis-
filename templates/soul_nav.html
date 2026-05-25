@@ -1,0 +1,456 @@
+{% extends "base.html" %}
+
+{% block title %}魂タイプ診断｜魂のナビAI – 無料スピリチュアル自己診断{% endblock %}
+
+{% block head_extra %}
+<link rel="alternate" hreflang="ja" href="https://tamashiinavi.com/navi">
+<link rel="alternate" hreflang="x-default" href="https://tamashiinavi.com/navi">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="keywords" content="魂タイプ診断,スピリチュアル診断 無料,魂ナビ,魂の使命 診断,スピリチュアル 自己診断,魂タイプ 種類,魂ナビ AI診断">
+<meta name="application-name" content="魂ナビ診断">
+<meta name="theme-color" content="#6B4FA0">
+<meta property="article:modified_time" content="2026-05-21T00:00:00+09:00">
+<meta name="description" content="魂タイプ診断が無料・登録不要で体験できる魂ナビAI。AIとの対話で使命・奉仕・創造など6つの魂タイプを仮説として提示。スピリチュアル自己診断で人生の方向性を探ろう。">
+{% endblock %}
+
+{% block extra_schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://tamashiinavi.com/navi#software",
+      "name": "魂ナビ診断（魂のナビAI）",
+      "alternateName": ["魂タイプ診断", "魂ナビ", "スピリチュアル自己診断"],
+      "url": "https://tamashiinavi.com/navi",
+      "applicationCategory": "LifestyleApplication",
+      "applicationSubCategory": "SpiritualDiagnosis",
+      "operatingSystem": "Web browser (all platforms)",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "JPY",
+        "availability": "https://schema.org/InStock",
+        "description": "基本診断は無料・会員登録不要で利用可能"
+      },
+      "featureList": [
+        "AIによる魂タイプ診断",
+        "身体感覚（向き・ズレ）を使った対話型自己分析",
+        "魂の使命・人生の方向性の探索",
+        "48時間以内の行動提案",
+        "プレミアムレポート（有料オプション）"
+      ],
+      "description": "魂ナビ診断は、AIとの対話を通じて魂のタイプ（使命・奉仕・創造・探求・調和・変容）を仮説として提示し、自己理解と人生の方向性を探るスピリチュアル自己診断アプリです。無料・登録不要で利用できます。",
+      "inLanguage": "ja",
+      "isAccessibleForFree": true,
+      "browserRequirements": "JavaScript enabled",
+      "screenshot": {
+        "@type": "ImageObject",
+        "url": "https://tamashiinavi.com/static/og-image.png",
+        "caption": "魂ナビ診断のスクリーンショット"
+      },
+      "author": {
+        "@type": "Organization",
+        "@id": "https://tamashiinavi.com/#organization"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://tamashiinavi.com/#organization"
+      },
+      "datePublished": "2024-01-01",
+      "dateModified": "2026-05-21"
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://tamashiinavi.com/navi#soul-type-list",
+      "name": "魂ナビ診断 魂タイプ一覧",
+      "description": "魂ナビ診断（スピリチュアル自己診断）で判明する6つの魂のタイプ。使命・奉仕・創造・探求・調和・変容。",
+      "url": "https://tamashiinavi.com/navi#soul-type-list",
+      "numberOfItems": 6,
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "使命タイプ",
+          "description": "明確なビジョンを持ち、社会や他者に大きな変化をもたらす役割を担う傾向。「何のために生きるか」が常に問いとしてある魂タイプ。"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "奉仕タイプ",
+          "description": "人のサポートや貢献に深い充足感を覚える魂タイプ。自己犠牲との境界線を引くことで本来の力が発揮される。"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "創造タイプ",
+          "description": "表現・制作・アイデアの具現化に喜びを感じる魂タイプ。独自の美意識と世界観が強みとなる。"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "探求タイプ",
+          "description": "真理・知識・未知の領域への探索を人生の軸にする魂タイプ。「なぜ？」を深め続けることが魂の充電になる。"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "調和タイプ",
+          "description": "関係性のバランスを整え、場の安心感を生み出す役割の魂タイプ。対立を溶かす直感的な能力を持つ。"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "変容タイプ",
+          "description": "自己変革と再生を繰り返しながら成長する魂タイプ。過去の困難が深い洞察と共感力に変わる。"
+        }
+      ]
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+  <section class="card soulNav">
+    <div class="card__header">
+      <div class="pill">魂のナビAI{% if premium_unlocked %} · {{ premium_bundle_name }}に含まれる体験{% endif %}</div>
+      <h1 class="h1">迷いを、頭だけで決め切らない対話</h1>
+      <p class="lead">
+        ここは<strong>魂のナビ講座の「体感の聞き方」に近い体験</strong>です。「YES／NO」は占いではなく、<strong>体の軽さ・重さ</strong>からの仮説です。{% if premium_unlocked %}本格レポートを読んだあとに進むと、<strong>{{ premium_bundle_name }}</strong>として一気通貫で整理しやすくなります。{% endif %}各ターンは<strong>短文チャットではなく厚めの対話</strong>になるよう設計しています（OpenAI 利用時）。48時間以内の小さな一歩を1つ置き、<strong>講座で深めたくなるかどうか</strong>の材料にしてください。
+      </p>
+    </div>
+
+    {% include '_funnel_rail.html' %}
+
+    <div class="panel panel--explain">
+      <div class="panel__title">用語のイメージ（30秒で）</div>
+      <ul class="bullets" style="margin:0;">
+        <li><strong>向き（YES寄りの仮説）</strong>：胸が少し広がる、呼吸が深くなる、など。衝動ではなく、落ち着いて残る感覚を手がかりにします。</li>
+        <li><strong>ズレ（NO寄りの仮説）</strong>：「やらなきゃ」が先に立つ、説明はできるのに体が重い、など。責めずに“手がかり”として扱います。</li>
+        <li>診断のタイプ名より、<strong>いま書いてくれた言葉と身体の反応</strong>を優先します。</li>
+      </ul>
+    </div>
+
+    {% if errors %}
+      <div class="alert" role="alert" aria-live="polite">
+        <div class="alert__title">入力を確認してください</div>
+        <ul class="alert__list">
+          {% for e in errors %}
+            <li>{{ e }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if api_missing %}
+      <div class="alert alert--info" role="status">
+        <div class="alert__title">オフライン・ルールモード</div>
+        <div class="fineprint">
+          <code>OPENAI_API_KEY</code> がこのアプリの環境に無いため、<strong>ルールベースのたたき台</strong>のみです（OpenAI は呼んでいません）。ローカルならプロジェクトの <code>.env</code>、本番サーバなら VPS 上の <code>.env</code> にキーを書き、プロセスを再起動してください。
+        </div>
+      </div>
+    {% endif %}
+
+    {# ===== CHANGE④: 関連リソース内部リンクセクション（KWアンカー・回遊率向上） ===== #}
+    <section class="panel panel--related-links" id="related-resources" aria-labelledby="related-links-heading" style="margin-bottom:1.5rem;">
+      <h2 class="panel__title" id="related-links-heading">魂ナビ診断をさらに深める関連コンテンツ</h2>
+      <p class="lead" style="margin-bottom:1rem;">
+        魂タイプ診断の結果を日常に活かしたい方、より深い自己理解を求める方へ。
+        以下のコンテンツをあわせてご覧ください。
+      </p>
+      <nav aria-label="関連コンテンツナビゲーション">
+        <ul style="display:grid;gap:.8rem;padding-left:0;list-style:none;">
+          <li>
+            <a href="https://tamashiinavi.com/" rel="noopener" style="font-weight:700;">
+              🏠 魂ナビ トップページ
+            </a>
+            <span style="display:block;font-size:.875rem;color:#555;margin-top:.2rem;">
+              魂ナビ診断の全体像・スピリチュアル自己診断の概要はこちらから
+            </span>
+          </li>
+          <li>
+            <a href="https://tamashiinavi.com/diagnosis" rel="noopener" style="font-weight:700;">
+              🔮 魂タイプ診断（テキスト版）
+            </a>
+            <span style="display:block;font-size:.875rem;color:#555;margin-top:.2rem;">
+              質問形式で魂の使命・タイプを手軽に確認したい方向けの無料診断
+            </span>
+          </li>
+          <li>
+            <a href="https://tamashiinavi.com/report" rel="noopener" style="font-weight:700;">
+              📄 魂タイプ 詳細レポート
+            </a>
+            <span style="display:block;font-size:.875rem;color:#555;margin-top:.2rem;">
+              診断後のプレミアムレポートで、魂の使命・才能・人生の方向性を詳しく解説
+            </span>
+          </li>
+          <li>
+            <a href="https://tamashiinavi.com/about" rel="noopener" style="font-weight:700;">
+              ℹ️ 魂ナビ診断とは？スピリチュアル診断との違い
+            </a>
+            <span style="display:block;font-size:.875rem;color:#555;margin-top:.2rem;">
+              占い・心理テストとの違い、診断の根拠・運営者情報をご確認いただけます
+            </span>
+          </li>
+        </ul>
+      </nav>
+    </section>
+    {# ===== /CHANGE④ ===== #}
+
+    {% if session and session.soul_type_context %}
+      <div class="panel panel--soulLink">
+        <div class="panel__title">魂タイプ診断との連携</div>
+        <p class="lead" style="margin:0 0 8px;">
+          <strong>{{ session.soul_type_context.type_name }}</strong>
+          <span class="fineprint">（無料診断から引き継ぎ · ラベルではなく身体感覚を優先します）</span>
+        </p>
+        <p class="fineprint" style="margin:0; line-height:1.6;">{{ session.soul_type_context.summary }}</p>
+        {% if session.soul_type_context.scores_by_name %}
+          <ul class="soulScores">
+            {% for n, v in session.soul_type_context.scores_by_name.items() %}
+              <li><span class="soulScores__n">{{ n }}</span><span class="soulScores__v">{{ v }}</span></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% if session.soul_type_context.get('ten_quiz_snapshot') %}
+          <p class="fineprint" style="margin:10px 0 0; line-height:1.6;">
+            設問ごとの回答（リッカート）もAIに渡しています（診断時点の一次データ）。
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if session and session.soul_type_context and session.soul_type_context.get('premium_linked') %}
+      <div class="panel panel--accent">
+        <div class="panel__title">本格レポート連携モード</div>
+        <p class="fineprint" style="margin:0; line-height:1.65;">
+          AI は先に読んだ本格レポートの要約を参照しています。体感と違うときは、遠慮なく体感のほうを正として書いてください。
+        </p>
+        {% if session.soul_type_context.get('suggested_opener') %}
+          <p class="lead" style="margin:10px 0 0; font-size:14px;">
+            <strong>入力のヒント：</strong>{{ session.soul_type_context.suggested_opener }}
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if comparison %}
+      <div class="panel panel--compare">
+        <div class="panel__title">前ターンからの変化（比較）</div>
+        <ul class="compareList">
+          <li>
+            <span class="compareList__k">仮説の寄り</span>
+            <span class="compareList__v">{{ comparison.lean_change.from }} → {{ comparison.lean_change.to }}</span>
+          </li>
+          <li>
+            <span class="compareList__k">NO寄り語彙の数（差分）</span>
+            <span class="compareList__v">{{ "%+d"|format(comparison.obligation_count_delta) }}</span>
+          </li>
+          <li>
+            <span class="compareList__k">YES寄り語彙の数（差分）</span>
+            <span class="compareList__v">{{ "%+d"|format(comparison.desire_fear_count_delta) }}</span>
+          </li>
+          <li>
+            <span class="compareList__k">入力文字数（差分）</span>
+            <span class="compareList__v">{{ "%+d"|format(comparison.user_input_length_delta) }}</span>
+          </li>
+        </ul>
+      </div>
+    {% endif %}
+
+    {% set has_turns = session and session.turns and session.turns|length >= 1 %}
+
+    {% if session and session.turns %}
+      {% set last = session.turns[-1] %}
+      {% set out = last.output %}
+      <div class="panel panel--navLast">
+        <div class="panel__title">直近の応答（ターン {{ last.turn_index }}）</div>
+        <ol class="navOut">
+          <li><span class="navOut__label">状態の整理</span><div class="navOut__body">{{ out.state_organization }}</div></li>
+          <li><span class="navOut__label">ズレの指摘</span><div class="navOut__body">{{ out.discrepancy }}</div></li>
+          <li><span class="navOut__label">向き・ズレの仮説</span><div class="navOut__body">{{ out.yesno_hypothesis }}</div></li>
+          <li><span class="navOut__label">一致行動</span><div class="navOut__body">{{ out.aligned_action }}</div></li>
+          <li><span class="navOut__label">問いかけ</span><div class="navOut__body">{{ out.followup_question }}</div></li>
+        </ol>
+        <div class="fineprint mono">
+          session_id: {{ session.session_id }} · JSON保存済み
+        </div>
+        {% if has_turns %}
+          <p class="fineprint navLast__closure" style="margin:14px 0 0; line-height:1.65; color:var(--text);">
+            上記で<strong>このターンのナビはひと区切り</strong>です。続きは<strong>下のフォーム</strong>から送れます。講座へ進む場合はこの下のパネルもご覧ください。
+          </p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if has_turns %}
+      <div class="panel">
+        <p class="fineprint" style="margin:0; line-height:1.75;">
+          {% if session.get('soul_nav_prefilled_turn') %}
+            レポート生成時に書いたテーマ／自由記述（または診断の「いまの課題」）で<strong>1ターン目は自動生成済み</strong>です。続きだけ下のフォームに入力してください。
+          {% else %}
+            次のターンではモデルが「<strong>{{ next_phase_label }}</strong>」の観点を強めます（5項目の形式は同じです）。
+          {% endif %}
+        </p>
+      </div>
+    {% endif %}
+
+    {% if not has_turns %}
+      <div class="panel">
+        <div class="panel__title">セッション・フロー（次の一手の意図）</div>
+        <p class="fineprint">
+          次に送るメッセージでは、モデルは主に「<strong>{{ next_phase_label }}</strong>」の観点を強めます（5項目の出力形式は毎回同じです）。
+        </p>
+        <ul class="flowMini">
+          {% for s in flow_steps %}
+            <li class="{% if s.phase.value == next_phase_value %}flowMini--on{% endif %}">
+              <span class="flowMini__p">{{ s.phase.value }}</span>
+              <span class="flowMini__t">{{ s.title }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="panel panel--explain soulNav__prepGuide">
+        <div class="panel__title">1ターン目で返答の質を上げる（書くときのヒント）</div>
+        <ul class="bullets" style="margin:0;">
+          <li><strong>テーマ</strong>がひと目で分かる（例：転職／関係／続けるかやめるか）</li>
+          <li><strong>身体の感覚</strong>を一言（胸・肩・お腹の重さ・楽さなど）</li>
+          <li><strong>言葉と本音のズレ</strong>（「やるべき」と「本当は」があれば）</li>
+          <li>感情や場面が浮かぶと、ズレの仮説が立てやすくなります。</li>
+        </ul>
+        <fieldset class="soulNav__prepChecks">
+          <legend class="soulNav__prepChecksLegend">書けたか確認（任意・送信には影響しません）</legend>
+          <label class="soulNav__prepCheck"><input type="checkbox" /> テーマが一文以上で伝わる</label>
+          <label class="soulNav__prepCheck"><input type="checkbox" /> 身体の感覚に触れている</label>
+          <label class="soulNav__prepCheck"><input type="checkbox" /> 迷いや葛藤が具体的に書けている</label>
+        </fieldset>
+      </div>
+    {% endif %}
+
+    {% if session %}
+      <form
+        id="soulNavForm"
+        class="form"
+        method="post"
+        action="{{ url_for('soul_nav_turn') }}"
+        onsubmit="(function(){var o=document.getElementById('soulNavGenOverlay');var b=document.getElementById('soulNavSubmitBtn');if(b){b.disabled=true;}if(o){o.classList.add('genWorking--on');o.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}})();"
+      >
+        <input type="hidden" name="session_id" value="{{ session.session_id }}" />
+        <div class="q">
+          <div class="q__title">
+            {% if has_turns %}次のターンを送る（任意）{% else %}いまの身体感覚も含めて、状況をそのまま書いてください{% endif %}
+          </div>
+          {% if soul_nav_min_user_chars > 0 %}
+            <p class="fineprint soulNav__inputHint">
+              目安 <strong>{{ soul_nav_min_user_chars }} 文字以上</strong>。短すぎるとナビの精度が落ちやすいです（ブラウザとサーバの両方でチェックします）。
+            </p>
+          {% endif %}
+          <textarea
+            id="soulNavUserText"
+            name="user_text"
+            rows="8"
+            required
+            class="textarea"
+            placeholder="例：転職すべきか迷っている。やらなきゃと思う一方で、本当は別の仕事に惹かれている。胸が少し重い。"
+            aria-describedby="soulNavCharCount"
+            {% if soul_nav_min_user_chars > 0 %}minlength="{{ soul_nav_min_user_chars }}"{% endif %}
+          ></textarea>
+          <p id="soulNavCharCount" class="fineprint soulNav__charCount" aria-live="polite"></p>
+        </div>
+        <div class="actions">
+          <button id="soulNavSubmitBtn" class="btn btn--primary" type="submit">ナビを回す</button>
+          <a class="btn btn--ghost" href="{{ url_for('soul_nav') }}">新しいセッション</a>
+        </div>
+      </form>
+    {% endif %}
+
+    {% if has_turns %}
+      <div class="panel panel--accent">
+        <div class="panel__title">統合1枚レポート（オプション）</div>
+        <p class="fineprint" style="margin:0; line-height:1.65;">
+          診断AI（5問）と、ここまでの魂のナビAIの対話を<strong>1枚に統合</strong>して確認できます（別ルートの条件あり）。次の7日間で何を観測し、どこから動くかを短く整理した出力です。
+        </p>
+        <div class="courseCta__actions">
+          {% if premium_unlocked %}
+            <a class="btn btn--primary" href="{{ url_for('premium_integration_report', session_id=session.session_id) }}">統合1枚レポートを開く</a>
+          {% else %}
+            <a class="btn btn--primary" href="{{ url_for('premium_ai_report') }}">{{ premium_bundle_name }}を解放する</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="panel panel--courseCta panel--courseCta--primary">
+        <div class="panel__title">ステップ4 · 魂のナビ講座へ（ここから先の本番）</div>
+        <p class="fineprint" style="margin:0; line-height:1.65;">
+          この画面のAIは<strong>短いプレビュー対話</strong>です。いまの応答で「もっと続けたい」「週次で伴走して整えたい」と感じたら、<strong>講座が次のステップ</strong>です。体感の癖が見えてきたタイミングで、地図と仲間のある学びに進むと伸びやすい流れです。
+        </p>
+        <div class="courseCta__actions">
+          {% if soul_course_purchase_url %}
+            <a class="btn btn--primary" href="{{ soul_course_purchase_url }}" rel="noopener noreferrer" target="_blank">{{ soul_course_cta_label }}</a>
+          {% else %}
+            <span class="fineprint">講座の申込URLは準備中です（<code>SOUL_COURSE_PURCHASE_URL</code>）。</span>
+          {% endif %}
+          <a class="btn btn--secondary" href="{{ url_for('premium_ai_report') }}">{{ premium_bundle_name }}へ戻る</a>
+        </div>
+      </div>
+    {% else %}
+      <div class="panel panel--courseCta">
+        <div class="panel__title">ステップ4 · 魂のナビ講座（本番の学び）</div>
+        <p class="fineprint" style="margin:0; line-height:1.65;">
+          このAIは<strong>短い対話用</strong>です。まずは上のフォームで<strong>1ターン</strong>試したあと、<strong>もっと続けたい・週次で伴走が欲しい</strong>と感じたら、下の講座が次のステップになりやすいです。
+        </p>
+        <div class="courseCta__actions">
+          {% if soul_course_purchase_url %}
+            <a class="btn btn--primary" href="{{ soul_course_purchase_url }}" rel="noopener noreferrer" target="_blank">{{ soul_course_cta_label }}</a>
+          {% else %}
+            <span class="fineprint">講座の申込URLは準備中です（<code>SOUL_COURSE_PURCHASE_URL</code>）。</span>
+          {% endif %}
+          <a class="btn btn--secondary" href="{{ url_for('premium_ai_report') }}">{{ premium_bundle_name }}へ戻る</a>
+        </div>
+      </div>
+    {% endif %}
+
+    <script>
+      (function () {
+        var ta = document.getElementById("soulNavUserText");
+        var el = document.getElementById("soulNavCharCount");
+        var min = parseInt("{{ soul_nav_min_user_chars }}", 10) || 0;
+        if (!ta || !el) return;
+        function upd() {
+          var n = ta.value.length;
+          el.textContent =
+            min > 0
+              ? "文字数 " + n + " / 目安 " + min + " 文字以上"
+              : "文字数 " + n;
+          el.className =
+            "fineprint soulNav__charCount" +
+            (min > 0 ? (n >= min ? " soulNav__charCount--ok" : " soulNav__charCount--warn") : "");
+        }
+        ta.addEventListener("input", upd);
+        upd();
+      })();
+    </script>
+
+    <div
+      id="soulNavGenOverlay"
+      class="genWorking"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="soulNavGenTitle"
+      aria-hidden="true"
+    >
+      <div class="genWorking__panel">
+        <div class="genWorking__spinner" aria-hidden="true"></div>
+        <p id="soulNavGenTitle" class="genWorking__title">魂のナビが考えています…</p>
+        <p class="genWorking__hint">
+          あなたの言葉と診断の文脈を踏まえ、<strong>次の一歩まで含めた返答</strong>を組み立てています（OpenAI API）。<strong>数十秒〜1分ほど</strong>かかることがあります。完了までこのタブを閉じないでください。
+        </p>
+        <p class="genWorking__dots" aria-hidden="true"><span></span><span></span><span></span></p>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,37 @@
+{# {% set funnel_done = 1 %} {% set funnel_emphasis = 2 %} #}
+<nav class="funnelRail" aria-label="体験から講座までの流れ">
+  <p class="funnelRail__caption">はじめての方向けの基本ルート</p>
+  <ol class="funnelRail__list">
+    <li class="funnelRail__item {% if funnel_done >= 1 %}funnelRail__item--done{% endif %} {% if funnel_emphasis == 1 %}funnelRail__item--emph{% endif %}">
+      <span class="funnelRail__num">1</span>
+      <span class="funnelRail__body">
+        <span class="funnelRail__title">LP</span>
+        <span class="funnelRail__sub">悩みの言語化</span>
+      </span>
+    </li>
+    <li class="funnelRail__sep" aria-hidden="true"></li>
+    <li class="funnelRail__item {% if funnel_done >= 2 %}funnelRail__item--done{% endif %} {% if funnel_emphasis == 2 %}funnelRail__item--emph{% endif %}">
+      <span class="funnelRail__num">2</span>
+      <span class="funnelRail__body">
+        <span class="funnelRail__title">無料診断</span>
+        <span class="funnelRail__sub">30問・ミニ要約で現在地を把握</span>
+      </span>
+    </li>
+    <li class="funnelRail__sep" aria-hidden="true"></li>
+    <li class="funnelRail__item {% if funnel_done >= 3 %}funnelRail__item--done{% endif %} {% if funnel_emphasis == 3 %}funnelRail__item--emph{% endif %}">
+      <span class="funnelRail__num">3</span>
+      <span class="funnelRail__body">
+        <span class="funnelRail__title">動画で確認</span>
+        <span class="funnelRail__sub">診断結果を踏まえて見るとよい整え方</span>
+      </span>
+    </li>
+    <li class="funnelRail__sep" aria-hidden="true"></li>
+    <li class="funnelRail__item {% if funnel_done >= 4 %}funnelRail__item--done{% endif %} {% if funnel_emphasis == 4 %}funnelRail__item--emph{% endif %}">
+      <span class="funnelRail__num">4</span>
+      <span class="funnelRail__body">
+        <span class="funnelRail__title">魂のナビ講座</span>
+        <span class="funnelRail__sub">継続で身体と判断を育てる本番</span>
+      </span>
+    </li>
+  </ol>
+</nav>

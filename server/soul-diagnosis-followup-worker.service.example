@@ -1,0 +1,22 @@
+# コピー例:
+#   sudo cp server/soul-diagnosis-followup-worker.service.example /etc/systemd/system/soul-diagnosis-followup-worker.service
+# ユーザー名・パスは環境に合わせて編集後:
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now soul-diagnosis-followup-worker
+
+[Unit]
+Description=魂のナビ診断 Followup Worker
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/apps/soul-diagnosis
+Environment=PATH=/home/ubuntu/apps/soul-diagnosis/.venv/bin
+ExecStart=/home/ubuntu/apps/soul-diagnosis/.venv/bin/python /home/ubuntu/apps/soul-diagnosis/followup_worker.py --interval-sec 30 --max-items 10
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

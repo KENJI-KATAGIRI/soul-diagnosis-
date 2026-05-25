@@ -1,0 +1,78 @@
+{% extends "nav_ai/base.html" %}
+
+{% block content %}
+  <div class="navAi__progress" role="progressbar" aria-valuenow="{{ step }}" aria-valuemin="1" aria-valuemax="{{ total }}">
+    <div class="navAi__progressTrack">
+      <div class="navAi__progressFill" style="width: {{ (progress_ratio * 100)|round(1) }}%"></div>
+    </div>
+    <p class="navAi__progressLabel">{{ step }} / {{ total }}</p>
+  </div>
+
+  <article class="navAi__card">
+    <h1 class="navAi__h1 navAi__h1--q">{{ q.headline }}</h1>
+    <p class="navAi__body">{{ q.body }}</p>
+
+    {% if error %}
+      <div class="navAi__alert" role="alert">{{ error }}</div>
+    {% endif %}
+
+    <form class="navAi__form" method="post" action="{{ url_for('nav_diagnosis_ai.question', step=step) }}" novalidate>
+      {% if q.input == "textarea" %}
+        <label class="navAi__srOnly" for="f-{{ q.id }}">{{ q.headline }}</label>
+        <textarea
+          id="f-{{ q.id }}"
+          class="navAi__textarea"
+          name="{{ q.id }}"
+          rows="5"
+          maxlength="{{ q.max_length | default(2000) }}"
+          placeholder="{{ q.placeholder | default('', true) }}"
+          required
+        >{% if current_value is not none and current_value is string %}{{ current_value }}{% endif %}</textarea>
+      {% elif q.input == "radio" %}
+        <fieldset class="navAi__fieldset">
+          <legend class="navAi__srOnly">{{ q.headline }}</legend>
+          <div class="navAi__options">
+            {% for opt in q.options %}
+              <label class="navAi__option">
+                <input
+                  type="radio"
+                  name="{{ q.id }}"
+                  value="{{ opt.value }}"
+                  {% if current_value == opt.value %}checked{% endif %}
+                  required
+                />
+                <span class="navAi__optionText">{{ opt.label }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+      {% elif q.input == "checkbox" %}
+        <fieldset class="navAi__fieldset">
+          <legend class="navAi__srOnly">{{ q.headline }}</legend>
+          <div class="navAi__options">
+            {% for opt in q.options %}
+              <label class="navAi__option">
+                <input
+                  type="checkbox"
+                  name="{{ q.id }}"
+                  value="{{ opt.value }}"
+                  {% if current_value and opt.value in current_value %}checked{% endif %}
+                />
+                <span class="navAi__optionText">{{ opt.label }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+      {% endif %}
+
+      <div class="navAi__actions">
+        {% if step > 1 %}
+          <a class="navAi__btn navAi__btn--ghost" href="{{ url_for('nav_diagnosis_ai.question', step=step - 1) }}">戻る</a>
+        {% endif %}
+        <button class="navAi__btn navAi__btn--primary" type="submit">
+          {% if step >= total %}結果を見る{% else %}次へ{% endif %}
+        </button>
+      </div>
+    </form>
+  </article>
+{% endblock %}

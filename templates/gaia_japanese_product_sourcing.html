@@ -1,0 +1,35 @@
+{% extends "gaia_seo_base.html" %}
+{% block seo_title %}Japanese Product Sourcing for Beauty and Service Businesses | Gaia Arts{% endblock %}
+{% block og_title %}Japanese Product Sourcing for Beauty and Service Businesses | Gaia Arts{% endblock %}
+{% block seo_description %}Gaia Arts helps connect beauty and service businesses with suitable Japanese products, focusing on quality, practicality, and market fit.{% endblock %}
+{% block og_description %}Japanese product sourcing for beauty and service businesses—quality, practicality, and market fit.{% endblock %}
+{% block json_ld %}
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Japanese Product Sourcing for Beauty and Service Businesses | Gaia Arts","description":"Gaia Arts helps connect beauty and service businesses with suitable Japanese products, focusing on quality, practicality, and market fit.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Japanese product sourcing</nav>
+        <h1>Japanese Product Sourcing for Beauty and Service Businesses</h1>
+        <p class="sub-lead">Not every market needs the most famous product. In many cases, what matters more is the right balance of quality, usability, price, and market fit. Gaia Arts helps connect businesses with Japanese products that are practical, relevant, and well suited to the target market.</p>
+
+        <section class="sub-section" aria-labelledby="src-support">
+          <h2 id="src-support">What we support</h2>
+          <p>Our sourcing support focuses especially on beauty and service-related products. Rather than simply introducing well-known brands, we aim to identify products that match local needs, realistic price ranges, and business potential.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="src-why">
+          <h2 id="src-why">Why this approach matters</h2>
+          <p>A product can be excellent in Japan and still not fit another market. Successful sourcing requires practical judgment, local awareness, and a clear understanding of what can work in real business conditions. Gaia Arts supports this process with a grounded and selective approach.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="src-who">
+          <h2 id="src-who">Who this is for</h2>
+          <p>This service is relevant for distributors, business owners, partners, and organizations looking for Japanese beauty or service-related products with realistic commercial potential.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="src-cta">
+          <h2 id="src-cta">Next step</h2>
+          <p>If you would like to explore Japanese product sourcing opportunities, please contact Gaia Arts.</p>
+          <a class="btn" href="{{ url_for('site_root') }}#contact">Contact Gaia Arts</a>
+          <p class="sub-links"><a href="{{ url_for('gaia_region_cambodia') }}">Cambodia</a> · <a href="{{ url_for('gaia_region_philippines') }}">Philippines</a> · <a href="{{ url_for('gaia_about_kenji') }}">About Kenji Katagiri</a></p>
+        </section>
+{% endblock %}

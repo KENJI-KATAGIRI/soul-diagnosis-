@@ -1,0 +1,975 @@
+{% set lec_lp_locale = lec_lp_locale|default('ja') %}
+<!doctype html>
+<html lang="{{ 'en' if lec_lp_locale == 'en' else 'ja' }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    {%- if lec_lp_locale == 'en' %}
+    <title>Life Energy Coaching Nagoya, Japan | Kinesiology, Energy Work &amp; Body–Mind Sessions | Kenji Katagiri</title>
+    <meta name="description" content="Life Energy Coaching in Nagoya: body–mind sessions blending kinesiology (muscle testing), energy healing, psychology, and gentle structural care. English OK. Online sessions available after your first in-person visit." />
+    {%- else %}
+    <title>ライフエネルギーコーチング名古屋｜キネシオロジー×エネルギーヒーリング | 片桐健治</title>
+    <meta name="description" content="ライフエネルギーコーチング（名古屋市中区）。初回無料体験あり。ライフエネルギーを数値化し体と心の根本にアプローチ。キネシオロジー・チャクラヒーリング・カイロプラクティック融合。" />
+    {%- endif %}
+    <link rel="canonical" href="{{ seo_canonical_url }}" />
+    <link rel="alternate" hreflang="ja" href="https://life-energy-coaching.net/lec/" />
+    <link rel="alternate" hreflang="en" href="https://life-energy-coaching.net/en/lec/" />
+    <link rel="alternate" hreflang="x-default" href="https://life-energy-coaching.net/lec/" />
+    {%- if search_console_verification %}
+    <meta name="google-site-verification" content="{{ search_console_verification }}" />
+    {%- endif %}
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='lec-hero.png') }}" />
+    {%- if lec_lp_locale == 'en' %}
+    <meta property="og:title" content="Life Energy Coaching Nagoya | Kinesiology &amp; Energy Healing" />
+    <meta property="og:description" content="Body–mind coaching in Nagoya, Japan. Kinesiology, energy work, psychology, and structural care—in English. Book a session or read more." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ja_JP" />
+    <meta name="twitter:title" content="Life Energy Coaching Nagoya | Kinesiology &amp; Energy Healing" />
+    <meta name="twitter:description" content="Body–mind coaching in Nagoya, Japan. English sessions. Kinesiology, energy healing, psychology." />
+    {%- else %}
+    <meta property="og:title" content="名古屋のライフエネルギーコーチング｜キネシオロジー×カイロ×心理学" />
+    <meta property="og:description" content="ライフエネルギーを数値化し、体と心の根本原因にアプローチ。カイロプラクティック・エネルギーヒーリング・筋反射学を融合した独自コーチング。名古屋市中区。オンライン対応。" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta name="twitter:title" content="名古屋のライフエネルギーコーチング｜キネシオロジー×カイロ×心理学" />
+    <meta name="twitter:description" content="ライフエネルギーを数値化し、体と心の根本原因にアプローチ。カイロプラクティック・エネルギーヒーリング・筋反射学を融合した独自コーチング。名古屋市中区。オンライン対応。" />
+    {%- endif %}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ seo_canonical_url }}" />
+    <meta property="og:image" content="{{ url_for('static', filename='lec-flow-wide.png', _external=True) }}" />
+    <meta property="og:image:width" content="640" />
+    <meta property="og:image:height" content="360" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="{{ url_for('static', filename='lec-flow-wide.png', _external=True) }}" />
+    {%- if ga_measurement_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_measurement_id }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ ga_measurement_id }}');
+    </script>
+    {%- endif %}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+Khmer:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --text: #333; --muted: #555; --light: #888;
+        --bg: #fff; --bg-alt: #f7faf5; --card: #ffffff;
+        --accent: #3a7d44; --accent-light: #e8f5e9;
+        --border: #d5e5d0; --max-w: 800px;
+        --gold: #c5a55a;
+      }
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: 'Noto Sans JP', 'Noto Sans Khmer', sans-serif;
+        color: var(--text); background: var(--bg);
+        line-height: 1.9; -webkit-font-smoothing: antialiased;
+        font-size: 15px;
+      }
+      img { display: block; max-width: 100%; height: auto; }
+      .wrap { width: min(var(--max-w), calc(100% - 32px)); margin: 0 auto; }
+      .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+      .reveal--visible { opacity: 1; transform: translateY(0); }
+
+      /* ── Header ── */
+      .site-header {
+        position: sticky; top: 0; z-index: 20;
+        background: rgba(255,255,255,.96); backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+      }
+      .site-header .wrap {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 12px 0; gap: 10px; flex-wrap: wrap;
+      }
+      .brand { text-decoration: none; display: flex; align-items: center; gap: 8px; }
+      .brand img { height: 40px; width: auto; }
+      .site-nav { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+      .site-nav a { color: var(--muted); text-decoration: none; font-size: 12.5px; font-weight: 500; }
+      .site-nav a:hover { color: var(--accent); }
+      .lang-sw { display: flex; gap: 4px; margin-left: 6px; border-left: 1px solid var(--border); padding-left: 10px; }
+      .lang-btn {
+        appearance: none; border: 1px solid var(--border); background: #fff;
+        padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 700;
+        color: var(--light); cursor: pointer; transition: .15s;
+      }
+      .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+      .lang-btn--active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+      /* ── Hero ── */
+      .hero {
+        position: relative; text-align: center;
+        padding: 56px 20px 48px;
+        background: linear-gradient(170deg, var(--bg-alt) 0%, var(--bg) 60%);
+      }
+      .hero h1 {
+        font-size: clamp(22px, 4.5vw, 32px); font-weight: 700;
+        line-height: 1.5; margin-bottom: 24px; color: var(--accent);
+      }
+      .hero__photo {
+        max-width: 520px; margin: 0 auto 28px;
+        border-radius: 16px; overflow: hidden;
+        box-shadow: 0 12px 40px rgba(0,0,0,.1);
+      }
+      .hero__photo img { width: 100%; aspect-ratio: 3/2; object-fit: cover; object-position: center top; }
+
+      /* ── Section base ── */
+      .section { padding: 56px 0; }
+      .section--alt { background: var(--bg-alt); }
+      .sec-title {
+        font-size: clamp(20px, 3.5vw, 26px); font-weight: 700;
+        text-align: center; margin-bottom: 28px; color: var(--accent);
+        line-height: 1.4;
+      }
+      .sec-body { font-size: 15px; line-height: 2; color: var(--text); }
+      .sec-body p { margin-bottom: 18px; }
+
+      /* ── Modalities ── */
+      .modality-list {
+        text-align: center; margin-bottom: 24px;
+        font-size: 15px; line-height: 2.2; color: var(--text);
+      }
+
+      /* ── Photo row ── */
+      .photo-row {
+        display: grid; grid-template-columns: repeat(3, 1fr);
+        gap: 12px; margin: 28px 0;
+      }
+      .photo-row img { border-radius: 10px; width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+
+      /* ── Signs ── */
+      .sign-block { margin-bottom: 24px; }
+      .sign-block h3 {
+        font-size: 17px; font-weight: 700; margin-bottom: 10px;
+        padding-left: 8px; border-left: 4px solid var(--accent);
+      }
+      .sign-block ul { list-style: none; padding: 0; }
+      .sign-block li {
+        position: relative; padding-left: 16px; margin-bottom: 6px;
+        font-size: 15px; color: var(--muted);
+      }
+      .sign-block li::before { content: '・'; position: absolute; left: 0; }
+      .star-block { margin-bottom: 22px; }
+      .star-block h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+      .star-block p, .star-block ul { font-size: 15px; color: var(--muted); line-height: 1.9; }
+      .star-block ul { list-style: none; padding: 0; }
+      .star-block li { position: relative; padding-left: 16px; margin-bottom: 4px; }
+      .star-block li::before { content: '・'; position: absolute; left: 0; }
+
+      /* ── Flow ── */
+      .flow-steps { }
+      .flow-card {
+        display: grid; grid-template-columns: 220px 1fr; gap: 24px;
+        margin-bottom: 32px; align-items: start;
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: 14px; overflow: hidden;
+      }
+      .flow-card__img { overflow: hidden; }
+      .flow-card__img img { width: 100%; height: 100%; min-height: 160px; object-fit: cover; }
+      .flow-card__body { padding: 20px 20px 20px 0; }
+      .flow-num {
+        width: 40px; height: 40px; border-radius: 50%;
+        background: var(--accent); color: #fff;
+        font-size: 18px; font-weight: 700;
+        display: grid; place-items: center; margin-bottom: 10px;
+      }
+      .flow-card__body h4 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+      .flow-card__body p { font-size: 14.5px; color: var(--muted); line-height: 1.85; margin-bottom: 8px; }
+      .chakra-list { font-size: 13.5px; color: var(--muted); line-height: 1.8; margin-top: 8px; }
+
+      /* ── Profile ── */
+      .profile-layout {
+        display: grid; grid-template-columns: 200px 1fr;
+        gap: 28px; align-items: start;
+      }
+      .profile-photo {
+        border-radius: 14px; overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,.08);
+      }
+      .profile-photo img { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+      .profile-body h3 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+      .profile-role { font-size: 13px; color: var(--accent); font-weight: 500; margin-bottom: 14px; display: block; }
+      .profile-body p { font-size: 15px; line-height: 2; color: var(--muted); margin-bottom: 14px; }
+
+      /* ── Voices ── */
+      .voice-item {
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: 14px; padding: 24px; margin-bottom: 20px;
+      }
+      .voice-item--with-photo {
+        display: flex; gap: 20px; align-items: flex-start;
+      }
+      .voice-photo {
+        flex-shrink: 0; width: 100px; height: 100px; border-radius: 50%; overflow: hidden;
+      }
+      .voice-photo img { width: 100%; height: 100%; object-fit: cover; }
+      .voice-body { flex: 1; min-width: 0; }
+      .voice-item h3 { font-size: 17px; font-weight: 700; color: var(--accent); margin-bottom: 12px; }
+      .voice-item blockquote {
+        font-size: 14.5px; line-height: 1.9; color: var(--muted);
+        margin: 0 0 12px; padding: 0; border: 0; font-style: normal;
+      }
+      .voice-item .voice-name { font-weight: 700; font-size: 14px; }
+      @media (max-width: 600px) {
+        .voice-item--with-photo { flex-direction: column; align-items: center; text-align: center; }
+        .voice-photo { width: 80px; height: 80px; }
+      }
+
+      /* ── Details ── */
+      .details-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+      .details-table th, .details-table td {
+        padding: 14px 16px; font-size: 14px; border-bottom: 1px solid var(--border);
+        text-align: left; vertical-align: top;
+      }
+      .details-table th {
+        background: var(--bg-alt); font-weight: 700; color: var(--accent);
+        width: 140px; white-space: nowrap;
+      }
+      .details-table td { color: var(--muted); }
+      .details-note { margin-top: 16px; font-size: 14px; color: var(--muted); line-height: 1.8; }
+
+      /* ── Contact ── */
+      .cta-block { text-align: center; padding: 56px 0; background: var(--bg-alt); }
+      .cta-block h2 { font-size: clamp(20px, 3vw, 26px); margin-bottom: 12px; color: var(--accent); }
+      .cta-block > .wrap > p { color: var(--muted); max-width: 480px; margin: 0 auto 20px; font-size: 15px; }
+      .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; text-align: left; }
+      .contact-card { border: 1px solid var(--border); border-radius: 14px; background: var(--card); padding: 20px; }
+      .contact-card h3 { font-size: 17px; margin-bottom: 10px; color: var(--accent); }
+      .contact-card p { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+      .contact-form label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 5px; color: var(--accent); }
+      .contact-form .row { margin-bottom: 12px; }
+      .contact-form input, .contact-form select, .contact-form textarea {
+        width: 100%; border: 1px solid var(--border); background: #fff; color: var(--text);
+        border-radius: 8px; padding: 10px 12px; font-size: 14px; font-family: inherit;
+      }
+      .contact-form textarea { min-height: 100px; resize: vertical; }
+      .hp-field { display: none !important; }
+      .btn {
+        display: inline-block; padding: 13px 28px; border-radius: 999px;
+        font-weight: 700; font-size: 14px; text-decoration: none;
+        transition: transform .12s, box-shadow .15s; border: none; cursor: pointer;
+      }
+      .btn--primary { background: var(--accent); color: #fff; box-shadow: 0 6px 20px rgba(58,125,68,.25); }
+      .btn--primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(58,125,68,.3); }
+
+      .flash-wrap { margin-bottom: 16px; }
+      .flash-msg { padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border); font-size: 14px; margin-bottom: 8px; }
+      .flash-msg--success { background: #ecfdf3; border-color: #9bd7b2; color: #125f3b; }
+      .flash-msg--error { background: #fff5f5; border-color: #f0b7b7; color: #8a2222; }
+
+      /* ── Video ── */
+      .video-embed { margin-top: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--card); padding: 16px; }
+      .video-embed--after { margin-top: 24px; }
+      .video-frame { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 8px; background: #000; }
+      .video-link { color: var(--accent); font-size: 14px; font-weight: 700; text-decoration: none; }
+      .video-caption { font-size: 17px; font-weight: 700; margin: 0 0 12px; color: var(--text); line-height: 1.4; }
+      .video-caption-note { font-size: 13px; color: var(--muted); margin: 12px 0 0; line-height: 1.65; }
+
+      /* ── Footer ── */
+      .site-footer { padding: 24px 0; text-align: center; font-size: 12px; color: var(--light); border-top: 1px solid var(--border); }
+
+      /* ── Wide image between sections ── */
+      .section-photo { max-width: 640px; margin: 0 auto 28px; border-radius: 14px; overflow: hidden; }
+      .section-photo img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+
+      @media (max-width: 700px) {
+        .profile-layout { grid-template-columns: 1fr; }
+        .profile-photo { max-width: 200px; margin: 0 auto; }
+        .flow-card { grid-template-columns: 1fr; }
+        .flow-card__img img { max-height: 200px; }
+        .flow-card__body { padding: 16px; }
+        .contact-grid { grid-template-columns: 1fr; }
+        .details-table th { display: block; width: 100%; }
+        .details-table td { display: block; padding-top: 4px; }
+        .site-nav { gap: 8px 12px; }
+      }
+    </style>
+  </head>
+  <body>
+    {%- if lec_lp_locale == 'en' %}
+    <script>try{localStorage.setItem('lec_lang','en');}catch(e){}</script>
+    {%- endif %}
+    {% set lec_header_brand_href = '#top' %}
+    {% include '_lec_header.html' %}
+
+    <main id="top">
+
+      <!-- ━━ Hero ━━ -->
+      <section class="hero">
+        <div class="wrap reveal">
+          <div class="hero__photo">
+            <picture>
+              <source type="image/webp" srcset="{{ url_for('static', filename='lec-hero.webp') }}" />
+              <img src="{{ url_for('static', filename='lec-hero.png') }}" alt="Life Energy Coaching" width="1024" height="723" fetchpriority="high" decoding="async" />
+            </picture>
+          </div>
+          <h1 data-i18n="hero_h1">今あなたは100％自分の力を<br>発揮して生きていますか？</h1>
+          <a href="#contact" class="btn btn--primary" data-i18n="hero_btn">お問い合わせ・ご予約</a>
+        </div>
+      </section>
+
+      <!-- ━━ Video ━━ -->
+      <section id="videos" class="section" style="padding:32px 0">
+        <div class="wrap reveal">
+          <div class="video-embed">
+            <iframe
+              class="video-frame"
+              src="https://www.youtube.com/embed/_nb1XOPeO2M?cc_load_policy=1"
+              title="Life Energy Coaching"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <p class="video-caption-note" data-i18n="videos_cc_hint">字幕は、YouTubeプレイヤー右下の「CC」から表示をオンにし、歯車メニューでご希望の言語をお選びください。</p>
+            <p style="margin-top:10px;text-align:center"><a class="video-link" href="https://www.youtube.com/watch?v=_nb1XOPeO2M" target="_blank" rel="noopener noreferrer" data-i18n="videos_link">YouTubeで開く →</a></p>
+          </div>
+          <div class="video-embed video-embed--after">
+            <p class="video-caption" data-i18n="videos_kine_h">筋反射学（キネシオロジーとは？）</p>
+            <iframe
+              class="video-frame"
+              src="https://www.youtube.com/embed/ts-SC119LgA?cc_load_policy=1"
+              title="筋反射学（キネシオロジー）"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <p class="video-caption-note" data-i18n="videos_cc_hint">字幕は、YouTubeプレイヤー右下の「CC」から表示をオンにし、歯車メニューでご希望の言語をお選びください。</p>
+            <p style="margin-top:10px;text-align:center"><a class="video-link" href="https://www.youtube.com/watch?v=ts-SC119LgA" target="_blank" rel="noopener noreferrer" data-i18n="videos_link2">この動画をYouTubeで開く →</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ━━ About: Life Energy Coaching ━━ -->
+      <section id="about" class="section">
+        <div class="wrap reveal">
+          <h2 class="sec-title" data-i18n="ab_title">Life Energy Coaching</h2>
+
+          <div class="modality-list" data-i18n="ab_modalities">
+            ライフエネルギーコーチングは、<br><br>
+            ・カイロプラクティック<br>
+            ・エネルギーヒーリング<br>
+            ・心理学<br>
+            ・筋反射学を融合した<br><br>
+            他にないコーチングです。<br><br>
+            低下したライフエネルギーレベルを数値化し、<br>
+            その時に必要とする施術を処方することで、みなさまにとって最高の人生の可能性を引き出します。
+          </div>
+
+          <div class="section-photo">
+            <picture>
+              <source type="image/webp" srcset="{{ url_for('static', filename='lec-dreamcatcher.webp') }}" />
+              <img src="{{ url_for('static', filename='lec-dreamcatcher.png') }}" alt="" width="1376" height="768" loading="lazy" decoding="async" />
+            </picture>
+          </div>
+
+          <div class="sec-body" data-i18n-html="ab_full">
+            <p>人は本来、「ライフエネルギー」と呼ばれる、生きる力・癒す力・浄化力の３つの力をもって生まれてきています。しかし、年齢を重ねる中で、生き方・生活習慣・生活環境の影響を受け、ライフエネルギーは次第に低下し、周りの様々なストレスに適応できない不安定な状態に陥ります。その結果体や心に様々なサインが現れます。</p>
+            <p>ライフエネルギーコーチングは体と心をひとつとして捉えます。人が本来生まれながらにもっているライフエネルギー(生きる力、癒す力)の現在レベルと低下原因を脳(潜在意識)から独自のテスト法とオリジナルチャートを使って明確にします。そして必要なヒーリング、手技療法、メンタルコーチングを駆使して生き方、生活習慣＆環境を見つめ直しながらライフエネルギーレベルを最大限に導き、最高の健康と人生を創造していくことを目的としています。</p>
+            <p style="text-align:center;font-weight:500;color:var(--accent)">ライフエネルギーコーチングは、あなたも気づいていない人生の可能性をサポート・応援しています。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ━━ Signs / Recommend ━━ -->
+      <section id="signs" class="section section--alt">
+        <div class="wrap reveal">
+          <h2 class="sec-title" data-i18n="sig_title">ライフエネルギーコーチングはこのような方におすすめです！</h2>
+
+          <div class="sign-block">
+            <h3 data-i18n="sig_body_h">☆体からのサイン</h3>
+            <ul>
+              <li data-i18n="sb1">首のこり・肩凝り・背中の痛み、張り</li>
+              <li data-i18n="sb2">腰の痛み、張り・関節痛</li>
+              <li data-i18n="sb3">生理痛・頭痛</li>
+              <li data-i18n="sb4">疲れが取れない・風邪をひきやすい</li>
+              <li data-i18n="sb5">寝つきが悪い・目覚めが悪い</li>
+              <li data-i18n="sb6">原因不明の体調不良</li>
+              <li>など</li>
+            </ul>
+          </div>
+
+          <div class="sign-block">
+            <h3 data-i18n="sig_mind_h">☆心からのサイン</h3>
+            <ul>
+              <li data-i18n="sm1">無気力・気力低下</li>
+              <li data-i18n="sm2">過去にとらわれる・心から笑えない</li>
+              <li data-i18n="sm3">マイナス思考になりやすい</li>
+              <li data-i18n="sm4">不安・不満・イライラ</li>
+              <li>など</li>
+            </ul>
+          </div>
+
+          <div class="star-block">
+            <h4 data-i18n="cause_h">⭐️おもな原因は</h4>
+            <p data-i18n="cause_p">意識的ストレス・無意識的ストレス・過労・リフレッシュ不足・栄養過不足・運動過不足・外傷・姿勢・骨格のゆがみ・電磁波・環境汚染・空間エネルギー など</p>
+          </div>
+
+          <div class="star-block">
+            <h4 data-i18n="history_h">⭐️体は人生の履歴書です</h4>
+            <p data-i18n="history_p">ライフエネルギーコーチングでは、意識ではわからない原因を体に直接聴くことで不調の原因を明確化します。</p>
+          </div>
+
+          <div class="star-block">
+            <h4 data-i18n="improve_h">⭐️ライフエネルギーが向上すると</h4>
+            <p data-i18n="improve_p">最少のエネルギーで最大の効果が出せる。悩みや悶々とすることが少なくなった。自分らしさを取り戻し夢や目標が描きやすくなった。心身共にスッキリ。意欲や気力が湧いてきた。人生の可能性が広がった。ストレスや環境の変化に影響を受けにくくなった。直感力が冴えてきた。</p>
+          </div>
+
+          <div class="star-block">
+            <h4 data-i18n="progress_h">⭐️体験が進むと</h4>
+            <p data-i18n="progress_p">体験者の皆さんはコーチングを重ね、ライフエネルギーが100％に近づくにつれ、気づけば、人生が変わっていたと良くおっしゃいます。ライフエネルギーコーチングを受けてくださる方は、社会的にも活躍されている方や経営者の方、情報に敏感な方が多いです。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ━━ Session Flow ━━ -->
+      <section id="flow" class="section">
+        <div class="wrap reveal">
+          <h2 class="sec-title" data-i18n="flow_title">ライフエネルギーコーチングの流れ</h2>
+
+          <div class="flow-steps">
+            <div class="flow-card">
+              <div class="flow-card__img">
+                <picture>
+                  <source type="image/webp" srcset="{{ url_for('static', filename='lec-about1.webp') }}" />
+                  <img src="{{ url_for('static', filename='lec-about1.png') }}" alt="問診・ヒアリング" width="1376" height="768" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+              <div class="flow-card__body">
+                <div class="flow-num">1</div>
+                <h4 data-i18n="f1h">問診・ヒアリング</h4>
+                <p data-i18n="f1p">まずはカウンセリングから。初めての方には、ライフエネルギーコーチングの説明からスタートします。</p>
+              </div>
+            </div>
+
+            <div class="flow-card">
+              <div class="flow-card__img">
+                <picture>
+                  <source type="image/webp" srcset="{{ url_for('static', filename='lec-about2.webp') }}" />
+                  <img src="{{ url_for('static', filename='lec-about2.png') }}" alt="体の声を聴きます" width="1376" height="768" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+              <div class="flow-card__body">
+                <div class="flow-num">2</div>
+                <h4 data-i18n="f2h">体の声を聴きます</h4>
+                <p data-i18n="f2p1">まずは、スタート時のライフエネルギーレベルを体に聴くことからスタートです。ライフエネルギーレベルが分かったら、それぞれのチャクラを意識しながら、聴いていきます。さて、今回の課題はなんでしょう？意識していないことが浮かび上がってきたり、今までにない気づきがあります。</p>
+                <p data-i18n="f2p2">チャクラにはそれぞれに意味があり、その時々で反応するところが変わります。体に聴いてみないと決してわかりません。</p>
+                <div class="chakra-list" data-i18n-html="f2_chakra">
+                  【第1チャクラ】生命力・本能<br>
+                  【第2チャクラ】生きるための喜び・楽しみ<br>
+                  【第3チャクラ】感情・怒り・力強さ・欲望<br>
+                  【第4チャクラ】愛・悲しみ<br>
+                  【第5チャクラ】コミュニケーション・自己評価・リーダーシップ<br>
+                  【第6チャクラ】思考の中心・アイディア・ひらめき・映像<br>
+                  【第7チャクラ】宇宙エネルギーを受け取る場所
+                </div>
+              </div>
+            </div>
+
+            <div class="flow-card">
+              <div class="flow-card__img">
+                <picture>
+                  <source type="image/webp" srcset="{{ url_for('static', filename='lec-about3.webp') }}" />
+                  <img src="{{ url_for('static', filename='lec-about3.png') }}" alt="施術" width="1376" height="768" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+              <div class="flow-card__body">
+                <div class="flow-num">3</div>
+                <h4 data-i18n="f3h">施術</h4>
+                <p data-i18n="f3p">体の答えは人それぞれなので、ここからはオーダーメイドの施術になります。カイロプラクティック、エネルギーヒーリング、心理学、筋反射学などを駆使して癒していきます。</p>
+              </div>
+            </div>
+
+            <div class="flow-card">
+              <div class="flow-card__img">
+                <picture>
+                  <source type="image/webp" srcset="{{ url_for('static', filename='lec-flow-wide.webp') }}" />
+                  <img src="{{ url_for('static', filename='lec-flow-wide.png') }}" alt="フォロー" width="1376" height="768" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+              <div class="flow-card__body">
+                <div class="flow-num">4</div>
+                <h4 data-i18n="f4h">フォロー</h4>
+                <p data-i18n="f4p">しっかりと癒された後は、もう一度ライフエネルギーレベルを計測します。今回は何パーセント上がってるのか、とても楽しみな瞬間です。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ━━ Profile ━━ -->
+      <section id="profile" class="section section--alt">
+        <div class="wrap reveal">
+          <h2 class="sec-title" data-i18n="pr_title">プロフィール</h2>
+          <div class="profile-layout">
+            <div class="profile-photo">
+              <picture>
+                <source type="image/webp" srcset="{{ url_for('static', filename='lec-profile.webp') }}" />
+                <img src="{{ url_for('static', filename='lec-profile.png') }}" alt="片桐健治" width="723" height="1024" loading="lazy" decoding="async" />
+              </picture>
+            </div>
+            <div class="profile-body">
+              <h3 data-i18n="pr_name">片桐健治</h3>
+              <span class="profile-role" data-i18n="pr_role">GaiaArtsCreation代表<br>認定ライフエネルギーコーチ／美容師</span>
+              <p data-i18n="pr_story1">私の人生が、まさに転機と言えるタイミングで天命に導かれ、ライフエネルギーコーチングとの出会いで大きく変化しました！</p>
+              <p data-i18n="pr_story2">自分自身がライフエネルギーコーチングを受けていくうちに本当のやりたいことが明確になり、全てを手放す決意を固め、21年経営していた美容室、エステサロン、マツエクサロンを売却。両手から色々なものを手放した結果、自分にとって本当にやりたかった事が、ライフエネルギーコーチングをきっかけにどんどんシンクロしてきています！</p>
+              <p data-i18n="pr_story3">３２年の美容師として髪をキレイにする仕事に携わっていく中で、自分の中に芽生えた、人それぞれの本当の可能性を引き出すこと、それは内面に在る、自分の選択に正しく気づくこと。</p>
+              <p data-i18n="pr_story4">髪（姿）と心を整えて毎日がイキイキ、ワクワク過ごしてもらいたい。お客様ご自身が本来の魅力に気づいてほしい。クライアント様お一人お一人に寄り添ってサポートします。</p>
+              <p data-i18n="pr_global" style="margin-top:8px;padding-top:12px;border-top:1px solid var(--border)">現在は名古屋を拠点に、国内のセッションに加え、カンボジア・フィリピン・インドネシア・モンゴルなど海外でも人材育成・ライフエネルギーの実践を広げています。</p>
+              <p style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
+                <a href="https://gaiaarts.org/" target="_blank" rel="noopener" class="btn btn--primary" style="display:inline-block;font-size:14px;padding:10px 24px" data-i18n="pr_gaia_link">Gaia Arts Creation の活動をもっと見る →</a>
+                <a href="https://gaiaarts.org/hair/" target="_blank" rel="noopener" class="btn btn--primary" style="display:inline-block;font-size:14px;padding:10px 24px" data-i18n="pr_hair_link">GaiaArtsHair →</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ━━ Client Voices ━━ -->
+      <section id="voices" class="section">
+        <div class="wrap reveal">
+          <h2 class="sec-title" data-i18n="vo_title">クライアントの声</h2>
+
+          <article class="voice-item voice-item--with-photo">
+            <div class="voice-photo">
+              <picture>
+                <source type="image/webp" srcset="{{ url_for('static', filename='lec-voice-man.webp') }}" />
+                <img src="{{ url_for('static', filename='lec-voice-man.png') }}" alt="" width="1376" height="768" loading="lazy" decoding="async" />
+              </picture>
+            </div>
+            <div class="voice-body">
+              <h3 data-i18n="v1_title">ハッとしました。</h3>
+              <blockquote data-i18n="v1_text">ライフエネルギーコーチングをして頂きました。最初コーチングと聴いていたので、いろいろ質問されるのか？と思っていたのですが、自分の低下したライフエネルギーを確認でき、１５年前の出来事が課題になっていると言われて、最初はいやそんな時に何もなかったけどなぁと思って過去を振り返っていたら、そういえばその時にある人に言われたことがとてもその時に、深く刺さったことを思い出しました。確かにそれ以来、人にあることを言われるとすごく心が騒ついてしまうようになりました。そして、施術をして頂いた後は、とても心がスッキリしてそこまで気にする必要はないなぁー楽な気持ちに捉えるようになりました。ありがとうございました。</blockquote>
+              <p class="voice-name" data-i18n="v1_name">Ｔ.Ｔ さん</p>
+            </div>
+          </article>
+
+          <article class="voice-item voice-item--with-photo">
+            <div class="voice-photo">
+              <picture>
+                <source type="image/webp" srcset="{{ url_for('static', filename='lec-voice-woman1.webp') }}" />
+                <img src="{{ url_for('static', filename='lec-voice-woman1.png') }}" alt="" width="1376" height="768" loading="lazy" decoding="async" />
+              </picture>
+            </div>
+            <div class="voice-body">
+              <h3 data-i18n="v2_title">めっちゃすっきりする！</h3>
+              <blockquote data-i18n="v2_text">占いみたいに見えないものを見てくれるのではなくて、潜在意識がどこに向いているのか、パワーがどうやって抜けているのか、どんな出来事に引っ張られているのか、自分らしく捉える方法まで、自分の体から出ている信号で数字になったりパワーになったり意識になったりして拾って教えてくれる。納得することでリラックスを与えてくれるメンタルコーチングでした。</blockquote>
+              <p class="voice-name" data-i18n="v2_name">S.K さん</p>
+            </div>
+          </article>
+
+          <article class="voice-item voice-item--with-photo">
+            <div class="voice-photo">
+              <picture>
+                <source type="image/webp" srcset="{{ url_for('static', filename='lec-voice-woman2.webp') }}" />
+                <img src="{{ url_for('static', filename='lec-voice-woman2.png') }}" alt="" width="1376" height="768" loading="lazy" decoding="async" />
+              </picture>
+            </div>
+            <div class="voice-body">
+              <h3 data-i18n="v3_title">心と体のエネルギーが循環する感覚</h3>
+              <blockquote data-i18n="v3_text">いつも親身にセッションをしていただきありがとうございます。ライフエネルギーコーチングを受けて自分自身では気づかないエネルギーのバランスの乱れを整えていただくことによって、心と体のエネルギーが循環する感覚になりました。そして、自分らしく自分が輝ける道へ背中を押してもらえるような、素晴らしいセッションだと思います。これからも引き続きどうぞよろしくお願いいたします。</blockquote>
+              <p class="voice-name" data-i18n="v3_name">K.A さん</p>
+            </div>
+          </article>
+
+          <article class="voice-item voice-item--with-photo">
+            <div class="voice-photo">
+              <picture>
+                <source type="image/webp" srcset="{{ url_for('static', filename='lec-voice-woman3.webp') }}" />
+                <img src="{{ url_for('static', filename='lec-voice-woman3.png') }}" alt="" width="1376" height="768" loading="lazy" decoding="async" />
+              </picture>
+            </div>
+            <div class="voice-body">
+            <h3 data-i18n="v4_title">定期的に受けることをおすすめします！</h3>
+            <blockquote data-i18n="v4_text">セッションでは、その時出たものをクリアしていくことで、滞っていたものが流れていくような感覚です。また、体の不調の原因など、内的/外的な要因も知ることができてとても面白いと思います。いろいろな方向からヒントを落としてくれるので、その時はわからなくても、自分のタイミングで、気づきや答えがでてくるようになり、知らないうちに自分の生きたい方向へ向かっているのを感じています。</blockquote>
+            <p class="voice-name" data-i18n="v4_name">K.S さん</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ━━ Details ━━ -->
+      <section id="details" class="section section--alt">
+        <div class="wrap reveal">
+          <h2 class="sec-title" data-i18n="det_title">ライフエネルギーコーチング施術の詳細</h2>
+          <table class="details-table">
+            <tr><th data-i18n="d1l">⭐️施術場所</th><td data-i18n="d1v">サロンで施術（オンライン施術）<br>初回はサロン施術必須。1度でもサロンで施術を受けていただくと、オンライン(zoom)も可能！<br>出張も可能です！地区によって出張料金は変わります！<br>（1例ですが、東京は出張料金4,000円となります）</td></tr>
+            <tr><th data-i18n="d2l">⭐️料金</th><td data-i18n="d2v">15,000円(税込)<br>オンラインZOOMセッション 13,000円（税込）</td></tr>
+            <tr><th data-i18n="d3l">⭐️施術の所要時間</th><td data-i18n="d3v">初回 1時間半～2時間<br>2回目より 1時間</td></tr>
+            <tr><th data-i18n="d4l">🌟住所</th><td data-i18n="d4v">〒460-0007 愛知県名古屋市中区新栄2-29-22 ファインアート川口２D<br>GaiaArtsCreation</td></tr>
+            <tr><th data-i18n="d5l">🌟TEL</th><td data-i18n="d5v">070-8422-8778<br>（電話は出られないことが多いのでSMSショートメッセージをいただければ返信させていただきます）</td></tr>
+            <tr><th data-i18n="d6l">🌟受付時間</th><td data-i18n="d6v">10:00~21:00（時間は相談に乗ります）<br>不定休です</td></tr>
+          </table>
+          <p class="details-note" data-i18n="det_note">🌟お問い合わせの返信が遅れる場合がありますのでフォームからのお問い合わせに返信が無い場合は、070-8422-8778までSMS（ショートメッセージ）をいただけたら必ず返信いたします。よろしくお願いいたします。</p>
+          <p class="details-note reveal" data-i18n-html="col_aux">迷いや違和感を整理するヒントや、セッションの考え方は<a href="{{ url_for('lec_page_blog_lec') }}">心のコラム</a>で順次ご紹介しています。</p>
+          <p class="details-note reveal" data-i18n-html="gaia_jp_aux">経営者・リーダー向けの読みもの（人材育成・意思決定・組織づくり）は、<a href="https://gaiaarts.org/jp/insights/" target="_blank" rel="noopener noreferrer">Gaia Arts の日本語コラム</a>にまとめています。</p>
+        </div>
+      </section>
+
+      <!-- ━━ Contact ━━ -->
+      <section id="contact" class="cta-block">
+        <div class="wrap reveal">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+          <div class="flash-wrap">
+            {% for category, message in messages %}
+            <div class="flash-msg {% if category == 'success' %}flash-msg--success{% else %}flash-msg--error{% endif %}">
+              {{ message }}
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% endwith %}
+          <h2 data-i18n="cta_h">オンライン予約・お問い合わせ</h2>
+          <div class="contact-grid">
+            <div class="contact-card">
+              <h3 data-i18n="form_h">お問い合わせフォーム</h3>
+              <form class="contact-form" action="{{ url_for('lec_contact_submit') }}" method="post">
+                <div class="row">
+                  <label for="lec-name" data-i18n="f_name">お名前 *</label>
+                  <input id="lec-name" name="name" required />
+                </div>
+                <div class="row">
+                  <label for="lec-email" data-i18n="f_email">メールアドレス *</label>
+                  <input id="lec-email" type="email" name="email" required />
+                </div>
+                <div class="row">
+                  <label for="lec-phone" data-i18n="f_phone">電話番号（任意）</label>
+                  <input id="lec-phone" name="phone" />
+                </div>
+                <div class="row">
+                  <label for="lec-lang" data-i18n="f_lang">希望言語（任意）</label>
+                  <select id="lec-lang" name="preferred_lang">
+                    <option value="">-</option>
+                    <option value="ja">日本語</option>
+                    <option value="en">English</option>
+                    <option value="km">Khmer</option>
+                    <option value="mn">Mongolian</option>
+                  </select>
+                </div>
+                <div class="row">
+                  <label for="lec-message" data-i18n="f_message">お問い合わせ内容 *</label>
+                  <textarea id="lec-message" name="message" required></textarea>
+                </div>
+                <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" />
+                <button type="submit" class="btn btn--primary" data-i18n="f_submit">送信する</button>
+              </form>
+            </div>
+            <div class="contact-card">
+              <h3 data-i18n="reserve_h">ご予約はこちら</h3>
+              <p data-i18n="reserve_p">オンライン予約システムからご希望の日時をお選びください。</p>
+              <a href="/reserve/" class="btn btn--primary" style="display:inline-block;margin-top:12px;text-decoration:none" data-i18n="reserve_btn">予約フォームへ →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap"><span data-i18n="footer">Copyright 2023 LEC-NGY</span></div>
+    </footer>
+
+    <script>
+    (function(){
+      var T = {
+        ja: {},
+        en: {
+          nav_about:"Treatment", nav_profile:"Profile", nav_voices:"Client Voices", nav_details:"Session Details", nav_kinesiology:"Kinesiology", nav_energy:"Energy & chakras", nav_column:"Heart column", nav_contact:"Book Online",
+          hero_h1:"Are you living at 100%\nof your own power right now?",
+          hero_btn:"Contact & Booking",
+          ab_title:"Life Energy Coaching",
+          ab_modalities:"Life Energy Coaching integrates\n\n・Chiropractic\n・Energy Healing\n・Psychology\n・Kinesiology\n\ninto a unique coaching method found nowhere else.\n\nWe quantify your decreased Life Energy level and prescribe the treatment you need at that moment, drawing out the highest possibilities for your life.",
+          ab_full:"<p>We are born with three powers called 'Life Energy': the power to live, the power to heal, and the power to purify. However, as we age, our lifestyle, habits, and environment cause our Life Energy to gradually decline, leaving us unable to cope with various stresses around us. As a result, various signs appear in both body and mind.</p><p>Life Energy Coaching views body and mind as one. Using proprietary testing methods and original charts, we clarify your current Life Energy level and the causes of its decline from the brain (subconscious). Then, by utilizing healing, manual therapy, and mental coaching, we guide your Life Energy to its maximum level while re-examining your lifestyle, habits, and environment—with the aim of creating the healthiest life and greatest possibilities for you.</p><p style='text-align:center;font-weight:500;color:var(--accent)'>Life Energy Coaching supports and encourages life possibilities you haven't yet discovered in yourself.</p>",
+          sig_title:"Life Energy Coaching is recommended for people like this!",
+          sig_body_h:"☆ Signals from the body", sig_mind_h:"☆ Signals from the mind",
+          sb1:"Neck stiffness, shoulder tension, back pain/tightness", sb2:"Lower back pain, tightness, joint pain", sb3:"Menstrual pain, headaches", sb4:"Persistent fatigue, frequent colds", sb5:"Difficulty falling asleep, waking unrefreshed", sb6:"Unexplained physical symptoms",
+          sm1:"Apathy, low motivation", sm2:"Stuck in the past, unable to laugh from the heart", sm3:"Tendency toward negative thinking", sm4:"Anxiety, dissatisfaction, irritability",
+          cause_h:"⭐️ Main causes include", cause_p:"Conscious stress, unconscious stress, overwork, insufficient rest, nutritional excess/deficiency, exercise excess/deficiency, injuries, posture, skeletal misalignment, electromagnetic waves, environmental pollution, spatial energy, etc.",
+          history_h:"⭐️ Your body is your life's resume", history_p:"Life Energy Coaching clarifies the causes of discomfort by listening directly to the body for what the conscious mind cannot understand.",
+          improve_h:"⭐️ When Life Energy improves", improve_p:"Achieve maximum results with minimum energy. Worries and rumination decrease. Regain your authentic self and find it easier to envision dreams and goals. Feel refreshed in body and mind. Motivation and vitality return. Life possibilities expand. Become less affected by stress and environmental changes. Intuition sharpens.",
+          progress_h:"⭐️ As sessions progress", progress_p:"Many clients say that as their Life Energy approaches 100% through repeated coaching, they realize their lives have transformed. Those who receive Life Energy Coaching are often socially active individuals, business leaders, and people with keen awareness.",
+          flow_title:"Life Energy Coaching Session Flow",
+          f1h:"Intake & Consultation", f1p:"We start with counseling. For first-time clients, we begin with an explanation of Life Energy Coaching.",
+          f2h:"Listening to the body", f2p1:"We start by asking the body about your current Life Energy level. Once we know the level, we listen while focusing on each chakra. What is today's theme? Things you weren't conscious of surface, and new insights emerge.", f2p2:"Each chakra has its own meaning, and the reactive areas change from time to time. You can never know without listening to the body.",
+          f2_chakra:"[1st Chakra] Vitality & Instinct<br>[2nd Chakra] Joy & Pleasure of living<br>[3rd Chakra] Emotion, Anger, Strength & Desire<br>[4th Chakra] Love & Sadness<br>[5th Chakra] Communication, Self-worth & Leadership<br>[6th Chakra] Center of thought, Ideas, Inspiration & Imagery<br>[7th Chakra] Receiving cosmic energy",
+          f3h:"Treatment", f3p:"Since each body gives different answers, from here the treatment is fully customized. We use chiropractic, energy healing, psychology, kinesiology, and more to facilitate healing.",
+          f4h:"Follow-up", f4p:"After thorough healing, we measure the Life Energy level once more. It's an exciting moment to see how many percent it has risen this time.",
+          pr_title:"Profile", pr_name:"Kenji Katagiri",
+          pr_role:"Representative, GaiaArtsCreation\nCertified Life Energy Coach / Hair Stylist",
+          pr_story1:"My life changed dramatically when, at what could only be called a turning point, I was guided by destiny to encounter Life Energy Coaching!",
+          pr_story2:"As I continued receiving Life Energy Coaching, what I truly wanted to do became clear. I resolved to let go of everything and sold the beauty salon, esthetic salon, and eyelash extension salon I had run for 21 years. As a result of releasing everything from both hands, the things I truly wanted to do began synchronizing one after another, triggered by Life Energy Coaching!",
+          pr_story3:"Through 32 years as a hair stylist making hair beautiful, something sprouted within me—drawing out each person's true potential means correctly noticing the choices that lie within.",
+          pr_story4:"I want people to feel vibrant and excited every day with their appearance and heart aligned. I want each client to discover their innate charm. I support each and every client by being there alongside them.",
+          pr_global:"Currently based in Nagoya, in addition to domestic sessions, I am expanding Life Energy and human development practices internationally in Cambodia, the Philippines, Indonesia, Mongolia, and more.",
+          pr_gaia_link:"Explore Gaia Arts Creation →", pr_hair_link:"GaiaArtsHair →",
+          vo_title:"Client Voices",
+          v1_title:"It hit me.", v1_name:"T.T.",
+          v1_text:"I received Life Energy Coaching. Since I'd heard it was 'coaching,' I expected to be asked lots of questions, but instead I was able to confirm my decreased Life Energy, and was told that an event from 15 years ago was the issue. At first I thought nothing had happened back then, but as I reflected on the past, I remembered that something someone said at that time had deeply affected me. Indeed, ever since then, when someone says certain things to me, my heart gets unsettled. After the treatment, my heart felt very clear, and I came to feel that I didn't need to worry about it so much—I could take it more lightly. Thank you very much.",
+          v2_title:"So refreshing!", v2_name:"S.K.",
+          v2_text:"Rather than seeing invisible things like fortune-telling, it picks up and shows you—through numbers, power, and consciousness from your body's signals—where your subconscious is directed, how your power is leaking, what events are pulling you, and even methods for perceiving things in your own way. It was mental coaching that brings relaxation through understanding.",
+          v3_title:"The feeling of mind-body energy circulating", v3_name:"K.A.",
+          v3_text:"Thank you for always conducting sessions so thoughtfully. Through Life Energy Coaching, by having energy imbalances I wasn't aware of adjusted, I felt a sense of mind and body energy circulating. I think it's a wonderful session that pushes you toward a path where you can shine as your true self. I look forward to continuing to work with you.",
+          v4_title:"I recommend receiving it regularly!", v4_name:"K.S.",
+          v4_text:"In sessions, by clearing what comes up at that time, there's a sense of things that were stagnant beginning to flow. Also, I find it very interesting to learn about internal and external factors causing physical discomfort. Since hints come from various directions, even if you don't understand at the time, insights and answers come at your own timing, and I feel myself heading in the direction I want to live without even realizing it.",
+          det_title:"Life Energy Coaching Session Details",
+          d1l:"⭐️ Location", d1v:"Salon treatment (online treatment available)<br>First visit must be at the salon. After one salon visit, online (Zoom) is also possible!<br>Mobile visits available! Travel fees vary by area.<br>(Example: Tokyo travel fee is ¥4,000)",
+          d2l:"⭐️ Fee", d2v:"¥15,000 (approx. $100 USD, tax included)<br>Online Zoom session ¥13,000 (approx. $85 USD, tax included)",
+          d3l:"⭐️ Duration", d3v:"First visit: 1.5–2 hours<br>Follow-ups: 1 hour",
+          d4l:"🌟 Address", d4v:"Fine Art Kawaguchi 2D, 2-29-22 Shin-Sakae, Naka-ku, Nagoya 460-0007<br>GaiaArtsCreation",
+          d5l:"🌟 TEL", d5v:"+81-70-4405-6058<br>(Often unable to answer calls—please send SMS/text and we will reply)",
+          d6l:"🌟 Hours", d6v:"10:00–21:00 (flexible by consultation)<br>Irregular holidays",
+          det_note:"🌟 If there is no reply to your form inquiry, please send an SMS to +81-70-4405-6058 and we will definitely respond. Thank you.",
+          col_aux:"Tips for sorting confusion and session perspectives are shared in our <a href=\"/lec/en/blog/\">Heart column</a> over time.",
+          gaia_jp_aux:"For business owners and leaders: articles on people development, decisions, and organizations are on <a href=\"https://gaiaarts.org/jp/insights/\" target=\"_blank\" rel=\"noopener noreferrer\">Gaia Arts (Japanese column)</a>.",
+          videos_title:"Watch videos to get a feel", videos_lead:"You can also check our approach and activities through video.", videos_link:"Open on YouTube →",
+          videos_cc_hint:"Turn on captions with the CC button on the YouTube player, then open the settings (gear) icon to choose your subtitle language.",
+          videos_kine_h:"Muscle reflex testing (What is kinesiology?)",
+          videos_link2:"Open this video on YouTube →",
+          cta_h:"Contact Us", cta_p:"Questions, bookings, online availability—contact us via form or SMS.",
+          quick_h:"Contact Info", quick_p:"SMS is recommended for urgent inquiries. We always reply.",
+          cta_sms:"SMS: <a href=\"sms:+817044056058\">+81-70-4405-6058</a>",
+          cta_mail:"Email: <a href=\"mailto:kenji.kys@gmail.com\">kenji.kys@gmail.com</a>",
+          form_h:"Inquiry Form", reserve_h:"Book a Session", reserve_p:"Choose your preferred date and time from the online booking system.", reserve_btn:"Go to Booking Form →",
+          f_name:"Name *", f_email:"Email *", f_phone:"Phone (optional)", f_lang:"Preferred language (optional)", f_message:"Message *", f_submit:"Send",
+          footer:"Copyright 2023 LEC-NGY"
+        },
+        km: {
+          nav_about:"ការព្យាបាល", nav_profile:"ប្រវត្តិរូប", nav_voices:"សំឡេងអតិថិជន", nav_details:"ព័ត៌មានលម្អិត", nav_kinesiology:"កីនេស៊ីអូឡូជី", nav_energy:"ថាមពល និង ចក្រ", nav_column:"អត្ថបទ", nav_contact:"ការកក់ Online",
+          hero_h1:"តើអ្នកកំពុងរស់នៅដោយប្រើថាមពល\n១០០% របស់ខ្លួនឯងឬទេ?",
+          hero_btn:"ទាក់ទង និងកក់ទុក",
+          ab_title:"Life Energy Coaching",
+          ab_modalities:"Life Energy Coaching រួមបញ្ចូល\n\n• គីរ៉ូប្រាក់ទិក\n• ការព្យាបាលថាមពល\n• ចិត្តវិទ្យា\n• កីនេស៊ីអូឡូជី\n\nជាវិធីសាស្ត្របង្វឹកពិសេសមួយដែលគ្មាននៅកន្លែងផ្សេង។\n\nយើងវាស់កម្រិតថាមពលជីវិតដែលថយចុះជាលេខ ហើយផ្តល់ការព្យាបាលដែលអ្នកត្រូវការនៅពេលនោះ។",
+          ab_full:"<p>មនុស្សកើតមកជាមួយថាមពលបីយ៉ាង ដែលហៅថា «ថាមពលជីវិត»៖ ថាមពលរស់នៅ ថាមពលព្យាបាល និងថាមពលសម្អាត។ ប៉ុន្តែនៅពេលចាស់ឡើង របៀបរស់នៅ ទម្លាប់ និងបរិស្ថានធ្វើឱ្យថាមពលជីវិតថយចុះបន្តិចម្ដងៗ។ លទ្ធផលគឺសញ្ញាផ្សេងៗលើរាងកាយ និងចិត្ត។</p><p>Life Energy Coaching មើលរាងកាយ និងចិត្តជារបស់តែមួយ។ យើងប្រើវិធីសាស្ត្រពិសេស និងតារាងដើមដើម្បីកំណត់កម្រិតបច្ចុប្បន្ន និងមូលហេតុថយចុះពីខួរក្បាល (អនុស្មារតី) រួចផ្តល់ការព្យាបាល ការស្តារដៃ និងការគាំទ្រផ្លូវចិត្តដើម្បីលើកកម្រិតថាមពលជីវិតឱ្យអតិបរមា។</p><p style='text-align:center;font-weight:500;color:var(--accent)'>Life Energy Coaching គាំទ្រ និងលើកទឹកចិត្តលទ្ធភាពជីវិតដែលអ្នកមិនទាន់ដឹង។</p>",
+          sig_title:"Life Energy Coaching សម្រាប់អ្នកបែបនេះ!",
+          sig_body_h:"☆ សញ្ញាពីរាងកាយ", sig_mind_h:"☆ សញ្ញាពីចិត្ត",
+          sb1:"ឈឺក ស្មាតឹង ឈឺខ្នង", sb2:"ឈឺចង្កេះ សន្លាក់ឈឺ", sb3:"ឈឺពេលមករដូវ ឈឺក្បាល", sb4:"អស់កម្លាំងជាប់ ងាយផ្ដាសាយ", sb5:"គេងមិនលក់ ភ្ញាក់មិនស្រួល", sb6:"មិនស្រួលខ្លួនដោយគ្មានមូលហេតុច្បាស់",
+          sm1:"អស់ចិត្ត ថាមពលទាប", sm2:"ជាប់នឹងអតីតកាល មិនអាចសើចពីចិត្ត", sm3:"ងាយគិតអវិជ្ជមាន", sm4:"ព្រួយបារម្ភ មិនពេញចិត្ត ឆាប់ខឹង",
+          cause_h:"⭐️ មូលហេតុសំខាន់រួមមាន", cause_p:"ស្ត្រេសដែលដឹង ស្ត្រេសដែលមិនដឹង ការងារច្រើនពេក សម្រាកមិនគ្រប់ អាហារ ចលនា របួស ឥរិយាបថ ឆ្អឹង រលកអេឡិចត្រូម៉ាញ៉េទិក ការបំពុលបរិស្ថាន។",
+          history_h:"⭐️ រាងកាយគឺជាប្រវត្តិរូបជីវិតរបស់អ្នក", history_p:"Life Energy Coaching សួររាងកាយផ្ទាល់ ដើម្បីស្វែងរកមូលហេតុដែលស្មារតីមិនអាចយល់បាន។",
+          improve_h:"⭐️ នៅពេលថាមពលជីវិតប្រសើរឡើង", improve_p:"សម្រេចលទ្ធផលអតិបរមាដោយថាមពលអប្បបរមា។ ការព្រួយបារម្ភថយចុះ។ ទទួលបានខ្លួនឯង និងមើលឃើញគោលដៅ។ រាងកាយ និងចិត្តស្រស់ថ្លា។ ថាមពល និងការលើកទឹកចិត្តកើនឡើង។ លទ្ធភាពជីវិតពង្រីក។ មិនងាយរងផលប៉ះពាល់ពីស្ត្រេស។ វិចារណញាណមុតស្រួច។",
+          progress_h:"⭐️ នៅពេលបទពិសោធន៍វិវឌ្ឍន៍", progress_p:"អ្នកចូលរួមជាច្រើនពោលថា នៅពេលថាមពលជីវិតខិតទៅជិត ១០០% ពួកគេបានដឹងថាជីវិតបានផ្លាស់ប្ដូរ។ អ្នកទទួលការបង្វឹកជាច្រើនជាអ្នកដឹកនាំ អ្នកជោគជ័យ និងអ្នកមានអារម្មណ៍ច្បាស់។",
+          flow_title:"លំហូរវគ្គ Life Energy Coaching",
+          f1h:"សំណួរ និងពិភាក្សា", f1p:"ចាប់ផ្ដើមពីការពិគ្រោះយោបល់។ សម្រាប់អ្នកថ្មី យើងពន្យល់អំពី Life Energy Coaching ជាមុនសិន។",
+          f2h:"ស្ដាប់រាងកាយ", f2p1:"ចាប់ផ្ដើមដោយសួររាងកាយពីកម្រិតថាមពលជីវិត រួចស្ដាប់តាមចក្រនីមួយៗ។ តើប្រធានបទថ្ងៃនេះជាអ្វី? រឿងដែលអ្នកមិនដឹងនឹងលេចឡើង ហើយការយល់ដឹងថ្មីនឹងកើតមាន។", f2p2:"ចក្រនីមួយៗមានអត្ថន័យផ្សេងៗ ហើយកន្លែងដែលមានប្រតិកម្មប្រែប្រួលតាមពេលវេលា។ បើមិនសួររាងកាយ មិនអាចដឹងឡើយ។",
+          f2_chakra:"[ចក្រទី១] កម្លាំងជីវិត និងសភាវគតិ<br>[ចក្រទី២] សេចក្ដីរីករាយ និងសុភមង្គលនៃការរស់នៅ<br>[ចក្រទី៣] អារម្មណ៍ កំហឹង កម្លាំង និងបំណង<br>[ចក្រទី៤] ស្នេហា និងសោកសៅ<br>[ចក្រទី៥] ការប្រាស្រ័យទាក់ទង ការវាយតម្លៃខ្លួនឯង និងភាពជាអ្នកដឹកនាំ<br>[ចក្រទី៦] មជ្ឈមណ្ឌលគំនិត គំនិតច្នៃប្រឌិត និងការបំផុសគំនិត<br>[ចក្រទី៧] កន្លែងទទួលថាមពលពីសកលលោក",
+          f3h:"ការព្យាបាល", f3p:"ដោយសាររាងកាយម្នាក់ៗឆ្លើយតបផ្សេងគ្នា ការព្យាបាលពីត្រង់នេះគឺតាមបំណង ដោយប្រើគីរ៉ូប្រាក់ទិក ការព្យាបាលថាមពល ចិត្តវិទ្យា កីនេស៊ីអូឡូជី។",
+          f4h:"ការតាមដាន", f4p:"បន្ទាប់ពីព្យាបាលហ្មត់ចត់ យើងវាស់កម្រិតថាមពលជីវិតម្ដងទៀត។ វាជាពេលរំភើបដែលដឹងថាឡើងប៉ុន្មានភាគរយ។",
+          pr_title:"ប្រវត្តិរូប", pr_name:"កាតាគីរី កែនជី",
+          pr_role:"អ្នកតំណាង GaiaArtsCreation\nគ្រូបង្វឹកថាមពលជីវិតដែលទទួលស្គាល់ / ជាងកាត់សក់",
+          pr_story1:"ជីវិតរបស់ខ្ញុំបានផ្លាស់ប្ដូរយ៉ាងខ្លាំង នៅពេលដែលវាសនាបាននាំខ្ញុំទៅជួប Life Energy Coaching!",
+          pr_story2:"ពេលទទួល Life Energy Coaching បន្ត អ្វីដែលខ្ញុំចង់ធ្វើពិតប្រាកដបានច្បាស់។ ខ្ញុំបានលក់ហាងកាត់សក់ សាឡន និងហាងភ្នែកក្លែងដែលខ្ញុំបានគ្រប់គ្រង ២១ ឆ្នាំ។ បន្ទាប់ពីដោះលែងអ្វីៗ រឿងដែលខ្ញុំពិតជាចង់ធ្វើបានមកដល់ម្ដងមួយៗ!",
+          pr_story3:"ក្នុងរយៈពេល ៣២ ឆ្នាំជាជាងកាត់សក់ ខ្ញុំបានដឹងថា ការទាញយកសក្តានុពលពិតរបស់មនុស្សម្នាក់ៗ មានន័យថាជួយពួកគេស្គាល់ជម្រើសផ្ទៃក្នុងរបស់ពួកគេ។",
+          pr_story4:"ខ្ញុំចង់ឱ្យអតិថិជនរស់នៅដោយរីករាយរាល់ថ្ងៃ ដោយមានរូបរាង និងចិត្តស្របគ្នា។ ខ្ញុំគាំទ្រអតិថិជនម្នាក់ៗដោយផ្ទាល់។",
+          pr_global:"បច្ចុប្បន្នមានមូលដ្ឋាននៅណាហ្គោយ៉ា ក្រៅពីវគ្គក្នុងប្រទេស ខ្ញុំកំពុងពង្រីកការអនុវត្ត Life Energy និងអភិវឌ្ឍន៍មនុស្សនៅកម្ពុជា ហ្វីលីពីន ឥណ្ឌូណេស៊ី ម៉ុងហ្គោលី។",
+          pr_gaia_link:"មើលសកម្មភាព Gaia Arts Creation →",
+          vo_title:"សំឡេងអតិថិជន",
+          v1_title:"ខ្ញុំភ្ញាក់ផ្អើល។", v1_name:"T.T.",
+          v1_text:"ខ្ញុំបានទទួល Life Energy Coaching។ ព្រោះឮថា «ការបង្វឹក» ខ្ញុំគិតថានឹងត្រូវសួរច្រើន ប៉ុន្តែផ្ទុយទៅវិញ ខ្ញុំបានបញ្ជាក់ថាមពលជីវិតដែលថយចុះ។ គេប្រាប់ថារឿងកើតឡើង ១៥ ឆ្នាំមុនជាបញ្ហា។ ដំបូងខ្ញុំគិតថាគ្មានអ្វីកើតឡើងពេលនោះ ប៉ុន្តែពេលរំឭកឡើងវិញ ខ្ញុំបានចាំសម្ដីគេដែលប៉ះពាល់ជ្រៅ។ បន្ទាប់ពីព្យាបាល ចិត្តខ្ញុំស្រស់ស្រាយ និងមានអារម្មណ៍ស្រាលជាង។ អរគុណ។",
+          v2_title:"ស្រស់ស្រាយខ្លាំង!", v2_name:"S.K.",
+          v2_text:"ជំនួសឱ្យការមើលរឿងមើលមិនឃើញដូចការទាយ វារើសសញ្ញាពីរាងកាយរបស់អ្នក ជាលេខ ថាមពល និងស្មារតី ដើម្បីបង្ហាញទិសដៅអនុស្មារតី វិធីថាមពលធ្លាក់ចុះ និងវិធីយល់ក្នុងរបៀបផ្ទាល់ខ្លួន។ ការបង្វឹកផ្លូវចិត្តដែលផ្ដល់ភាពស្រស់ស្រាយតាមរយៈការយល់ដឹង។",
+          v3_title:"អារម្មណ៍ថាមពលចិត្ត-រាងកាយចរាចរ", v3_name:"K.A.",
+          v3_text:"អរគុណសម្រាប់វគ្គយកចិត្តទុកដាក់។ តាមរយៈ Life Energy Coaching ការកែតម្រូវតុល្យភាពថាមពលដែលមើលមិនឃើញ បានឱ្យខ្ញុំមានអារម្មណ៍ថាថាមពលចិត្ត និងរាងកាយចរាចរ។ វាជាវគ្គដ៏អស្ចារ្យដែលជំរុញអ្នកឆ្ពោះទៅរកការភ្លឺចិត្តជាខ្លួនឯងពិត។ សូមបន្តទំនាក់ទំនង។",
+          v4_title:"ខ្ញុំណែនាំឱ្យទទួលជាទៀងទាត់!", v4_name:"K.S.",
+          v4_text:"ក្នុងវគ្គ ដោយសម្អាតអ្វីដែលលេចឡើងពេលនោះ រឿងស្ទះចាប់ផ្ដើមហូរ។ ការរៀនអំពីមូលហេតុផ្ទៃក្នុង/ខាងក្រៅនៃភាពមិនស្រួលពិតជាគួរឱ្យចាប់អារម្មណ៍។ ការណែនាំមកពីទិសផ្សេងៗ ផ្ដល់ការយល់ដឹងតាមពេលវេលាផ្ទាល់ ហើយខ្ញុំឃើញខ្លួនឯងកំពុងទៅទិសដែលចង់រស់នៅ។",
+          det_title:"ព័ត៌មានលម្អិតវគ្គ",
+          d1l:"⭐️ ទីតាំង", d1v:"ព្យាបាលនៅសាឡន (ព្យាបាលអនឡាញ)<br>ដំបូងត្រូវមកសាឡន។ បន្ទាប់ពីមកម្ដង Zoom អនឡាញក៏បាន!<br>ចេញទៅទីកន្លែងក៏បាន! តម្លៃធ្វើដំណើរខុសគ្នាតាមតំបន់។",
+          d2l:"⭐️ តម្លៃ", d2v:"¥15,000 (ប្រមាណ $100 USD រួមពន្ធ)<br>Zoom អនឡាញ ¥13,000 (ប្រមាណ $85 USD រួមពន្ធ)",
+          d3l:"⭐️ រយៈពេល", d3v:"លើកដំបូង៖ 1.5-2 ម៉ោង<br>ពីលើកទី២៖ 1 ម៉ោង",
+          d4l:"🌟 អាសយដ្ឋាន", d4v:"Fine Art Kawaguchi 2D, 2-29-22 Shin-Sakae, Naka-ku, Nagoya 460-0007<br>GaiaArtsCreation",
+          d5l:"🌟 ទូរស័ព្ទ", d5v:"+81-70-4405-6058<br>(ជារឿយៗមិនអាចឆ្លើយទូរស័ព្ទ សូមផ្ញើ SMS ហើយយើងនឹងឆ្លើយតប)",
+          d6l:"🌟 ម៉ោង", d6v:"10:00-21:00 (អាចពិភាក្សា)<br>ថ្ងៃឈប់មិនទៀងទាត់",
+          det_note:"🌟 ប្រសិនបើគ្មានការឆ្លើយតបពីទម្រង់បែបបទ សូមផ្ញើ SMS ទៅ +81-70-4405-6058 ហើយយើងនឹងឆ្លើយតបជាក់ជាមិនខាន។",
+          col_aux:"គន្លឹះសម្រាប់រៀបចំភាពភ័ន្តរឿង និងទស្សនៈវគ្គ ត្រូវបានចែករំលែកនៅក្នុង <a href=\"/lec/en/blog/\">Heart column</a> ជាបន្តបន្ទាប់។",
+          gaia_jp_aux:"សម្រាប់ម្ចាស់អាជីវកម្ម និងអ្នកដឹកនាំ៖ អត្ថបទអំពីការអភិវឌ្ឍន៍មនុស្ស ការសម្រេចចិត្ត និងអង្គការ ស្ថិតនៅ <a href=\"https://gaiaarts.org/jp/insights/\" target=\"_blank\" rel=\"noopener noreferrer\">Gaia Arts (ជាភាសាជប៉ុន)</a>។",
+          videos_title:"មើលវីដេអូ", videos_lead:"សូមពិនិត្យមើលវិធីសាស្ត្រ និងសកម្មភាពរបស់យើងតាមរយៈវីដេអូ។", videos_link:"បើកនៅ YouTube →",
+          videos_cc_hint:"សូមបើកអក្សររត់ពីក្រោមដោយប៊ូតុង CC នៅក្នុងអ្នកចាក់ YouTube រួចបើកការកំណត់ (រូបចង្កៀង) ដើម្បីជ្រើសរើសភាសាអក្សររត់ពីក្រោម។",
+          videos_kine_h:"ការធ្វើតេស្តឆ្នូតសាច់ដុំ (កីនេស៊ីអូឡូជី ជាអ្វី?)",
+          videos_link2:"បើកវីដេអូនេះនៅ YouTube →",
+          cta_h:"ទំនាក់ទំនង", cta_p:"សំណួរ ការកក់ទុក ការពិគ្រោះអនឡាញ—ទំនាក់ទំនងតាមទម្រង់បែបបទ ឬ SMS។",
+          quick_h:"ព័ត៌មានទំនាក់ទំនង", quick_p:"SMS ត្រូវបានណែនាំសម្រាប់ការសាកសួរបន្ទាន់។ យើងតែងតែឆ្លើយតប។",
+          cta_sms:"SMS: <a href=\"sms:+817044056058\">+81-70-4405-6058</a>",
+          cta_mail:"អ៊ីមែល: <a href=\"mailto:kenji.kys@gmail.com\">kenji.kys@gmail.com</a>",
+          form_h:"ទម្រង់បែបបទសាកសួរ",
+          f_name:"ឈ្មោះ *", f_email:"អ៊ីមែល *", f_phone:"ទូរស័ព្ទ (ជម្រើស)", f_lang:"ភាសាដែលចង់បាន (ជម្រើស)", f_message:"ខ្លឹមសារ *", f_submit:"ផ្ញើ",
+          footer:"Copyright 2023 LEC-NGY"
+        },
+        mn: {
+          nav_about:"Эмчилгээ", nav_profile:"Профайл", nav_voices:"Сэтгэгдэл", nav_details:"Дэлгэрэнгүй", nav_kinesiology:"Кинезиологи", nav_energy:"Энерги, чакра", nav_column:"Нийтлэл", nav_contact:"Онлайн захиалга",
+          hero_h1:"Та өөрийн хүчээ 100% ашиглан\nамьдарч байна уу?",
+          hero_btn:"Холбоо барих & захиалга",
+          ab_title:"Life Energy Coaching",
+          ab_modalities:"Life Energy Coaching нь\n\n• Хиропрактик\n• Энергийн эмчилгээ\n• Сэтгэл зүй\n• Кинезиологийг нэгтгэсэн\n\nөвөрмөц коучинг юм.\n\nБууруулсан амьдралын энергийн түвшинг тоогоор хэмжиж, тухайн үед хэрэгтэй эмчилгээг зохиож, хамгийн сайн амьдралын боломжийг олно.",
+          ab_full:"<p>Хүн амьдрах, эдгээх, цэвэрлэх гэсэн 'Амьдралын энерги'-тэй төрдөг. Гэвч нас ахих тусам амьдралын хэв маяг, орчны нөлөөгөөр энерги буурч, стрессийг даван туулахад бэрхшээлтэй. Үр дүнд нь бие сэтгэлд дохио илэрнэ.</p><p>Life Energy Coaching бие сэтгэлийг нэгд авч үзнэ. Өвөрмөц туршилт, хүснэгтээр одоогийн түвшин, бууралтын шалтгааныг тодорхойлж, шаардлагатай эмчилгээ, гар барилт, сэтгэл зүйн дэмжлэгийг хослуулан эрүүл, жинхэнэ амьдралын боломжийг нээнэ.</p><p style='text-align:center;font-weight:500;color:var(--accent)'>Та өөрөө анзаараагүй амьдралын боломжийг дэмжинэ.</p>",
+          sig_title:"Ийм хүмүүст зориулсан!",
+          sig_body_h:"☆ Биеийн дохио", sig_mind_h:"☆ Сэтгэлийн дохио",
+          sb1:"Хүзүү, мөр өвдөх, нуруу зогсох", sb2:"Бэлхүүс, үе мөч өвдөх", sb3:"Сарын тэмдэг, толгой өвдөх", sb4:"Ядрах, ханиад их авах", sb5:"Унтахад хэцүү, сэрэхэд хүндрэлтэй", sb6:"Шалтгаангүй зовиур",
+          sm1:"Урам хугарах, энерги дутмаг", sm2:"Өнгөрсөнд гацах, инээхэд хэцүү", sm3:"Сөрөг бодол давамгайлах", sm4:"Санаа зовох, уур, түгшүүр",
+          cause_h:"⭐️ Гол шалтгаанууд", cause_p:"Ухамсартай/ухамсаргүй стресс, хэт ачаалал, амрах дутмаг, хоол тэжээл, хөдөлгөөн, гэмтэл, байрлал, орчны хүчин зүйл.",
+          history_h:"⭐️ Бие бол амьдралын намтар", history_p:"Ухамсрын ойлгоогүй шалтгааныг биенээс шууд асууж тодруулна.",
+          improve_h:"⭐️ Энерги дээшлэхэд", improve_p:"Бага энергиэр их үр дүн. Зовиур, эргэлзээ багасна. Өөрийнхөө байдлаар зорилго тодорхой болно. Бие сэтгэл цэвэрхэн. Урам, хүч нэмэгдэнэ. Амьдралын боломж өргөжинө. Стресст тэсвэртэй. Зөн совин мэдрэмж сайжирна.",
+          progress_h:"⭐️ Туршлага давтагдахад", progress_p:"100%-д ойртох тусам амьдрал өөрчлөгдсөнийг олон хүн хэлдэг. Удирдагч, мэдрэмжтэй хүмүүс олон.",
+          flow_title:"Life Energy Coaching-ийн дараалал",
+          f1h:"Асуулт, зөвлөгөө", f1p:"Эхлээд ярилцлага. Шинэ хүнд Life Energy Coaching-ийн тайлбараас эхэлнэ.",
+          f2h:"Биеийг сонсох", f2p1:"Эхлээд амьдралын энергийн түвшинг биенээс асууна. Чакра бүрийг анхаарч сонсоно. Ухамсрын бус зүйл гарч ирнэ.", f2p2:"Чакра бүр өөр утгатай, цаг тухайд нь хариу өөрчлөгдөнө.",
+          f2_chakra:"[1] Амьдралын хүч<br>[2] Баяр, зугаа<br>[3] Сэтгэл хөдлөл, хүч<br>[4] Хайр, гуниг<br>[5] Харилцаа, манлайлал<br>[6] Бодол, санаа<br>[7] Сансрын энерги хүлээн авах",
+          f3h:"Эмчилгээ", f3p:"Хүн бүрийн биеийн хариу өөр тул захиалгат эмчилгээ. Гiropraktik, энерги, сэтгэл зүй, кинезиологийг хослуулна.",
+          f4h:"Дагалдах", f4p:"Эмчилгээний дараа дахин хэмжинэ. Хэдэн хувиар өссөнийг мэдэх сэтгэл хөдлөлтэй мөч.",
+          pr_title:"Профайл", pr_name:"Kenji Katagiri",
+          pr_role:"GaiaArtsCreation төлөөлөгч\nБаталгаажсан Life Energy Coach / Үсчин",
+          pr_story1:"Хувь заяаны удирдлагаар Life Energy Coaching-тай уулзаж, амьдрал маань эрс өөрчлөгдсөн!",
+          pr_story2:"Коучинг хүлээн авах тусам жинхэнэ хүсэл тодорхой болж, 21 жил эрхэлсэн салонуудаа зарж, бүгдийг тавьсны үр дүнд жинхэнэ хүссэн зүйл синхрончлогдож эхэлсэн!",
+          pr_story3:"32 жил үсчнээр ажиллахдаа хүн бүрийн жинхэнэ боломжийг олох нь дотоод сонголтыг зөв таних гэдгийг мэдэрсэн.",
+          pr_story4:"Гадаад төрх, сэтгэлийг зохицуулж өдөр бүр урам зоригтой амьдрахыг хүсэж, нэг бүрчлэн дэмжинэ.",
+          pr_global:"Нагояд суурилж, Камбож, Филиппин, Индонез, Монгол зэрэгт хүний хөгжил, энергийн практикийг өргөтгөж байна.",
+          pr_gaia_link:"Gaia Arts Creation-ийн үйл ажиллагааг үзэх →",
+          vo_title:"Үйлчлүүлэгчдийн сэтгэгдэл",
+          v1_title:"Гайхширсан.", v1_name:"T.T.",
+          v1_text:"Life Energy Coaching хүлээн авсан. Коучинг гэж сонссон тул олон асуулт тавина гэж бодсон ч, өөрийн бууруулсан энергийг батлаж, 15 жилийн өмнөх зүйл сэдэв болж байгааг мэдсэн. Эхлээд юу ч болоогүй гэж бодсон ч, тухайн үед хэн нэгний хэлсэн зүйл гүнзгий нөлөөлсөнийг санасан. Эмчилгээний дараа зүрх сэтгэл тайвширч, хөнгөн болсон.",
+          v2_title:"Маш тунгалаг!", v2_name:"S.K.",
+          v2_text:"Мэргэ шиг биш, биеийн дохиогоор дэд ухамсар, энергийн урсгал, ямар зүйл татаж байгааг тоо, хүч, ухамсраар харуулж, ойлголтоор тайвшруулдаг коучинг.",
+          v3_title:"Бие сэтгэлийн энерги эргэлдэх мэдрэмж", v3_name:"K.A.",
+          v3_text:"Анзаараагүй тэнцвэргүй байдлыг засснаар бие сэтгэлийн энерги эргэлдэж байгаа мэдрэмж төрсөн. Жинхэнэ өөрөөрөө гялалзах замд түлхэж өгдөг гайхалтай сессион.",
+          v4_title:"Тогтмол хүлээн авахыг зөвлөе!", v4_name:"K.S.",
+          v4_text:"Сессион бүрд гарсан зүйлийг цэвэрлэснээр тогтнож байсан зүйл урсаж эхэлдэг. Дотоод/гадаад шалтгааныг мэдэх сонирхолтой. Зөвлөмж олон чиглэлээс ирж, өөрийн цагтаа ойлголт, хариулт ирж, мэдэлгүйгээр хүссэн чиглэлд явж байгааг мэдэрнэ.",
+          det_title:"Нарийвчилсан мэдээлэл",
+          d1l:"⭐️ Газар", d1v:"Салонд (эхний удаа заавал; дараа Zoom боломжтой)<br>Зочлох боломжтой (газар бүрийн хураамж өөр)",
+          d2l:"⭐️ Төлбөр", d2v:"¥15,000 (ойролцоогоор $100 USD, татвар орсон)<br>Zoom ¥13,000 (ойролцоогоор $85 USD, татвар орсон)",
+          d3l:"⭐️ Хугацаа", d3v:"Эхний удаа: 1.5–2 цаг / Дараагийнх: 1 цаг",
+          d4l:"🌟 Хаяг", d4v:"Fine Art Kawaguchi 2D, Shin-Sakae 2-29-22, Naka-ku, Nagoya 460-0007",
+          d5l:"🌟 Утас", d5v:"+81-70-4405-6058 (SMS илүү тохиромжтой)",
+          d6l:"🌟 Цаг", d6v:"10:00–21:00 (зөвлөлдөж болно) / Чөлөө тогтмол биш",
+          det_note:"🌟 Маягт хариу ирэхгүй бол +81-70-4405-6058-д SMS илгээнэ үү.",
+          col_aux:"Эргэлзээ, зөрчилдөх мэдрэмжийг цэгцлэх зөвлөмж, сессийн талаарх тайлбарыг <a href=\"/lec/en/blog/\">Heart column</a> дараалан нийтэлнэ.",
+          gaia_jp_aux:"Бизнес эрхлэгч, удирдагчдад: хүний хөгжил, шийдвэр, байгууллагын талаарх нийтлэлүүд <a href=\"https://gaiaarts.org/jp/insights/\" target=\"_blank\" rel=\"noopener noreferrer\">Gaia Arts (япон хэл)</a> дээр байна.",
+          videos_title:"Видео үзэх", videos_lead:"Видеогоор арга барил, үйл ажиллагааг шалгана уу.", videos_link:"YouTube-д нээх →",
+          videos_cc_hint:"YouTube тоглуулагчийн CC товчоор тайлбарыг асаагаад, тохиргооны цэснээс тайлбарын хэлээ сонгоно уу.",
+          videos_kine_h:"Булчингийн тусгал шалгалт (Кинезиологи гэж юу вэ?)",
+          videos_link2:"Энэ видеог YouTube-д нээх →",
+          cta_h:"Холбоо барина уу", cta_p:"Асуулт, захиалга—маягт эсвэл SMS.",
+          quick_h:"Холбоо барих", quick_p:"SMS зөвлөмжтэй. Заавал хариулна.",
+          cta_sms:"SMS: <a href=\"sms:+817044056058\">+81-70-4405-6058</a>",
+          cta_mail:"Имэйл: <a href=\"mailto:kenji.kys@gmail.com\">kenji.kys@gmail.com</a>",
+          form_h:"Хүсэлт",
+          f_name:"Нэр *", f_email:"Имэйл *", f_phone:"Утас (заавал биш)", f_lang:"Хэл (заавал биш)", f_message:"Мессеж *", f_submit:"Илгээх",
+          footer:"Copyright 2023 LEC-NGY"
+        }
+      };
+
+      var currentLang = localStorage.getItem('lec_lang') || 'ja';
+
+      function applyLang(lang) {
+        if (!T[lang]) lang = 'ja';
+        currentLang = lang;
+        localStorage.setItem('lec_lang', lang);
+        try { localStorage.setItem('gac_lang', lang); } catch(e) {}
+        document.documentElement.lang = lang === 'ja' ? 'ja' : lang === 'km' ? 'km' : lang === 'mn' ? 'mn' : 'en';
+
+        if (lang === 'ja') {
+          document.querySelectorAll('[data-i18n]').forEach(function(el) {
+            /* ja = default HTML content, skip */
+          });
+          /* Reset innerHTML sections to defaults by reloading would be complex;
+             instead, for ja we just reload if needed. Since HTML default is ja,
+             simply do nothing for text nodes, but handle html nodes: */
+          location.hash && false; // no-op
+          return;
+        }
+
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+          var key = el.getAttribute('data-i18n');
+          if (T[lang] && T[lang][key] !== undefined) {
+            el.textContent = T[lang][key];
+          }
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+          var key = el.getAttribute('data-i18n-html');
+          if (T[lang] && T[lang][key] !== undefined) {
+            el.innerHTML = T[lang][key];
+          }
+        });
+
+        document.querySelectorAll('.lang-btn').forEach(function(b) {
+          b.classList.toggle('lang-btn--active', b.getAttribute('data-lang') === lang);
+        });
+      }
+
+      /* Store original ja HTML for restoring */
+      var jaCache = {};
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        jaCache[el.getAttribute('data-i18n')] = { text: el.textContent, html: el.innerHTML };
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+        jaCache['html__' + el.getAttribute('data-i18n-html')] = el.innerHTML;
+      });
+
+      function applyNavHref(mode) {
+        var useEn = (mode === 'en');
+        document.querySelectorAll('a[data-href-ja][data-href-en]').forEach(function(a) {
+          a.setAttribute('href', useEn ? a.getAttribute('data-href-en') : a.getAttribute('data-href-ja'));
+        });
+      }
+
+      function applyLangFull(lang) {
+        if (!T[lang] && lang !== 'ja') lang = 'ja';
+        currentLang = lang;
+        localStorage.setItem('lec_lang', lang);
+        try { localStorage.setItem('gac_lang', lang); } catch(e) {}
+        document.documentElement.lang = lang === 'ja' ? 'ja' : lang === 'km' ? 'km' : lang === 'mn' ? 'mn' : 'en';
+
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+          var key = el.getAttribute('data-i18n');
+          if (lang === 'ja') {
+            if (jaCache[key]) el.innerHTML = jaCache[key].html;
+          } else if (T[lang] && T[lang][key] !== undefined) {
+            el.textContent = T[lang][key];
+          }
+        });
+        document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+          var key = el.getAttribute('data-i18n-html');
+          if (lang === 'ja') {
+            if (jaCache['html__' + key]) el.innerHTML = jaCache['html__' + key];
+          } else if (T[lang] && T[lang][key] !== undefined) {
+            el.innerHTML = T[lang][key];
+          }
+        });
+
+        document.querySelectorAll('.lang-btn').forEach(function(b) {
+          b.classList.toggle('lang-btn--active', b.getAttribute('data-lang') === lang);
+        });
+        applyNavHref(lang === 'en' ? 'en' : 'ja');
+      }
+
+      document.querySelectorAll('.lang-btn').forEach(function(b) {
+        b.addEventListener('click', function() { applyLangFull(b.getAttribute('data-lang')); });
+      });
+
+      if (currentLang !== 'ja') applyLangFull(currentLang);
+      else applyNavHref('ja');
+      document.querySelectorAll('.lang-btn').forEach(function(b) {
+        b.classList.toggle('lang-btn--active', b.getAttribute('data-lang') === currentLang);
+      });
+
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function(el){ el.classList.add('reveal--visible'); });
+      } else {
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('reveal--visible'); io.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        els.forEach(function(el){ io.observe(el); });
+      }
+    })();
+    </script>
+    {# JSON-LD: HealthAndBeautyBusiness + founder（検索向け・言語に応じて inLanguage / description） #}
+    {%- if lec_lp_locale == 'en' %}
+    <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HealthAndBeautyBusiness","name":"Life Energy Coaching NAGOYA","alternateName":"ライフエネルギーコーチング名古屋","url":{{ seo_canonical_url|tojson }},"inLanguage":"en","description":"Life Energy Coaching in Nagoya, Japan: sessions combining kinesiology (muscle testing), energy healing, psychology, and body-based coaching. English available. First visit in person; online follow-ups possible.","telephone":"+81-70-8422-8778","priceRange":"¥¥","openingHours":"Mo-Su 10:00-21:00","address":{"@type":"PostalAddress","postalCode":"460-0007","addressRegion":"Aichi","addressLocality":"Nagoya, Naka-ku","streetAddress":"Shinsakae 2-29-22 Fine Art Kawaguchi 2D","addressCountry":"JP"},"areaServed":{"@type":"City","name":"Nagoya"},"founder":{"@type":"Person","name":"Kenji Katagiri","alternateName":"片桐健治"}}
+    </script>
+    {%- else %}
+    <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HealthAndBeautyBusiness","name":"Life Energy Coaching NAGOYA","alternateName":"ライフエネルギーコーチング名古屋","url":{{ seo_canonical_url|tojson }},"inLanguage":"ja","description":"名古屋市中区。ライフエネルギーを数値化し、カイロ・エネルギーヒーリング・心理学・筋反射学を融合したコーチング。","telephone":"070-8422-8778","priceRange":"¥¥","openingHours":"Mo-Su 10:00-21:00","address":{"@type":"PostalAddress","postalCode":"460-0007","addressRegion":"愛知県","addressLocality":"名古屋市中区","streetAddress":"新栄2-29-22 ファインアート川口2D","addressCountry":"JP"},"founder":{"@type":"Person","name":"片桐健治","alternateName":"Kenji Katagiri"}}
+    </script>
+    {%- endif %}
+  </body>
+</html>

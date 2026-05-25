@@ -1,0 +1,25 @@
+{# 個別コラム（/blog/<slug>/）。app.py の LEC_COLUMN_ENTRIES で status を live にし、seo_description / body_html を追加して運用。 #}
+{% extends "lec_seo_base.html" %}
+{% block seo_title %}{{ entry.title }}｜心のコラム | Life Energy Coaching NAGOYA{% endblock %}
+{% block og_title %}{{ entry.title }}｜心のコラム{% endblock %}
+{% block seo_description %}{{ entry.get('seo_description') or (entry.title ~ '。ライフエネルギーコーチング名古屋・片桐健治の心のコラム。') }}{% endblock %}
+{% block og_description %}{{ entry.get('seo_description') or (entry.title ~ '。') }}{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="パンくず"><a href="{{ url_for('site_root') }}">トップ</a> ／ <a href="{{ url_for('lec_page_blog_lec') }}">心のコラム</a> ／ {{ entry.title }}</nav>
+        {% if entry.get('title_en') %}
+        <p class="breadcrumb" style="margin-top:-12px;margin-bottom:8px;font-size:13px"><a href="{{ url_for('lec_page_column_en_lec', slug=entry.slug) }}" hreflang="en" lang="en">Read in English</a></p>
+        {% endif %}
+        <article>
+          <h1>{{ entry.title }}</h1>
+          <div class="sub-section column-article-body">
+            {{ entry.get('body_html', '') | safe }}
+          </div>
+        </article>
+
+        <section class="sub-section" aria-labelledby="sec-after-read">
+          <h2 id="sec-after-read">セッションを知る・お問い合わせ</h2>
+          <p>心のコラムは補助的な読みものです。施術の流れや料金はランディングページでご確認いただき、ご自身のペースでお問い合わせください。</p>
+          <a class="btn" href="{{ url_for('lec_landing') }}#details">ライフエネルギーコーチングの詳細はこちら</a>
+          <p class="sub-links"><a href="{{ url_for('lec_page_blog_lec') }}">心のコラム一覧へ戻る</a> ／ <a href="{{ url_for('lec_landing') }}">初めての方はこちら（トップ）</a> ／ <a href="{{ url_for('lec_landing') }}#contact">お問い合わせはこちら</a></p>
+        </section>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}30問の本診断へ | 魂のナビ診断{% endblock %}
+
+{% block content %}
+  <section class="card emailGate" data-track-view="diagnosis_email_gate">
+    <div class="card__header">
+      <div class="pill">次のステップ</div>
+      <h1 class="h1 emailGate__title">8問では、まだ表面しか見えていません</h1>
+      <p class="lead emailGate__lead">
+        30問では、なぜそのズレが起きているのか——<br />
+        あなたのタイプと変容フェーズまで特定できます。<br />
+        診断結果はメールで届くので、あとから何度でも読み返せます。
+      </p>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="simpleDiag__flash" role="status">
+          {% for category, message in messages %}
+            <p class="simpleDiag__flashMsg simpleDiag__flashMsg--{{ category }}">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <div class="panel emailGate__summary">
+      <p class="fineprint emailGate__label">8問の確認結果</p>
+      <h2 class="emailGate__summaryTitle">{{ simple_template.title }}</h2>
+      <p class="emailGate__summaryBody">{{ simple_template.one_liner }}</p>
+    </div>
+
+    <div class="panel panel--utageLead emailGate__panel">
+      <div class="panel__title">診断結果の送り先を入力してください</div>
+      <p class="fineprint emailGate__copy">
+        入力後、そのまま30問が始まります。
+      </p>
+      <form id="emailGateForm" class="form form--utage" method="post" action="{{ url_for('diagnosis_email_gate_submit') }}" data-track-submit="diagnosis_email_gate_submit">
+        <div class="q">
+          <label class="q__title" for="gate_email">メールアドレス（必須）</label>
+          <input
+            id="gate_email"
+            class="input"
+            type="email"
+            name="email"
+            required
+            autocomplete="email"
+            placeholder="you@example.com"
+            value="{{ saved_email }}"
+          />
+        </div>
+        <div class="q">
+          <label class="q__title" for="gate_name">お名前（任意）</label>
+          <input
+            id="gate_name"
+            class="input"
+            type="text"
+            name="name"
+            maxlength="120"
+            autocomplete="name"
+            placeholder="山田 太郎"
+            value="{{ saved_name }}"
+          />
+        </div>
+        <div class="actions emailGate__actions">
+          <button class="btn btn--primary btn--large" type="submit">30問を受ける（無料）→</button>
+        </div>
+      </form>
+
+      {# UTAGEへのサイレント送信（ブラウザから直接POSTしてメールアドレスを取得させる） #}
+      <form id="utageSilentForm"
+            action="https://utage-system.com/r/TjlcA76tYZoW/store"
+            method="POST"
+            target="utageSink"
+            style="display:none"
+            aria-hidden="true">
+        <input type="hidden" name="mail" id="utageMail">
+        <input type="hidden" name="name" id="utageName">
+      </form>
+      <iframe name="utageSink" style="display:none" aria-hidden="true"></iframe>
+
+      <script>
+        document.getElementById('emailGateForm').addEventListener('submit', function() {
+          var email = document.getElementById('gate_email').value;
+          var name  = document.getElementById('gate_name').value;
+          if (email) {
+            document.getElementById('utageMail').value = email;
+            document.getElementById('utageName').value = name || '';
+            try { document.getElementById('utageSilentForm').submit(); } catch(e) {}
+          }
+        });
+      </script>
+    </div>
+  </section>
+{% endblock %}

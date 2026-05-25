@@ -1,0 +1,133 @@
+{% extends "gaia_seo_base.html" %}
+{% block seo_title %}Insights | Gaia Arts—Perspectives on Leadership, Service, and People Development{% endblock %}
+{% block og_title %}Insights | Gaia Arts{% endblock %}
+{% block seo_description %}Articles and practical perspectives from Gaia Arts on leadership, hospitality, service quality, decision-making, and human development—written as readings for people shaping teams in Asia.{% endblock %}
+{% block og_description %}Practical perspectives from Gaia Arts on leadership, service quality, and human development across Asia.{% endblock %}
+{% block head_extra %}
+    <style>
+      .insight-index-section { margin-top: 32px; }
+      .insight-index-section:first-of-type { margin-top: 0; }
+      .insight-index-section__lead { font-size: 15px; color: var(--muted); margin: -6px 0 14px; line-height: 1.65; max-width: 52em; }
+      .insight-index-list { list-style: none; padding: 0; margin: 12px 0 0; }
+      .insight-index-list li { margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid var(--border); }
+      .insight-index-list li:last-child { border-bottom: none; }
+      .insight-index-list a.title { font-weight: 700; color: var(--accent); text-decoration: none; font-size: 17px; }
+      .insight-index-list a.title:hover { text-decoration: underline; }
+      .insight-index-list .excerpt { font-size: 14px; color: var(--muted); margin-top: 8px; line-height: 1.65; }
+      .insight-planned-list { list-style: none; padding: 0; margin: 12px 0 0; }
+      .insight-planned-list > li { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+      .insight-planned-list > li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+      .insight-planned-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; margin-bottom: 6px; }
+      .insight-badge { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); background: var(--bg-alt); border: 1px solid var(--border); padding: 3px 8px; border-radius: 6px; flex-shrink: 0; }
+      .insight-planned-title { font-size: 16px; font-weight: 700; color: var(--text); line-height: 1.35; }
+      .insight-planned-list .excerpt { font-size: 14px; color: var(--muted); margin: 0 0 10px; line-height: 1.65; }
+      .insight-related { font-size: 13px; color: var(--light); line-height: 1.6; margin: 0; }
+      .insight-related a { color: var(--accent); font-weight: 500; text-decoration: none; }
+      .insight-related a:hover { text-decoration: underline; }
+      .insight-related__label { font-weight: 600; color: var(--muted); margin-right: 6px; }
+      .insight-nav-strip { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--border); font-size: 14px; line-height: 1.75; color: var(--muted); }
+      .insight-nav-strip a { color: var(--accent); font-weight: 500; text-decoration: none; }
+      .insight-nav-strip a:hover { text-decoration: underline; }
+      .insight-nav-strip__label { display: block; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--light); margin-bottom: 8px; }
+    </style>
+{% endblock %}
+{% block json_ld %}
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Insights | Gaia Arts","description":"Articles and practical perspectives from Gaia Arts on leadership, hospitality, service quality, and human development across Asia.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Insights</nav>
+        <h1>Insights</h1>
+        <p class="sub-lead">Insights brings together articles, perspectives, and practical reflections from Gaia Arts. These readings are meant to support people who care about leadership, hospitality, service quality, decision-making, and human development—especially where teams are growing, crossing cultures, or working under real operational pressure. They are not updates or announcements; they are working notes from the field, offered in a calm, direct voice.</p>
+
+        <section class="sub-section" aria-labelledby="ins-cat">
+          <h2 id="ins-cat">Topics we explore</h2>
+          <ul>
+            <li>Leadership presence and inner alignment</li>
+            <li>Hospitality, standards, and genuine service culture</li>
+            <li>Communication and how people show up at work</li>
+            <li>Human development alongside skill and procedure</li>
+            <li>Training across Asia and what transfers with respect for local context</li>
+          </ul>
+        </section>
+
+        <section class="sub-section insight-index-section" aria-labelledby="ins-readings">
+          <h2 id="ins-readings">Articles and readings</h2>
+          <p class="insight-index-section__lead">Each title opens a full piece. The short lines below are here to help you choose what matches your situation—not as headlines or news.</p>
+          {% if insight_articles %}
+          <ul class="insight-index-list">
+            {% for a in insight_articles %}
+            <li>
+              <a class="title" href="{{ url_for('gaia_insight_article', slug=a.slug) }}">{{ a.title }}</a>
+              {% if a.excerpt %}<p class="excerpt">{{ a.excerpt }}</p>{% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p>Additional readings will appear here as they are added.</p>
+          {% endif %}
+        </section>
+
+        {% if insight_planned %}
+        <section class="sub-section insight-index-section" aria-labelledby="ins-planned">
+          <h2 id="ins-planned">Readings in preparation</h2>
+          <p class="insight-index-section__lead">Brief summaries of topics we are developing. Full articles will replace this block when each piece is ready.</p>
+          <ul class="insight-planned-list">
+            {% for p in insight_planned %}
+            <li>
+              <p class="insight-planned-head">
+                <span class="insight-badge">In preparation</span>
+                <strong class="insight-planned-title">{{ p.title }}</strong>
+              </p>
+              {% if p.excerpt %}<p class="excerpt">{{ p.excerpt }}</p>{% endif %}
+              {% if p.related %}
+              <p class="insight-related">
+                <span class="insight-related__label">See also:</span>
+                {% for key in p.related %}
+                  {% if key == "hospitality" %}
+                    <a href="{{ url_for('gaia_services_hospitality') }}">Hospitality training</a>
+                  {% elif key == "leadership" %}
+                    <a href="{{ url_for('gaia_services_leadership') }}">Leadership development</a>
+                  {% elif key == "regions" %}
+                    <span>Regions (<a href="{{ url_for('gaia_region_cambodia') }}">Cambodia</a>, <a href="{{ url_for('gaia_region_philippines') }}">Philippines</a>, <a href="{{ url_for('gaia_region_indonesia') }}">Indonesia</a>, <a href="{{ url_for('gaia_region_mongolia') }}">Mongolia</a>)</span>
+                  {% elif key == "about" %}
+                    <a href="{{ url_for('gaia_about_kenji') }}">About Kenji Katagiri</a>
+                  {% elif key == "contact" %}
+                    <a href="{{ url_for('site_root') }}#contact">Contact</a>
+                  {% endif %}
+                  {% if not loop.last %}<span aria-hidden="true"> · </span>{% endif %}
+                {% endfor %}
+              </p>
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endif %}
+
+        <nav class="insight-nav-strip" aria-label="Related site sections">
+          <span class="insight-nav-strip__label">On this site</span>
+          <a href="{{ url_for('gaia_jp_insights') }}" lang="ja">Japanese column（日本語）</a>
+          <span aria-hidden="true"> · </span>
+          <a href="{{ url_for('gaia_services_hospitality') }}">Hospitality training</a>
+          <span aria-hidden="true"> · </span>
+          <a href="{{ url_for('gaia_services_leadership') }}">Leadership development</a>
+          <span aria-hidden="true"> · </span>
+          <a href="{{ url_for('gaia_region_cambodia') }}">Cambodia</a>
+          <span aria-hidden="true"> · </span>
+          <a href="{{ url_for('gaia_region_philippines') }}">Philippines</a>
+          <span aria-hidden="true"> · </span>
+          <a href="{{ url_for('gaia_region_indonesia') }}">Indonesia</a>
+          <span aria-hidden="true"> · </span>
+          <a href="{{ url_for('gaia_region_mongolia') }}">Mongolia</a>
+          <span aria-hidden="true"> · </span>
+          <a href="{{ url_for('gaia_about_kenji') }}">About Kenji</a>
+          <span aria-hidden="true"> · </span>
+          <a href="{{ url_for('site_root') }}#contact">Contact</a>
+        </nav>
+
+        <section class="sub-section" aria-labelledby="ins-cta">
+          <h2 id="ins-cta">A conversation</h2>
+          <p>If a perspective here connects with what you are trying to build in your team or region, we welcome a quiet, practical conversation—no pressure, no obligation.</p>
+          <a class="btn" href="{{ url_for('site_root') }}#contact">Contact Gaia Arts</a>
+        </section>
+{% endblock %}

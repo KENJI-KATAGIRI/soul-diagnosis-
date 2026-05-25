@@ -1,0 +1,56 @@
+# 環境・秘密情報
+.env
+.env.*
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# データ・ログ（個人情報含む）
+data/
+lib/data/
+logs/
+*.log
+*.jsonl
+*.json.bak
+
+# バックアップファイル
+*.bak
+*.bak_*
+backups/
+*_b64.txt
+
+# SEO提案・履歴
+proposals/
+history/
+
+# 一時ファイル
+*.tmp
+*.swp
+.DS_Store
+
+# MCP設定（認証情報含む）
+mcp-google-insights/credentials*.json
+mcp-google-insights/.env
+
+# macOSリソースフォーク
+._*
+.DS_Store
+
+# エディタ設定（APIキー含む可能性）
+.cursor/
+.claude/
+.mcp.json
+
+# .envリソースフォーク
+._.env
+
+# 大容量ファイル（GitHub制限超え）
+slides/
+static/*.png

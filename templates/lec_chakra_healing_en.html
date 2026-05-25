@@ -1,0 +1,50 @@
+{% extends "lec_seo_base_en.html" %}
+{% block lec_header_ja_href %}{{ url_for('lec_page_chakra_healing_lec') }}{% endblock %}
+{% block seo_title %}Chakra healing &amp; deep energy release | Life Energy Coaching NAGOYA{% endblock %}
+{% block og_title %}Chakra healing &amp; deep energy release{% endblock %}
+{% block seo_description %}Life Energy Coaching (EC) in Nagoya: receive essential messages through the chakras and support deep release in body and mind. Overview of the seven chakras and insight keywords. Kinesiology is explained on a separate page.{% endblock %}
+{% block og_description %}Chakra-based energy coaching in Nagoya. Keywords, themes, and transformation through EC sessions.{% endblock %}
+{% block head_extra %}
+    <style>
+      .sub-section h3 { font-size: 16px; font-weight: 700; color: var(--accent); margin: 22px 0 10px; line-height: 1.45; }
+    </style>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Energy &amp; chakras</nav>
+        <h1>Chakra healing &amp; deep energy release</h1>
+        <p class="sub-lead">Chakras are energy gateways in the body. Everyday relationship stress, emotions held in the unconscious, and beliefs formed without noticing can gather as subtle energy in each chakra.</p>
+        <p>Through Energy Coaching (EC), we do more than “balance chakras” in a generic way—we listen for the <strong>essential message</strong> coming through each center so body and mind can move toward deeper release.</p>
+
+        <section class="sub-section" aria-labelledby="sec-keywords">
+          <h2 id="sec-keywords">Reading “insight keywords” from the chakras</h2>
+          <p>The chakra that needs attention now often holds a specific life theme. In session we use insight keywords like those below to explore the roots of what you are facing.</p>
+          <h3>1st chakra (foundation, survival)</h3>
+          <p>Attachment to law, rules, custom, and order—feeling bound or trapped, losing yourself, and no longer living in a way that feels true. Being caught in “how things should be” can make it hard to live from your own center.</p>
+          <h3>2nd chakra (abundance, individuality)</h3>
+          <p>Clarifying sources of difficult feelings in relationships, and reviewing the flow of energy around money (how you earn and spend), plus the balance between masculine energy (independence, reason) and feminine energy (emotion, intuition).</p>
+          <h3>3rd chakra (fear and passion)</h3>
+          <p>Behind thoughts like “What if…?” there is often real passion and joy. As fear of pressure or criticism is acknowledged, that energy can become a compass for moving forward.</p>
+          <h3>4th chakra (emotional transformation)</h3>
+          <p>Emotions are energy. By meeting anger, grief, and frustration with care and integration, they can shift toward love, joy, and passion.</p>
+          <h3>5th chakra (will and commitment)</h3>
+          <p>Giving yourself permission to choose what you want, and expressing yourself even when disapproval feels risky. A clear “I choose this” can strengthen the flow of what you need—even before every step is figured out.</p>
+          <h3>6th chakra (perception and environment)</h3>
+          <p>Releasing fixed stories about yourself, others, and situations to open space for new possibilities. We may also explore subtle environmental influences such as electromagnetic stress or energetic messages from others (living or deceased).</p>
+          <h3>7th chakra (trust and intuition)</h3>
+          <p>Restoring trust that life brings what your soul needs for growth. Supporting courage to follow intuition beyond fear, without reducing everything to gain and loss.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="sec-transformation">
+          <h2 id="sec-transformation">What energy transformation can offer</h2>
+          <p>In EC sessions we meet specific chakras, welcoming fear and anxiety as they are, and integrating them step by step.</p>
+          <p>As unprocessed emotions and beliefs soften, many people feel more life force, clearer motivation, and the freedom to choose the next stage with fewer regrets.</p>
+          <p>If you sense “I cannot move forward though I don’t know why” or “my feelings never quite clear,” listening to the message of the chakras may be a gentle place to start.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="sec-cta">
+          <h2 id="sec-cta">Related pages &amp; contact</h2>
+          <p>For the practical use of muscle testing in sessions, see <a href="{{ url_for('lec_page_kinesiology_en_lec') }}"><strong>Kinesiology (muscle testing)</strong></a>.</p>
+          <p>For session inquiries or bookings, please use the main landing page.</p>
+          <a class="btn" href="{{ url_for('lec_landing') }}#contact">Contact &amp; booking</a>
+        </section>
+{% endblock %}

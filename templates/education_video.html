@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% set use_closing = closing_course_video_url %}
+{% set video_title = closing_course_video_title if use_closing else education_video_title %}
+{% set video_url = closing_course_video_url if use_closing else education_video_url %}
+
+{% block title %}動画 | 魂のナビ診断{% endblock %}
+
+{% block content %}
+<style>
+  .vidBridge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 32px 24px 36px;
+  }
+  .vidBridge__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(124,92,255,.45);
+    background: rgba(124,92,255,.12);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+  .vidBridge__type {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    line-height: 1.35;
+  }
+  .vidBridge__state {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 340px;
+    margin: 0 auto 28px;
+  }
+  .vidBridge__hook {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.65;
+    max-width: 320px;
+    margin: 0 auto 32px;
+    color: var(--text);
+  }
+  .vidBridge__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 28px;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid rgba(124,92,255,.7);
+    background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(80,50,220,.7));
+    color: #fff;
+    box-shadow: 0 6px 28px rgba(124,92,255,.35);
+    transition: filter .15s ease, transform .1s ease;
+    width: 100%;
+    max-width: 320px;
+  }
+  .vidBridge__btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+  .vidBridge__btn svg { flex-shrink: 0; }
+  .vidBridge__sub {
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .vidBridge__back {
+    margin-top: 24px;
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    opacity: .7;
+  }
+  .vidBridge__back:hover { opacity: 1; }
+</style>
+
+  <section class="card">
+    <div class="vidBridge" data-track-view="funnel_video_page">
+
+      <div class="vidBridge__pill">次のステップ</div>
+
+      <p class="vidBridge__type">{{ soul_type.name }}</p>
+
+      <p class="vidBridge__state">{{ consciousness.alignment_state }}</p>
+
+      <p class="vidBridge__hook">
+        このズレを整えるヒントが<br>次の動画にあります
+      </p>
+
+      {% if video_url %}
+        <a
+          id="videoOpenBtn"
+          class="vidBridge__btn"
+          href="{{ video_url }}"
+          rel="noopener noreferrer"
+          target="_blank"
+          data-track-click="video_utage_open"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          動画を見る（無料）
+        </a>
+        <p class="vidBridge__sub">別タブで開きます</p>
+      {% else %}
+        <p class="fineprint">動画URLはまだ設定されていません。</p>
+      {% endif %}
+
+      {% if line_register_url %}
+      <div
+        id="videoLinePrompt"
+        style="display:none; margin-top:24px; padding:16px 18px; border-radius:14px;
+               border:1px solid rgba(0,200,80,.28); background:rgba(0,200,80,.06);
+               max-width:340px; width:100%; text-align:left;"
+        data-track-view="video_line_prompt"
+      >
+        <p style="margin:0 0 6px; font-weight:700; font-size:14px;">動画を開いてくださった方へ</p>
+        <p class="fineprint" style="margin:0 0 14px; line-height:1.7;">
+          ご案内が確実に届くよう、LINEにも登録しておくことをおすすめします。
+        </p>
+        <a
+          class="btn btn--primary"
+          href="{{ line_register_url }}"
+          rel="noopener noreferrer"
+          target="_blank"
+          data-track-click="video_line_register"
+          style="display:inline-flex; font-size:14px;"
+        >LINEにも登録する</a>
+      </div>
+      <script>
+        (function () {
+          var btn = document.getElementById("videoOpenBtn");
+          var prompt = document.getElementById("videoLinePrompt");
+          if (btn && prompt) {
+            btn.addEventListener("click", function () {
+              setTimeout(function () {
+                prompt.style.display = "";
+                prompt.scrollIntoView({ behavior: "smooth", block: "nearest" });
+              }, 800);
+            });
+          }
+        })();
+      </script>
+      {% endif %}
+
+      <a class="vidBridge__back" href="{{ url_for('result_view') }}" data-track-click="bridge_back_to_result">← 診断結果に戻る</a>
+
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "nav_ai/base.html" %}
+
+{% block content %}
+  <article class="navAi__card">
+    <p class="navAi__eyebrow">有料 · 深掘り版</p>
+    <h1 class="navAi__h1">ご案内</h1>
+    <p class="navAi__lead">
+      無料チェックで見えた仮説を、あなたの言葉と身体感覚に合わせて言語化し、次の一歩まで伴走するプランです。
+    </p>
+
+    <ul class="navAi__bullets">
+      <li>一般論でのまとめや、正解の押し付けはしません</li>
+      <li>テーマに応じた問いと、実行可能な小さな行動に落とし込みます</li>
+      <li>必要に応じて、既存の「魂のナビAI」セッションとも連携できます</li>
+    </ul>
+
+    <section class="navAi__section navAi__section--muted">
+      <h2 class="navAi__h2">お申し込み</h2>
+      <p class="navAi__prose">
+        こちらはデモ画面です。実際の決済・予約リンクは運用時に差し替えてください。
+      </p>
+      <p class="navAi__prose">
+        連絡先メール・公式LINE・予約フォームなど、導線を1つに絞ると迷いが減ります。
+      </p>
+    </section>
+
+    <div class="navAi__actions navAi__actions--stack">
+      <a class="navAi__btn navAi__btn--primary navAi__btn--block" href="mailto:hello@example.com?subject=深掘り版の相談">相談する（メール）</a>
+      <a class="navAi__btn navAi__btn--ghost navAi__btn--block" href="{{ url_for('nav_diagnosis_ai.result') }}">結果に戻る</a>
+      <a class="navAi__link" href="{{ url_for('nav_diagnosis_ai.top') }}">トップへ</a>
+    </div>
+  </article>
+{% endblock %}

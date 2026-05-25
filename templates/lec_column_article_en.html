@@ -1,0 +1,23 @@
+{# 英語コラム個別。entry に title_en / body_html_en / seo_description_en 必須 #}
+{% extends "lec_seo_base_en.html" %}
+{% block lec_header_ja_href %}{{ url_for('lec_column_post_lec', slug=entry.slug) }}{% endblock %}
+{% block seo_title %}{{ entry.title_en }} | Heart column | Life Energy Coaching NAGOYA{% endblock %}
+{% block og_title %}{{ entry.title_en }} | Heart column{% endblock %}
+{% block seo_description %}{{ entry.get('seo_description_en') or (entry.title_en ~ ' — Heart column, Life Energy Coaching NAGOYA.') }}{% endblock %}
+{% block og_description %}{{ entry.get('seo_description_en') or (entry.title_en ~ '.') }}{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / <a href="{{ url_for('lec_page_blog_en_lec') }}">Heart column</a> / {{ entry.title_en }}</nav>
+        <article>
+          <h1>{{ entry.title_en }}</h1>
+          <div class="sub-section column-article-body">
+            {{ entry.get('body_html_en', '') | safe }}
+          </div>
+        </article>
+
+        <section class="sub-section" aria-labelledby="sec-after-read">
+          <h2 id="sec-after-read">Sessions &amp; contact</h2>
+          <p>The column is background reading only. For flow, fees, and booking, use the main page.</p>
+          <a class="btn" href="{{ url_for('lec_landing') }}#details">Life Energy Coaching — details</a>
+          <p class="sub-links"><a href="{{ url_for('lec_page_blog_en_lec') }}">Back to Heart column</a> · <a href="{{ url_for('lec_column_post_lec', slug=entry.slug) }}" hreflang="ja" lang="ja">日本語で読む</a> · <a href="{{ url_for('lec_landing') }}#contact">Contact</a></p>
+        </section>
+{% endblock %}

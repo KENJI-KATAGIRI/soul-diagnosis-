@@ -1,0 +1,40 @@
+{% extends "gaia_seo_base.html" %}
+{% block seo_title %}Leadership Development in Asia | Inner Leadership &amp; Decision-Making | Gaia Arts{% endblock %}
+{% block og_title %}Leadership Development in Asia | Inner Leadership &amp; Decision-Making | Gaia Arts{% endblock %}
+{% block seo_description %}Leadership development programs focused on inner alignment, decision-making, communication, and team growth for organizations across Asia.{% endblock %}
+{% block og_description %}Leadership development in Asia—inner alignment, decision-making, communication, and team growth.{% endblock %}
+{% block json_ld %}
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Leadership Development in Asia | Inner Leadership and Decision-Making | Gaia Arts","description":"Leadership development programs focused on inner alignment, decision-making, communication, and team growth for organizations across Asia.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Services / Leadership development</nav>
+        <h1>Leadership Development Through Inner Alignment and Decision-Making</h1>
+        <p class="sub-lead">Leadership is not only about strategy, instruction, or authority. Sustainable leadership also depends on internal condition, clarity, communication, and the ability to make aligned decisions under pressure. Gaia Arts offers leadership development programs that combine practical training with a deeper focus on internal leadership.</p>
+
+        <section class="sub-section" aria-labelledby="lead-why">
+          <h2 id="lead-why">Why inner leadership matters</h2>
+          <p>In many teams, performance problems do not come only from a lack of skill. They can also come from hesitation, misalignment, unclear communication, emotional pressure, and inconsistency in leadership. When leaders are more aligned internally, their decisions become clearer, their presence becomes steadier, and the team can respond with more trust and cohesion.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="lead-learn">
+          <h2 id="lead-learn">What participants can learn</h2>
+          <p>Programs may include leadership mindset, decision-making quality, communication, self-awareness, workplace presence, team alignment, and the relationship between internal condition and external performance. The focus is not simply on knowledge, but on helping participants recognize how their state influences their actions and results.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="lead-ideal">
+          <h2 id="lead-ideal">Ideal participants</h2>
+          <p>This training is suitable for managers, business owners, team leaders, trainers, and organizations that want to develop people in a more integrated way. It is especially effective for teams in transition, growth phases, or multicultural environments where leadership quality strongly affects results.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="lead-method">
+          <h2 id="lead-method">A practical and human-centered method</h2>
+          <p>Kenji Katagiri’s work is based on long experience in team development, service industries, and professional education in Japan. His approach integrates practical skill development with inner leadership, helping participants connect mindset, action, and performance.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="lead-cta">
+          <h2 id="lead-cta">Next step</h2>
+          <p>If your organization is looking for a leadership program that goes beyond surface-level training, contact Gaia Arts to discuss the right format.</p>
+          <a class="btn" href="{{ url_for('site_root') }}#contact">Contact Gaia Arts</a>
+          <p class="sub-links"><a href="{{ url_for('gaia_services_hospitality') }}">Hospitality training</a> · <a href="{{ url_for('gaia_region_indonesia') }}">Indonesia</a> · <a href="{{ url_for('gaia_region_mongolia') }}">Mongolia</a> · <a href="{{ url_for('gaia_about_kenji') }}">About Kenji Katagiri</a></p>
+        </section>
+{% endblock %}

@@ -1,0 +1,67 @@
+{# LEC 日本語サブページ（lec_seo_base）用：ヘッダー nav の言語切替 + キネ／チャクラの英語URL切替 #}
+<script>
+(function(){
+  var T = {
+    ja: {},
+    en: {
+      nav_about:"Treatment", nav_profile:"Profile", nav_voices:"Client Voices", nav_details:"Session Details",
+      nav_kinesiology:"Kinesiology", nav_energy:"Energy & chakras", nav_column:"Heart column", nav_contact:"Contact"
+    },
+    km: {
+      nav_about:"ការព្យាបាល", nav_profile:"ប្រវត្តិរូប", nav_voices:"សំឡេងអតិថិជន", nav_details:"ព័ត៌មានលម្អិត",
+      nav_kinesiology:"កីនេស៊ីអូឡូជី", nav_energy:"ថាមពល និង ចក្រ", nav_column:"អត្ថបទ", nav_contact:"ទំនាក់ទំនង"
+    },
+    mn: {
+      nav_about:"Эмчилгээ", nav_profile:"Профайл", nav_voices:"Сэтгэгдэл", nav_details:"Дэлгэрэнгүй",
+      nav_kinesiology:"Кинезиологи", nav_energy:"Энерги, чакра", nav_column:"Нийтлэл", nav_contact:"Холбоо барих"
+    }
+  };
+
+  function applyNavHref(lang) {
+    var useEn = (lang === 'en');
+    document.querySelectorAll('a[data-href-ja][data-href-en]').forEach(function(a) {
+      a.setAttribute('href', useEn ? a.getAttribute('data-href-en') : a.getAttribute('data-href-ja'));
+    });
+  }
+
+  var jaCache = {};
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var k = el.getAttribute('data-i18n');
+    jaCache[k] = { html: el.innerHTML };
+  });
+
+  function applyLangFull(lang) {
+    if (!T[lang] && lang !== 'ja') lang = 'ja';
+    localStorage.setItem('lec_lang', lang);
+    try { localStorage.setItem('gac_lang', lang); } catch(e) {}
+    document.documentElement.lang = lang === 'ja' ? 'ja' : lang === 'km' ? 'km' : lang === 'mn' ? 'mn' : 'en';
+
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (lang === 'ja') {
+        if (jaCache[key]) el.innerHTML = jaCache[key].html;
+      } else if (T[lang] && T[lang][key] !== undefined) {
+        el.textContent = T[lang][key];
+      }
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(function(b) {
+      b.classList.toggle('lang-btn--active', b.getAttribute('data-lang') === lang);
+    });
+    applyNavHref(lang === 'en' ? 'en' : 'ja');
+  }
+
+  var currentLang = localStorage.getItem('lec_lang') || 'ja';
+
+  document.querySelectorAll('.lang-btn').forEach(function(b) {
+    b.addEventListener('click', function() { applyLangFull(b.getAttribute('data-lang')); });
+  });
+
+  if (currentLang !== 'ja') applyLangFull(currentLang);
+  else applyNavHref('ja');
+
+  document.querySelectorAll('.lang-btn').forEach(function(b) {
+    b.classList.toggle('lang-btn--active', b.getAttribute('data-lang') === currentLang);
+  });
+})();
+</script>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}配信停止 | 魂のナビ診断{% endblock %}
+{% block content %}
+<div style="max-width:480px;margin:60px auto;padding:0 24px;color:#e8e0f0;font-family:'Noto Sans JP',sans-serif;">
+  <h1 style="font-size:1.3rem;font-weight:700;margin-bottom:24px;color:#c9b8e8;">メール配信停止</h1>
+
+  {% if done %}
+    <div style="background:rgba(100,200,120,0.12);border:1px solid rgba(100,200,120,0.3);border-radius:8px;padding:20px 24px;">
+      <p style="margin:0;line-height:1.7;">
+        <strong>{{ email }}</strong> の配信を停止しました。<br>
+        今後、診断結果メールはお届けしません。
+      </p>
+    </div>
+    <p style="margin-top:28px;font-size:0.85rem;color:#9990b0;">
+      再度メールを受け取りたい場合は <a href="mailto:info@tamashiinavi.com" style="color:#c9b8e8;">info@tamashiinavi.com</a> までご連絡ください。
+    </p>
+
+  {% elif error %}
+    <div style="background:rgba(200,80,80,0.12);border:1px solid rgba(200,80,80,0.3);border-radius:8px;padding:20px 24px;">
+      <p style="margin:0;">{{ error }}</p>
+    </div>
+
+  {% else %}
+    <p style="line-height:1.8;margin-bottom:28px;">
+      以下のメールアドレスへの診断結果メール配信を停止します。<br>
+      よろしければ「配信を停止する」ボタンを押してください。
+    </p>
+    <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:16px 20px;margin-bottom:28px;word-break:break-all;">
+      {{ email }}
+    </div>
+    <a href="{{ url_for('unsubscribe', email=email, confirm='1') }}"
+       style="display:inline-block;background:#7b5ea7;color:#fff;border-radius:6px;padding:12px 28px;text-decoration:none;font-weight:600;font-size:0.95rem;">
+      配信を停止する
+    </a>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WMR42GMR');</script>
+    <!-- End Google Tag Manager -->
+    <title>{% block title %}{{ qz.app_title }}{% endblock %}</title>
+    <meta name="description" content="身体感覚に寄り添う簡易チェック。無料で結果を表示します。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='nav_ai.css') }}" />
+  </head>
+  <body class="navAi">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMR42GMR"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <a class="navAi__skip" href="#main">本文へ</a>
+    <header class="navAi__header">
+      <div class="navAi__headerInner">
+        <a class="navAi__brand" href="{{ url_for('nav_diagnosis_ai.top') }}">{{ qz.app_title }}</a>
+        <nav class="navAi__nav" aria-label="サイト">
+          <a href="{{ url_for('index') }}">魂タイプ診断</a>
+          <a href="{{ url_for('soul_nav') }}">ナビAI</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="navAi__main">
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="navAi__footer">
+      <p>※簡易チェックです。医療・法律・投資などの判断は専門家へご相談ください。</p>
+      <nav class="navAi__legalNav" aria-label="法的情報">
+        <a href="{{ privacy_policy_url }}" rel="noopener noreferrer" target="_blank">プライバシーポリシー</a>
+        <span class="navAi__legalSep" aria-hidden="true"> | </span>
+        <a href="{{ tokusho_url }}" rel="noopener noreferrer" target="_blank">特定商取引法に基づく表記</a>
+        <span class="navAi__legalSep" aria-hidden="true"> | </span>
+        <a href="{{ company_url }}" rel="noopener noreferrer" target="_blank">会社概要</a>
+      </nav>
+      <p class="navAi__legalCopy">© 2026 Gaia Arts Creation. All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>

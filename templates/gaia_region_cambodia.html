@@ -1,0 +1,40 @@
+{% extends "gaia_seo_base.html" %}
+{% block seo_title %}Workforce Training Cambodia | Hospitality, Service &amp; Leadership | Gaia Arts{% endblock %}
+{% block og_title %}Workforce Training Cambodia | Hospitality, Service &amp; Leadership | Gaia Arts{% endblock %}
+{% block seo_description %}Workforce training and service quality development for Cambodia, combining Japanese practical experience with local collaboration and human-centered learning.{% endblock %}
+{% block og_description %}Workforce training for Cambodia—hospitality, service quality, and leadership with local collaboration.{% endblock %}
+{% block json_ld %}
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Workforce Training Cambodia | Hospitality, Service and Leadership | Gaia Arts","description":"Workforce training and service quality development for Cambodia, combining Japanese practical experience with local collaboration and human-centered learning.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Regions / Cambodia</nav>
+        <h1>Workforce Training and Human Development for Cambodia</h1>
+        <p class="sub-lead">Cambodia is growing quickly, and many organizations are looking for practical ways to strengthen people, service quality, and workplace capability. Gaia Arts aims to contribute through training programs that combine Japanese field experience with local collaboration, especially in hospitality, beauty, service, and leadership development.</p>
+
+        <section class="sub-section" aria-labelledby="kh-why">
+          <h2 id="kh-why">Why Cambodia</h2>
+          <p>Cambodia has strong energy, growth potential, and a young workforce. At the same time, many sectors benefit from training that supports not only technical skills, but also service mindset, professionalism, communication, and human development. Gaia Arts sees value in contributing where practical service standards and people development can grow together.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="kh-provide">
+          <h2 id="kh-provide">What Gaia Arts can provide</h2>
+          <p>Possible training areas include hospitality training, service quality development, team communication, leadership basics, workplace mindset, and human resource development for customer-facing industries. Programs can be delivered as pilot workshops, partner collaborations, or custom training formats depending on local needs.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="kh-collab">
+          <h2 id="kh-collab">Collaboration approach</h2>
+          <p>Gaia Arts is interested in working with schools, training institutions, business associations, local partners, and organizations that want to strengthen workforce capability in Cambodia. The goal is not to impose a one-way model, but to create training that fits local needs while sharing practical standards and experience from Japan.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="kh-vision">
+          <h2 id="kh-vision">Long-term vision</h2>
+          <p>Rather than offering isolated training sessions only, Gaia Arts is interested in building relationships that can lead to sustainable development, collaborative programs, and local impact over time.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="kh-cta">
+          <h2 id="kh-cta">Next step</h2>
+          <p>If you are based in Cambodia and would like to explore training, partnership, or pilot opportunities, please get in touch.</p>
+          <a class="btn" href="{{ url_for('site_root') }}#contact">Contact Gaia Arts</a>
+          <p class="sub-links"><a href="{{ url_for('gaia_services_hospitality') }}">Hospitality training</a> · <a href="{{ url_for('gaia_services_leadership') }}">Leadership development</a> · <a href="{{ url_for('gaia_japanese_product_sourcing') }}">Japanese product sourcing</a> · <a href="{{ url_for('gaia_about_kenji') }}">About Kenji Katagiri</a></p>
+        </section>
+{% endblock %}

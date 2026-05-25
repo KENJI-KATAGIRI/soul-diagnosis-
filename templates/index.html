@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+
+{% block title %}魂のナビ講座 | 講座LP{% endblock %}
+
+{% block content %}
+  {% set lp_offer_href = soul_course_purchase_url or "#lpOffer" %}
+  {% set lp_ai_href = url_for('soul_nav') %}
+
+  <section class="lpHero card" data-track-view="lp_hero">
+    <div class="card__header lpHero__header">
+      <div class="pill">魂のナビ講座</div>
+      <p class="lpHero__eyebrow">頑張っているのに、なぜかしっくりこない方へ</p>
+      <h1 class="h1">もう「正しい選択」をしているのに苦しいなら、<br />本音と選択軸がズレているのかもしれません</h1>
+      <p class="lead lpHero__lead">
+        進んでいるのに満たされない。<br />
+        決めたはずなのに、身体がついてこない。<br />
+        そんな違和感の正体を見つけ、<strong>自分の本音・身体感覚・魂の方向性と一致した選び方</strong>を取り戻す講座です。
+      </p>
+      <div class="actions lpHero__actions">
+        <a class="btn btn--primary btn--large" href="{{ lp_offer_href }}" {% if soul_course_purchase_url %}rel="noopener noreferrer" target="_blank"{% endif %} data-track-click="lp_hero_primary_cta">講座に申し込む</a>
+      </div>
+      <p class="lpHero__microcopy">押し売りではなく、今の違和感の正体を言葉にしながら、自分の軸を整えていく講座です。</p>
+      <div class="lpTrust">
+        <span class="lpTrust__item">オンライン受講可</span>
+        <span class="lpTrust__item">少人数で実践型</span>
+        <span class="lpTrust__item">Zoom個人セッション2回つき</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="lpSection card" data-track-view="lp_empathy">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">こんな感覚に、心当たりはありませんか</h2>
+      <p class="lead">説明しにくい。だからこそ、一人で抱え込みやすい苦しさがあります。</p>
+    </div>
+    <div class="lpEmpathy">
+      <div class="panel">
+        <ul class="bullets lpEmpathy__list">
+          <li>何かを選ぶたびに、「これでいいのかな」と確信が持てない</li>
+          <li>頭では納得しているのに、身体や感覚がついてこない</li>
+          <li>周りから見れば順調なのに、自分の中ではずっとしっくりこない</li>
+          <li>やりたいことがわからないというより、本音がもう見えにくくなっている</li>
+          <li>前に進みたいのに、どこかでいつもブレーキがかかる</li>
+          <li>頑張っているのに満たされず、「まだ何か違う」が残る</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <p class="lpEmpathy__text">
+          怠けているわけではありません。<br />
+          何もしていないわけでもありません。<br />
+          むしろ、ずっと頑張ってきた人ほど、この違和感は深くなりやすいのです。
+        </p>
+        <p class="lpEmpathy__text">
+          だからこそ、表面的には順調に見える。<br />
+          でも内側では、ずっと落ち着かない。<br />
+          その孤独は、人に説明しにくいまま残ります。
+        </p>
+      </div>
+    </div>
+    <div class="actions lpSection__actions">
+      <a class="btn btn--primary" href="{{ lp_offer_href }}" {% if soul_course_purchase_url %}rel="noopener noreferrer" target="_blank"{% endif %} data-track-click="lp_empathy_cta">この講座で何が変わるかを見る</a>
+    </div>
+  </section>
+
+  <section class="lpSection card" data-track-view="lp_problem">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">問題は、あなたの弱さではありません</h2>
+      <p class="lead">努力不足でも、決断力不足でもなく、選択軸が外側に寄りすぎているだけかもしれません。</p>
+    </div>
+    <div class="lpSection__grid">
+      <article class="panel">
+        <div class="panel__title">正しさで選び続けるほど、自分の感覚は遠くなる</div>
+        <p>期待、評価、損得、嫌われないこと。外側の基準で選び続けると、本音より先に防衛反応が動くようになります。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">頭で納得しても、身体がついてこないとズレが生まれる</div>
+        <p>「これが正しい」と理解できる。でも胸が重い、呼吸が浅い、力が入る。そんなとき、選択と感覚は一致していません。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">迷いは欠陥ではなく、ズレに気づくサイン</div>
+        <p>迷いはナビの故障ではありません。ズレたまま進む前に、「このままでいいのか」と教えてくれる感覚です。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="lpSection card" data-track-view="lp_solution">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">この講座は、知識を増やす場所ではありません</h2>
+      <p class="lead">本来の自分の感覚を取り戻し、それを現実の選択に結び直すための講座です。</p>
+    </div>
+    <div class="lpValueList">
+      <article class="panel">
+        <div class="panel__title">何を学ぶのか</div>
+        <p>心のナビと魂のナビの違い。違和感の見方。身体感覚の読み方。迷いの意味。一致したときの選び方を扱います。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">何を取り戻すのか</div>
+        <p>誰かの正解ではなく、自分の本音と身体感覚に戻れる軸を取り戻します。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">受講後に起きること</div>
+        <p>人生、仕事、人間関係の選び方に、一致感が戻りやすくなります。迷っても、自分に戻る感覚が育ちます。</p>
+      </article>
+    </div>
+    <div class="actions lpSection__actions">
+      <a class="btn btn--primary" href="{{ lp_offer_href }}" {% if soul_course_purchase_url %}rel="noopener noreferrer" target="_blank"{% endif %} data-track-click="lp_solution_cta">受講内容を見る</a>
+    </div>
+  </section>
+
+  <section class="lpSection card" data-track-view="lp_before_after">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">受講前と受講後で、何が変わるのか</h2>
+    </div>
+    <div class="lpCompare">
+      <div class="panel lpCompare__card">
+        <div class="panel__title">受講前</div>
+        <ul class="bullets">
+          <li>何を選んでも不安が残る</li>
+          <li>正解を探し続ける</li>
+          <li>頭では理解しても心がついてこない</li>
+          <li>動いているのに進んでいる感じがしない</li>
+          <li>違和感があるのに、うまく言葉にできない</li>
+        </ul>
+      </div>
+      <div class="panel lpCompare__card lpCompare__card--accent">
+        <div class="panel__title">受講後</div>
+        <ul class="bullets">
+          <li>自分の感覚で選べるようになる</li>
+          <li>迷っても、戻れる軸がある</li>
+          <li>頭と身体の一致感が出てくる</li>
+          <li>行動が軽くなり、現実が動き始める</li>
+          <li>人に合わせるより、自分に合うかで選べるようになる</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="lpSection card" data-track-view="lp_curriculum">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">講座で扱うこと</h2>
+      <p class="lead">内容ではなく、「だから受講後に何が起きるのか」が見えるように設計しています。</p>
+    </div>
+    <div class="lpCurriculum">
+      <article class="panel">
+        <div class="panel__title">迷いはナビの故障ではない</div>
+        <p>迷いを否定せず、今の状態を正しく読む視点を持ちます。自分責めが少しずつほどけていきます。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">心のナビと魂のナビの違い</div>
+        <p>何に引っ張られて選んでいるのかが見えやすくなり、感覚の読み間違いが減っていきます。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">使命は探すものではなく思い出すもの</div>
+        <p>外に答えを探し続ける苦しさがやわらぎ、自分の中に残っていた感覚を拾いやすくなります。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">崩壊はズレを終わらせる合図</div>
+        <p>止まったように見える時期の意味が変わり、焦りよりも見直しの視点が持てるようになります。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">一致と循環で流れに乗る</div>
+        <p>無理に押し出すのではなく、一致した状態から動くことで現実の流れが軽くなりやすくなります。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">感じる／許す／動かす</div>
+        <p>感覚で終わらず、現実の選択まで落とし込むので、日常の変化につながりやすくなります。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">一致が先、行動は結果</div>
+        <p>とにかく動くのではなく、合っている状態から動く感覚が育ち、消耗しにくくなります。</p>
+      </article>
+    </div>
+    <div class="actions lpSection__actions">
+      <a class="btn btn--primary" href="{{ lp_offer_href }}" {% if soul_course_purchase_url %}rel="noopener noreferrer" target="_blank"{% endif %} data-track-click="lp_curriculum_cta">講座の詳細を確認する</a>
+    </div>
+  </section>
+
+  <section class="lpSection card" data-track-view="lp_instructor">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">なぜ、この講座を届けているのか</h2>
+    </div>
+    <div class="lpInstructor">
+      <div class="panel">
+        <p>
+          この講座を届けるのは、長年の美容・サービス業の現場で人を育て、事業を営みながら、
+          多くの人の「表面的な悩みの奥」にある本音やズレに向き合ってきた講師です。
+        </p>
+        <p>
+          人は、言葉で語る悩みと、本当に引っかかっていることが違う場合があります。
+          仕事、人間関係、将来の不安として現れていても、その奥には「自分の感覚がわからない」というズレがあることが少なくありません。
+        </p>
+      </div>
+      <div class="panel">
+        <p>
+          そうしたズレに、現場の人材育成や経営の中でも、キネシオロジーや感覚的アプローチの実践の中でも向き合ってきました。
+        </p>
+        <p>
+          だからこそこの講座は、感覚論だけで終わりません。精神論でもありません。
+          感じたことを、どう選択に結び直すか。どう現実に落とし込むか。そこまで一貫して扱います。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lpSection card" data-track-view="lp_voices">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">“よかった”ではなく、“変わった”の声</h2>
+      <p class="lead">受講前後の変化が伝わる声を掲載しています。</p>
+    </div>
+    <div class="lpValueList">
+      <article class="panel">
+        <div class="panel__title">「これで合ってるはずなのに苦しい」が、初めて言葉になった</div>
+        <p>申し込む前は順調に見えるのに苦しい状態でした。受講後は「私は正しさで選び続けていた」と気づき、迷っても自分の感覚に戻れるようになりました。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">頑張っているのに進まない理由がわかった</div>
+        <p>努力不足だと思っていたけれど、実際はズレたまま頑張っていたとわかりました。受講後は身体の反応を見ながら動けるようになりました。</p>
+      </article>
+      <article class="panel">
+        <div class="panel__title">感覚の話なのに、現実に落とし込めた</div>
+        <p>ふわっと終わる講座への警戒がありましたが、感じたことをどう選択に結び直すかまで扱ってくれたのが決め手でした。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="lpSection card" data-track-view="lp_fit">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">この講座が合う人、合わない人</h2>
+    </div>
+    <div class="lpCompare">
+      <div class="panel lpCompare__card">
+        <div class="panel__title">向いている人</div>
+        <ul class="bullets">
+          <li>頑張っているのに満たされない人</li>
+          <li>人生や仕事の方向性に迷っている人</li>
+          <li>正しい選択をしているのに苦しい人</li>
+          <li>自分の本音や感覚を取り戻したい人</li>
+          <li>表面的な自己啓発ではなく、本質的に変わりたい人</li>
+        </ul>
+      </div>
+      <div class="panel lpCompare__card">
+        <div class="panel__title">向いていない人</div>
+        <ul class="bullets">
+          <li>答えだけをすぐ欲しい人</li>
+          <li>誰かに正解を決めてほしい人</li>
+          <li>自分と向き合う時間を取りたくない人</li>
+          <li>一切の実践なしで変化だけ欲しい人</li>
+          <li>感覚や内側の変化に価値を感じない人</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="lpSection card" data-track-view="lp_faq">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">受講前によくいただく質問</h2>
+    </div>
+    <div class="lpFaq">
+      <details class="details"><summary>初心者でも大丈夫ですか？</summary><p>大丈夫です。専門知識がなくても、感覚を丁寧に言葉にするところから進めます。</p></details>
+      <details class="details"><summary>スピリチュアルに偏りすぎていませんか？</summary><p>過剰に神秘化せず、現実の選択や行動に落とし込む講座です。</p></details>
+      <details class="details"><summary>忙しくても受講できますか？</summary><p>はい。日常の中で実践できる形にしています。</p></details>
+      <details class="details"><summary>受講後はどんな場面で活かせますか？</summary><p>人生、仕事、人間関係など、日々の選択の場面で活かせます。</p></details>
+      <details class="details"><summary>どんな人が成果を感じやすいですか？</summary><p>違和感を放置したくない人、自分の選択軸を取り戻したい人です。</p></details>
+      <details class="details"><summary>価格に見合う価値はありますか？</summary><p>何を学ぶか以上に、これからの選び方そのものが変わる時間だからです。</p></details>
+      <details class="details"><summary>1回で変われますか？</summary><p>劇的変化を約束するものではありませんが、見方と選び方が変わるきっかけになります。</p></details>
+      <details class="details"><summary>感覚が鈍い人でも大丈夫ですか？</summary><p>大丈夫です。感じにくい人ほど、言葉と身体感覚を丁寧に結び直していきます。</p></details>
+      <details class="details"><summary>オンラインでも問題ありませんか？</summary><p>問題ありません。オンラインでも十分に取り組める設計です。</p></details>
+      <details class="details"><summary>申込後の流れは？</summary><p>お申し込み後、日程や参加方法、必要なご案内を順にお送りします。</p></details>
+    </div>
+  </section>
+
+  <section id="lpOffer" class="lpSection card" data-track-view="lp_offer">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">今回のご案内内容</h2>
+      <p class="lead">今回は 98,000円のまま、講座内容を現実の選択に落とし込むための Zoom個人セッション（60分）2回をお付けしています。</p>
+    </div>
+    <div class="lpOffer">
+      <div class="panel lpOffer__main">
+        <div class="panel__title">オファー概要</div>
+        <div class="lpOffer__rows">
+          <div><span>価格</span><strong>{{ soul_course_price }}</strong></div>
+          <div><span>形式</span><strong>{{ soul_course_format }}</strong></div>
+          <div><span>講座回数</span><strong>{{ soul_course_sessions }}</strong></div>
+          <div><span>期間</span><strong>{{ soul_course_period }}</strong></div>
+          {% if soul_course_support %}
+          <div><span>サポート</span><strong>{{ soul_course_support }}</strong></div>
+          {% endif %}
+          <div><span>特典</span><strong>{{ soul_course_bonus }}</strong></div>
+          <div><span>人数</span><strong>{{ soul_course_capacity }}</strong></div>
+          <div><span>締切</span><strong>満席になり次第終了</strong></div>
+          <div><span>申込後の流れ</span><strong>{{ soul_course_after_apply }}</strong></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel__title">今回の特典で受け取れること</div>
+        <p>値引きではなく、講座を「理解する」だけで終わらせず、あなた自身の迷い・決定・現実の動かし方に落とし込むための伴走を付けています。</p>
+        <ul class="bullets">
+          <li>講座内容をあなた自身の状況に引き寄せて整理できる</li>
+          <li>迷いが出た場面を、そのまま個別セッションで扱える</li>
+          <li>「わかった」で止まらず、「動ける」に変えやすい</li>
+        </ul>
+      </div>
+    </div>
+    <div class="actions lpSection__actions">
+      <a class="btn btn--primary btn--large" href="{{ lp_offer_href }}" {% if soul_course_purchase_url %}rel="noopener noreferrer" target="_blank"{% endif %} data-track-click="lp_offer_cta">個人セッション特典つきで申し込む</a>
+    </div>
+  </section>
+
+  <section class="lpSection card lpSection--final" data-track-view="lp_final_cta">
+    <div class="card__header">
+      <h2 class="h1 lpSection__title">本当はもう、気づいているのかもしれません</h2>
+      <p class="lead">
+        このまま外側の正解に合わせ続けるだけでは、また同じ迷いに戻ってしまうことを。<br />
+        必要なのは、もっと頑張ることではなく、自分の感覚に戻ることです。
+      </p>
+      <p class="lead">
+        誰かの期待ではなく。<br />
+        不安を避けるためでもなく。<br />
+        本音と身体感覚と一致したところから、もう一度選べるようになること。<br />
+        その時間を、ここから取り戻しませんか。
+      </p>
+    </div>
+    <div class="actions lpSection__actions">
+      <a class="btn btn--primary btn--large" href="{{ lp_offer_href }}" {% if soul_course_purchase_url %}rel="noopener noreferrer" target="_blank"{% endif %} data-track-click="lp_final_primary_cta">伴走特典つきで講座に申し込む</a>
+      <a class="btn btn--secondary" href="{{ lp_ai_href }}" data-track-click="lp_final_ai_cta">まだ迷う方はAI統合診断へ</a>
+    </div>
+  </section>
+{% endblock %}
+

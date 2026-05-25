@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "app_title": "魂のナビ診断AI",
+  "tagline": "身体感覚に寄り添う、無料の簡易チェック",
+  "total_steps": 5,
+  "questions": [
+    {
+      "id": "q1",
+      "step": 1,
+      "headline": "いま迷っているテーマ",
+      "body": "ひとつに決めなくて大丈夫です。いちばん気になっていることを、短くで構いません。",
+      "input": "textarea",
+      "placeholder": "例：転職、副業、人間関係、進路、休むタイミング…",
+      "required": true,
+      "min_length": 1,
+      "max_length": 800
+    },
+    {
+      "id": "q2",
+      "step": 2,
+      "headline": "言葉に近いのはどれですか？",
+      "body": "いちばん近いものをひとつ選んでください。",
+      "input": "radio",
+      "required": true,
+      "options": [
+        {
+          "value": "want",
+          "label": "やりたい",
+          "signals": { "yes": 2 }
+        },
+        {
+          "value": "want_but_scared",
+          "label": "やりたいけど、怖さや不安がある",
+          "signals": { "yes": 3, "yes_fear": 1 }
+        },
+        {
+          "value": "should",
+          "label": "やるべきだと思っている",
+          "signals": { "no": 2, "obligation": 1 }
+        },
+        {
+          "value": "must",
+          "label": "やらなきゃ・しなきゃ、と感じている",
+          "signals": { "no": 3, "obligation": 2 }
+        },
+        {
+          "value": "mixed",
+          "label": "まだはっきりしない／いくつか混ざっている",
+          "signals": { "mixed": 1 }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "step": 3,
+      "headline": "身体や感覚に近いもの",
+      "body": "当てはまるものをすべて選んでください（複数可）。",
+      "input": "checkbox",
+      "required": true,
+      "min_select": 1,
+      "options": [
+        {
+          "value": "light",
+          "label": "軽さや、ほっとする感じがある",
+          "signals": { "yes": 2, "body_yes": 1 }
+        },
+        {
+          "value": "expand",
+          "label": "広がりや余地を少し感じる",
+          "signals": { "yes": 2, "body_yes": 1 }
+        },
+        {
+          "value": "heavy",
+          "label": "重さやしんどさがある",
+          "signals": { "misalignment": 2, "body_heavy": 1 }
+        },
+        {
+          "value": "tense",
+          "label": "緊張や、身が縮む感じがある",
+          "signals": { "misalignment": 2, "body_tense": 1 }
+        },
+        {
+          "value": "unclear",
+          "label": "いまはよくわからない／感じにくい",
+          "signals": { "neutral": 1 }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "step": 4,
+      "headline": "現在の状態",
+      "body": "仕事・生活・心身など、いまの状態を自由に書いてください。",
+      "input": "textarea",
+      "placeholder": "例：忙しさは続いているが、睡眠は取れている。決断だけ先延ばし…",
+      "required": true,
+      "min_length": 1,
+      "max_length": 800
+    },
+    {
+      "id": "q5",
+      "step": 5,
+      "headline": "自由記述",
+      "body": "補足や本音、言いにくいことでも構いません。短くて大丈夫です。",
+      "input": "textarea",
+      "placeholder": "書きたいことがなければ「なし」とだけでも構いません。",
+      "required": true,
+      "min_length": 1,
+      "max_length": 1200
+    }
+  ]
+}

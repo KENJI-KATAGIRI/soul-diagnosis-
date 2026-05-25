@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ja" style="background-color:#0b1020">
+  <head>
+    <meta charset="utf-8" />
+    <style>html,body{background:#0b1020;margin:0}</style>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#0b1020" />
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WMR42GMR');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KRBFD7KHHZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KRBFD7KHHZ');
+    </script>
+    <!-- End Google Analytics 4 -->
+    <title>{% block title %}魂のナビ診断{% endblock %}</title>
+    <meta name="description" content="8問で現在地を確認し、必要な方は30問で深掘りできる魂のナビ診断です。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body data-page="{{ request.endpoint or '' }}">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMR42GMR"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="bg"></div>
+    {% set endpoint = request.endpoint or '' %}
+    {% if endpoint in ['index'] %}
+      {% set brand_subtitle = '30問で、いまの判断パターンと現在地を見る' %}
+    {% elif endpoint in ['result', 'result_view'] %}
+      {% set brand_subtitle = '30問の結果から、いまの現在地とズレやすいポイントを見る' %}
+    {% elif endpoint in ['diagnosis_email_gate'] %}
+      {% set brand_subtitle = '30問の本診断に進む前に、結果の受け取り先を設定する' %}
+    {% else %}
+      {% set brand_subtitle = '8問で、いまの状態を整理する無料診断' %}
+    {% endif %}
+    <header class="header">
+      <div class="container header__inner">
+        <div class="brand">
+          <div class="brand__mark" aria-hidden="true">魂</div>
+          <div class="brand__text">
+            <div class="brand__title">魂のナビ診断</div>
+            <div class="brand__subtitle">{{ brand_subtitle }}</div>
+          </div>
+        </div>
+        {% if endpoint not in ['landing', 'index', 'result', 'result_view', 'course_lp', 'simple_diagnosis', 'simple_result', 'diagnosis_email_gate'] %}
+          <nav class="header__nav" aria-label="サイト内">
+            <a class="link" href="{{ url_for('landing') }}">ホーム</a>
+            <a class="link" href="{{ url_for('index') }}">無料診断</a>
+            <a class="link" href="{{ diagnosis_line_funnel_url }}" rel="noopener noreferrer" target="_blank">次のステップ</a>
+            {% if soul_course_purchase_url %}
+              <a class="link link--course" href="{{ soul_course_purchase_url }}" rel="noopener noreferrer" target="_blank">講座</a>
+            {% endif %}
+          </nav>
+        {% endif %}
+      </div>
+    </header>
+
+    <main class="container main">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="fineprint">※この診断は自己理解の補助を目的とした簡易テストです。</div>
+        <nav class="footer__legal" aria-label="法的情報">
+          <a class="footer__legalLink" href="{{ privacy_policy_url }}" rel="noopener noreferrer" target="_blank">プライバシーポリシー</a>
+          <span class="footer__sep" aria-hidden="true"> | </span>
+          <a class="footer__legalLink" href="{{ tokusho_url }}" rel="noopener noreferrer" target="_blank">特定商取引法に基づく表記</a>
+          <span class="footer__sep" aria-hidden="true"> | </span>
+          <a class="footer__legalLink" href="{{ company_url }}" rel="noopener noreferrer" target="_blank">会社概要</a>
+        </nav>
+        <p class="footer__copy fineprint">© 2026 Gaia Arts Creation. All Rights Reserved.</p>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        function postEvent(payload) {
+          try {
+            fetch("{{ url_for('track_event') }}", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+              keepalive: true
+            });
+          } catch (e) {
+            // noop
+          }
+        }
+
+        function pushEvent(payload) {
+          window.dataLayer = window.dataLayer || [];
+          window.navFunnelEvents = window.navFunnelEvents || [];
+          window.dataLayer.push(payload);
+          window.navFunnelEvents.push(payload);
+          postEvent(payload);
+        }
+
+        function eventNameFromPage(page) {
+          if (page === "landing") return "diagnosis_lp_view";
+          if (page === "simple_diagnosis") return "simple_diagnosis_view";
+          if (page === "simple_result") return "simple_result_view";
+          if (page === "diagnosis_email_gate") return "diagnosis_email_gate_view";
+          if (page === "index") return "diagnosis_form_view";
+          if (page === "result" || page === "result_view") return "result_view";
+          if (page === "course_lp") return "course_lp_view";
+          return "page_view";
+        }
+
+        function eventNameFromTrackId(trackId) {
+          if (!trackId) return "";
+          if (trackId.indexOf("diagnosis_lp_") === 0 && trackId.indexOf("_cta") > -1) return "simple_diagnosis_start";
+          if (trackId === "simple_diagnosis_submit") return "simple_diagnosis_submit";
+          if (trackId === "simple_result_to_email_gate") return "simple_result_to_email_gate";
+          if (trackId === "diagnosis_email_gate_submit") return "lead_register_submit";
+          if (trackId === "diagnosis_submit") return "diagnosis_complete";
+          if (trackId === "result_line_register" || trackId === "result_to_next_step" || trackId === "result_early_to_video") return "line_gate_start";
+          if (trackId === "result_primary_course_lp") return "result_to_course_click";
+          if (trackId === "result_primary_education_bridge") return "result_to_education_bridge_click";
+          if (trackId === "result_secondary_course_lp") return "result_to_course_click";
+          if (trackId === "lp_final_ai_cta") return "ai_integration_click";
+          if (trackId === "result_secondary_premium") return "premium_report_click";
+          if (trackId === "education_video_premium_bundle_cta") return "premium_bundle_click";
+          if (trackId === "premium_generate_submit") return "premium_report_purchase";
+          if (trackId === "premium_unlock_submit" || trackId === "premium_demo_unlock_submit") return "premium_unlock_submit";
+          if (trackId.indexOf("lp_") === 0 && trackId.indexOf("_cta") > -1) return "course_apply_click";
+          return "";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+          var page = document.body.getAttribute("data-page");
+          if (page) {
+            pushEvent({ event: eventNameFromPage(page), page: page });
+          }
+
+          document.querySelectorAll("[data-track-view]").forEach(function (el) {
+            pushEvent({
+              event: "nav_section_view",
+              page: page,
+              trackId: el.getAttribute("data-track-view")
+            });
+          });
+
+          document.querySelectorAll("[data-track-click]").forEach(function (el) {
+            el.addEventListener("click", function () {
+              var trackId = el.getAttribute("data-track-click");
+              pushEvent({
+                event: eventNameFromTrackId(trackId) || "click",
+                page: page,
+                trackId: trackId
+              });
+            });
+          });
+
+          document.querySelectorAll("[data-track-submit]").forEach(function (el) {
+            el.addEventListener("submit", function () {
+              var trackId = el.getAttribute("data-track-submit");
+              pushEvent({
+                event: eventNameFromTrackId(trackId) || "submit",
+                page: page,
+                trackId: trackId
+              });
+            });
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
+

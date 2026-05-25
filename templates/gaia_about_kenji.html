@@ -1,0 +1,36 @@
+{% extends "gaia_seo_base.html" %}
+{% block seo_title %}Kenji Katagiri | Founder of Gaia Arts | Trainer and Human Development Professional{% endblock %}
+{% block og_title %}Kenji Katagiri | Founder of Gaia Arts{% endblock %}
+{% block seo_description %}Learn more about Kenji Katagiri, founder of Gaia Arts, with more than 30 years of experience in Japan’s beauty, service, and people development fields.{% endblock %}
+{% block og_description %}Kenji Katagiri—founder of Gaia Arts, trainer and human development professional.{% endblock %}
+{% block json_ld %}
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Kenji Katagiri | Founder of Gaia Arts | Trainer and Human Development Professional","description":"Learn more about Kenji Katagiri, founder of Gaia Arts, with more than 30 years of experience in Japan's beauty, service, and people development fields.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / About / Kenji Katagiri</nav>
+        <h1>About Kenji Katagiri</h1>
+        <p class="sub-lead">Kenji Katagiri is the founder of Gaia Arts and a human development professional with more than 30 years of experience in Japan’s beauty and service industries. His work combines practical field knowledge, people development, service quality, and a deep interest in internal alignment and decision-making.</p>
+
+        <section class="sub-section" aria-labelledby="kenji-bg">
+          <h2 id="kenji-bg">Background</h2>
+          <p>Over the course of his career, Kenji has been involved in salon management, team development, service education, and professional training. His experience has shown him that long-term results are created not only by skill, but by the relationship between mindset, communication, internal condition, and action.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="kenji-phil">
+          <h2 id="kenji-phil">Training philosophy</h2>
+          <p>Kenji’s approach is grounded in practical human development. He values training that helps people not only learn concepts, but also change how they show up in work and life. His programs often connect service standards, leadership, and inner alignment in a way that supports clearer decisions and stronger performance.</p>
+          <p>For a related perspective on individual body–mind coaching in Japan, see <a href="https://life-energy-coaching.net/" target="_blank" rel="noopener noreferrer">Life Energy Coaching (Nagoya)</a>—kept separate from Gaia Arts’ organizational and international focus.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="kenji-intl">
+          <h2 id="kenji-intl">International vision</h2>
+          <p>Through Gaia Arts, Kenji is building cross-border collaborations in Asia, especially in areas related to hospitality, leadership, education, beauty, and human development. His goal is to contribute through meaningful partnerships that combine Japanese standards with local relevance.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="kenji-cta">
+          <h2 id="kenji-cta">Next step</h2>
+          <p>To explore collaboration, training, or speaking opportunities with Kenji Katagiri, please contact Gaia Arts.</p>
+          <a class="btn" href="{{ url_for('site_root') }}#contact">Contact Gaia Arts</a>
+          <p class="sub-links"><a href="{{ url_for('gaia_services_hospitality') }}">Hospitality training</a> · <a href="{{ url_for('gaia_services_leadership') }}">Leadership development</a> · <a href="{{ url_for('gaia_region_cambodia') }}">Cambodia</a> · <a href="{{ url_for('gaia_insights') }}">Insights</a></p>
+        </section>
+{% endblock %}

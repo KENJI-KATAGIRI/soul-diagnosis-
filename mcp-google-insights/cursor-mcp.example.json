@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "gsc-ga4-readonly": {
+      "command": "/Users/あなたのユーザー/魂のナビ講座/.venv/bin/python3",
+      "args": ["-m", "mcp_google_insights"],
+      "cwd": "/Users/あなたのユーザー/魂のナビ講座/mcp-google-insights",
+      "env": {
+        "PYTHONPATH": ".",
+        "GOOGLE_APPLICATION_CREDENTIALS": "/absolute/path/to/service-account.json",
+        "GSC_SITE_LIFE_ENERGY": "sc-domain:life-energy-coaching.net",
+        "GSC_SITE_GAIAARTS": "sc-domain:gaiaarts.org",
+        "GA4_PROPERTY_ID_LIFE_ENERGY": "123456789",
+        "GA4_PROPERTY_ID_GAIAARTS": "987654321"
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{% extends "gaia_seo_base.html" %}
+{% block seo_title %}Hospitality Training in Asia | Service Quality &amp; Team Development | Gaia Arts{% endblock %}
+{% block og_title %}Hospitality Training in Asia | Service Quality &amp; Team Development | Gaia Arts{% endblock %}
+{% block seo_description %}Practical hospitality training for teams in Asia, focused on service quality, mindset, teamwork, and customer experience. Led by Kenji Katagiri.{% endblock %}
+{% block og_description %}Practical hospitality training for teams in Asia—service quality, mindset, teamwork, and customer experience.{% endblock %}
+{% block json_ld %}
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Hospitality Training in Asia | Service Quality and Team Development | Gaia Arts","description":"Practical hospitality training for teams in Asia, focused on service quality, mindset, teamwork, and customer experience. Led by Kenji Katagiri.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Services / Hospitality training</nav>
+        <h1>Hospitality Training for Service Teams in Asia</h1>
+        <p class="sub-lead">Great service is not created by technique alone. It is built through mindset, team alignment, communication, and the ability to respond to customers with consistency and care. At Gaia Arts, our hospitality training programs are designed to help service teams strengthen both their skills and their internal condition, so quality can be delivered in a natural and sustainable way.</p>
+
+        <section class="sub-section" aria-labelledby="hosp-focus">
+          <h2 id="hosp-focus">What this training focuses on</h2>
+          <p>Our hospitality training combines practical service development with inner leadership and team awareness. Depending on the client’s needs, the program can include service mindset, communication, customer care, professionalism, workplace attitude, and decision-making under pressure. The aim is not only to teach people what to do, but to help them understand how to show up in a way that improves service quality.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="hosp-who">
+          <h2 id="hosp-who">Who this is for</h2>
+          <p>This program is suitable for hospitality businesses, salons, beauty teams, customer-facing staff, education providers, and organizations that want to raise service standards while also developing people. It is especially useful in growing teams where technical knowledge exists, but consistency, communication, or service culture still need to be strengthened.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="hosp-approach">
+          <h2 id="hosp-approach">Our approach</h2>
+          <p>Kenji Katagiri brings more than 30 years of experience from Japan’s beauty and service industries. His approach is practical, human-centered, and built on real operational experience. Rather than relying only on theory, the training is designed to help participants connect mindset, action, and service quality in a way they can apply immediately.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="hosp-format">
+          <h2 id="hosp-format">Delivery format</h2>
+          <p>Training can be delivered as workshops, pilot programs, internal training sessions, or collaborative development projects. Programs can be adapted for local teams, business owners, managers, and trainers.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="hosp-cta">
+          <h2 id="hosp-cta">Next step</h2>
+          <p>If you would like to explore hospitality training for your team or organization, please contact Gaia Arts to discuss your goals.</p>
+          <a class="btn" href="{{ url_for('site_root') }}#contact">Contact Gaia Arts</a>
+          <p class="sub-links"><a href="{{ url_for('gaia_services_leadership') }}">Leadership development</a> · <a href="{{ url_for('gaia_region_cambodia') }}">Cambodia</a> · <a href="{{ url_for('gaia_about_kenji') }}">About Kenji Katagiri</a> · <a href="{{ url_for('site_root') }}#contact">Contact</a></p>
+        </section>
+{% endblock %}

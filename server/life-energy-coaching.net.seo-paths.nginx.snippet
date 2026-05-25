@@ -1,0 +1,114 @@
+# life-energy-coaching.net の server { ... } 内に追記
+# proxy_pass のポートは、同じ server 内の /lec/ 等と同じ upstream に合わせる（例: 8000 または 8001）
+#
+# 反映手順（VPS）:
+#   sudo nano /etc/nginx/sites-enabled/（該当ファイル）
+#   このブロックを server { } 内に貼り付け → 保存
+#   sudo nginx -t && sudo systemctl reload nginx
+#
+# 英語ページが nginx の plain「404 Not Found」になるときは、
+# 下の 2 つの location ^~ /en/... がサーバ設定に無い状態です。
+
+# LLMO対策: LLMクローラー向けファイル + SEOファイルをFlaskに転送
+location = /llms.txt {
+    proxy_pass http://127.0.0.1:8001;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+location = /robots.txt {
+    proxy_pass http://127.0.0.1:8001;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+location = /sitemap.xml {
+    proxy_pass http://127.0.0.1:8001;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+# 日本語サブページ + ブログ
+location ~ ^/(kinesiology|chakra-healing|blog)(/.*)?$ {
+    proxy_pass http://127.0.0.1:8001;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+# 英語（キネシオロジー・エネルギー）— 正規表現より優先される ^~ で明示
+location ^~ /en/kinesiology {
+    proxy_pass http://127.0.0.1:8001;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+location ^~ /en/chakra-healing {
+    proxy_pass http://127.0.0.1:8001;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+location ^~ /en/lec {
+    proxy_pass http://127.0.0.1:8001;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+location ^~ /en/blog {
+    proxy_pass http://127.0.0.1:8001;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+# /lec/en/ は英語LP。/lec/en/kinesiology 等より短いので、長い location と併用時は長い方が優先される。
+location ^~ /lec/en/ {
+    proxy_pass http://127.0.0.1:8001;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+
+location ^~ /lec/en/blog {
+    proxy_pass http://127.0.0.1:8001;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}

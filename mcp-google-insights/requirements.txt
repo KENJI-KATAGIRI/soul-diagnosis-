@@ -1,0 +1,4 @@
+# MCP サーバー専用（メインの app.py / Flask とは独立）
+google-api-python-client>=2.100.0,<3.0
+google-auth>=2.23.0,<3.0
+python-dotenv>=1.0,<2.0

@@ -1,0 +1,25 @@
+{# Gaia 共通ヘッダー（英語サイト）。アンカーはトップの各セクションへ。 #}
+<header class="site-header">
+  <div class="wrap">
+    <a href="{{ url_for('site_root') }}" class="site-logo">Gaia Arts</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="{{ url_for('site_root') }}#about" data-i18n="nav_about">About</a>
+      <a href="{{ url_for('gaia_services_hospitality') }}">Hospitality</a>
+      <a href="{{ url_for('gaia_services_leadership') }}">Leadership</a>
+      <a href="{{ url_for('site_root') }}#approach" data-i18n="nav_approach">Approach</a>
+      <a href="{{ url_for('gaia_region_cambodia') }}">Regions</a>
+      <a href="{{ url_for('gaia_japanese_product_sourcing') }}">Sourcing</a>
+      <a href="{{ url_for('gaia_insights') }}">Insights</a>
+      <a href="{{ url_for('gaia_jp_insights') }}" lang="ja" title="Japanese columns">日本語コラム</a>
+      <a href="{{ url_for('gaia_about_kenji') }}">Kenji</a>
+      <a href="{{ url_for('gaia_hair_salon') }}" lang="ja" title="名古屋・美容室">Salon</a>
+      <a href="{{ url_for('site_root') }}#contact" data-i18n="nav_contact">Contact</a>
+      <div class="lang-sw">
+        <button class="lang-btn lang-btn--active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ja">日本語</button>
+        <button class="lang-btn" data-lang="km">ខ្មែរ</button>
+        <button class="lang-btn" data-lang="mn">MN</button>
+      </div>
+    </nav>
+  </div>
+</header>

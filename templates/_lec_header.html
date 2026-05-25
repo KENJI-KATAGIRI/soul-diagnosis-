@@ -1,0 +1,27 @@
+{# LEC 共通ヘッダー。lec_header_brand_href: LP は #top、サブページは url_for('site_root') #}
+<header class="site-header">
+  <div class="wrap">
+    <a href="{{ lec_header_brand_href }}" class="brand">
+      <picture>
+        <source type="image/webp" srcset="{{ url_for('static', filename='gaia-logo.webp') }}" />
+        <img src="{{ url_for('static', filename='gaia-logo.png') }}" alt="GaiaArtsCreation" width="1024" height="1024" decoding="async" />
+      </picture>
+    </a>
+    <nav class="site-nav" aria-label="メイン">
+      <a href="{{ url_for('lec_landing') }}#about" data-i18n="nav_about">施術の内容</a>
+      <a href="{{ url_for('lec_landing') }}#profile" data-i18n="nav_profile">プロフィール</a>
+      <a href="{{ url_for('lec_landing') }}#voices" data-i18n="nav_voices">クライアント様の声</a>
+      <a href="{{ url_for('lec_landing') }}#details" data-i18n="nav_details">施術の詳細</a>
+      <a href="{{ url_for('lec_page_kinesiology_lec') }}" data-i18n="nav_kinesiology" data-href-ja="{{ url_for('lec_page_kinesiology_lec') }}" data-href-en="{{ url_for('lec_page_kinesiology_en_lec') }}">キネシオロジー</a>
+      <a href="{{ url_for('lec_page_chakra_healing_lec') }}" data-i18n="nav_energy" data-href-ja="{{ url_for('lec_page_chakra_healing_lec') }}" data-href-en="{{ url_for('lec_page_chakra_healing_en_lec') }}">エネルギー</a>
+      <a href="{{ url_for('lec_page_blog_lec') }}" data-i18n="nav_column" data-href-ja="{{ url_for('lec_page_blog_lec') }}" data-href-en="{{ url_for('lec_page_blog_en_lec') }}">心のコラム</a>
+      <a href="{{ url_for('lec_landing') }}#contact" data-i18n="nav_contact">オンライン予約</a>
+      <div class="lang-sw">
+        <button type="button" class="lang-btn lang-btn--active" data-lang="ja">日本語</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="km">ខ្មែរ</button>
+        <button type="button" class="lang-btn" data-lang="mn">MN</button>
+      </div>
+    </nav>
+  </div>
+</header>

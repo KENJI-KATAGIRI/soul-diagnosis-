@@ -1,0 +1,35 @@
+{% extends "gaia_seo_base.html" %}
+{% block seo_title %}Service Training Philippines | Hospitality &amp; Team Development | Gaia Arts{% endblock %}
+{% block og_title %}Service Training Philippines | Hospitality &amp; Team Development | Gaia Arts{% endblock %}
+{% block seo_description %}Service training and team development for businesses and organizations in the Philippines, focused on hospitality, mindset, and practical quality improvement.{% endblock %}
+{% block og_description %}Service training and team development in the Philippines—hospitality, mindset, and practical quality.{% endblock %}
+{% block json_ld %}
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Service Training Philippines | Hospitality and Team Development | Gaia Arts","description":"Service training and team development for businesses and organizations in the Philippines, focused on hospitality, mindset, and practical quality improvement.","url":"{{ seo_canonical_url }}","isPartOf":{"@type":"WebSite","name":"Gaia Arts","url":"https://gaiaarts.org"}}</script>
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ url_for('site_root') }}">Home</a> / Regions / Philippines</nav>
+        <h1>Service Training and Team Development for the Philippines</h1>
+        <p class="sub-lead">The Philippines has strong potential in hospitality, service, customer care, and people-centered industries. Gaia Arts supports organizations that want to strengthen service quality, team culture, and practical human development through training that connects mindset, professionalism, and action.</p>
+
+        <section class="sub-section" aria-labelledby="ph-focus">
+          <h2 id="ph-focus">Training focus</h2>
+          <p>Programs can include hospitality mindset, communication, customer response, professionalism, internal leadership, and team alignment. The purpose is to help participants not only understand good service in theory, but also embody it in daily work.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="ph-matters">
+          <h2 id="ph-matters">Why this matters</h2>
+          <p>In service industries, results are influenced not only by systems and procedures, but also by attitude, communication, and internal consistency. When these factors improve, customer experience and team performance often improve together.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="ph-partners">
+          <h2 id="ph-partners">Possible partners</h2>
+          <p>Gaia Arts is open to working with schools, service businesses, hospitality teams, beauty-related industries, and organizations that want to strengthen practical people development in the Philippines.</p>
+        </section>
+
+        <section class="sub-section" aria-labelledby="ph-cta">
+          <h2 id="ph-cta">Next step</h2>
+          <p>If you are interested in service training or human development programs in the Philippines, please contact Gaia Arts.</p>
+          <a class="btn" href="{{ url_for('site_root') }}#contact">Contact Gaia Arts</a>
+          <p class="sub-links"><a href="{{ url_for('gaia_services_hospitality') }}">Hospitality training</a> · <a href="{{ url_for('gaia_services_leadership') }}">Leadership development</a> · <a href="{{ url_for('gaia_about_kenji') }}">About Kenji Katagiri</a> · <a href="{{ url_for('gaia_region_cambodia') }}">Cambodia</a> · <a href="{{ url_for('gaia_region_indonesia') }}">Indonesia</a></p>
+        </section>
+{% endblock %}

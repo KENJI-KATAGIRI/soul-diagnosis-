@@ -1,0 +1,28 @@
+# コピー例: sudo cp server/soul-diagnosis.service.example /etc/systemd/system/soul-diagnosis.service
+# ユーザー名・パスは環境に合わせて編集後:
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now soul-diagnosis
+
+[Unit]
+Description=魂のナビ診断 Flask (Gunicorn)
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/apps/soul-diagnosis
+Environment=PATH=/home/ubuntu/apps/soul-diagnosis/.venv/bin
+# app.py は既定で .env を override 読み込み（.env の SMTP が unit の古い値より優先）
+ExecStart=/home/ubuntu/apps/soul-diagnosis/.venv/bin/gunicorn \
+  --bind 127.0.0.1:8000 \
+  --workers 2 \
+  --timeout 120 \
+  --access-logfile - \
+  --error-logfile - \
+  wsgi:application
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
