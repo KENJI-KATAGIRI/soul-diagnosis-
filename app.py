@@ -2463,6 +2463,20 @@ Booking and inquiries: https://life-energy-coaching.net/lec/#contact
         session["diagnosis_lead_synced"] = False
         session["lead_email"] = email
         session["lead_name"] = name
+        try:
+            import datetime as _dt
+            _lp = Path(__file__).resolve().parent / "data" / "leads.jsonl"
+            _lp.parent.mkdir(parents=True, exist_ok=True)
+            _entry = json.dumps({
+                "at": _dt.datetime.now(_dt.timezone.utc).isoformat(),
+                "email": email,
+                "name": name,
+                "simple_level": str(session.get("simple_result_level") or ""),
+                "source": "email_gate",
+            }, ensure_ascii=False)
+            _lp.open("a", encoding="utf-8").write(_entry + chr(10))
+        except Exception:
+            current_app.logger.exception("leads.jsonl write failed")
         _append_event("lead_register_complete", {"stage": "before_diagnosis"})
         return redirect(url_for("index"))
 
