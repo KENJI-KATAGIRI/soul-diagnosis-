@@ -533,6 +533,179 @@ def _lec_inquiries_file() -> Path:
     return root / "lec_inquiries.jsonl"
 
 
+
+def _lec_blocked_ips() -> set:
+    p = Path(__file__).resolve().parent / "data" / "lec_blocked_ips.txt"
+    if not p.exists():
+        return set()
+    result = set()
+    for line in p.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#"):
+            result.add(line)
+    return result
+
+
+def _lec_blocked_names() -> set:
+    p = Path(__file__).resolve().parent / "data" / "lec_blocked_names.txt"
+    if not p.exists():
+        return set()
+    result = set()
+    for line in p.read_text(encoding="utf-8").splitlines():
+        line = line.strip().lower()
+        if line and not line.startswith("#"):
+            result.add(line)
+    return result
+
+
+def _lec_rate_limited(ip: str) -> bool:
+    import datetime
+    LIMIT = 3
+    try:
+        filepath = _lec_inquiries_file()
+        if not filepath.exists():
+            return False
+        cutoff = datetime.datetime.utcnow() - datetime.timedelta(hours=24)
+        ip_norm = ip.split(",")[0].strip()
+        count = 0
+        with filepath.open(encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    entry = json.loads(line)
+                    ts = entry.get("created_at", "")
+                    created = datetime.datetime.fromisoformat(
+                        ts.replace("Z", "+00:00")
+                    ).replace(tzinfo=None)
+                    if created < cutoff:
+                        continue
+                    if entry.get("ip", "").split(",")[0].strip() == ip_norm:
+                        count += 1
+                except Exception:
+                    continue
+        return count >= LIMIT
+    except Exception:
+        return False
+
+
+
+# ── スパム自動検知 ──────────────────────────────────────────────────────────
+
+# 「値段を聞く」スパムで使われる多言語キーワード
+_SPAM_PRICE_PATTERNS = [
+    "wanted to know your price", "want to know your price",
+    "wollte ihren preis", "votre prix", "uw prijs", "su precio",
+    "quería saber", "quero saber", "cena", "preis wissen",
+    "знать цену", "цену", "bilmek istedim", "qiymət",
+    "muốn biết giá", "kumukūʻai", "makemake wau",
+    "ọnụahịa", "achọrọ m", "theastaigh uaim", "dia duit",
+    "htio sam znati", "meg akartam", "árát", "çmimin",
+    "gribēju zināt", "vēlējos uzzināt",
+]
+
+def _lec_spam_score(name: str, email: str, phone: str, message: str, ip: str) -> int:
+    """
+    スパムスコアを返す（0〜100）。60以上でスパム判定。
+    複数の要素を組み合わせて誤検知を減らす。
+    """
+    import re
+    score = 0
+    msg_lower = message.lower()
+
+    # 短いメッセージ（本物のお問い合わせはたいてい長い）
+    if len(message) < 80:
+        score += 25
+    if len(message) < 40:
+        score += 15  # 追加
+
+    # 価格問い合わせスパムパターン
+    for pattern in _SPAM_PRICE_PATTERNS:
+        if pattern in msg_lower:
+            score += 40
+            break
+
+    # 日本語・英語・韓国語以外の文字を使った短いメッセージ（多言語バラまき型）
+    jp_chars = len(re.findall(r"[\u3040-\u30ff\u4e00-\u9fff]", message))
+    if jp_chars == 0 and len(message) < 100:
+        score += 10
+
+    # 電話番号が異常に長い（偽物）
+    digits_only = re.sub(r"[^0-9]", "", phone)
+    if len(digits_only) > 12:
+        score += 20
+
+    # IPが既知のスパム送信元 /24 帯
+    ip_norm = ip.split(",")[0].strip()
+    if ip_norm.startswith("80.94.95."):
+        score += 30
+
+    return min(score, 100)
+
+
+def _lec_quarantine(payload: dict, score: int) -> None:
+    """スパム判定された送信をクォランティンファイルに保存し、LINE通知する。"""
+    import urllib.request as urlreq
+    p = Path(__file__).resolve().parent / "data" / "lec_quarantine.jsonl"
+    payload["spam_score"] = score
+    try:
+        with p.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(payload, ensure_ascii=False) + "\n")
+    except Exception:
+        pass
+
+    # IPが繰り返しスパムを送っていたら自動でブロックリストに追加
+    _lec_auto_block_ip(payload.get("ip", "").split(",")[0].strip())
+
+    # LINE通知（line_hair_token.txt を流用）
+    try:
+        token_path = Path("/home/ubuntu/.secrets/line_hair_token.txt")
+        owner_path = Path("/home/ubuntu/.secrets/owner_line_id.txt")
+        if not token_path.exists() or not owner_path.exists():
+            return
+        token = token_path.read_text().strip()
+        owner = owner_path.read_text().strip()
+        msg = (
+            f"🚨 スパム検知 (score={score})\n"
+            f"名前: {payload.get('name','')}\n"
+            f"IP: {payload.get('ip','')}\n"
+            f"メール: {payload.get('email','')}\n"
+            f"本文: {payload.get('message','')[:60]}"
+        )
+        body = json.dumps({"to": owner, "messages": [{"type": "text", "text": msg}]})
+        req = urlreq.Request(
+            "https://api.line.me/v2/bot/message/push",
+            data=body.encode(),
+            headers={"Content-Type": "application/json", "Authorization": f"Bearer {token}"},
+        )
+        urlreq.urlopen(req, timeout=5)
+    except Exception:
+        pass
+
+
+def _lec_auto_block_ip(ip: str) -> None:
+    """クォランティンに同一IPが3件以上あったら自動でIPブロックリストに追加する。"""
+    if not ip:
+        return
+    try:
+        q_path = Path(__file__).resolve().parent / "data" / "lec_quarantine.jsonl"
+        block_path = Path(__file__).resolve().parent / "data" / "lec_blocked_ips.txt"
+        if not q_path.exists():
+            return
+        count = sum(
+            1 for line in q_path.read_text(encoding="utf-8").splitlines()
+            if line.strip() and json.loads(line).get("ip", "").split(",")[0].strip() == ip
+        )
+        if count >= 3:
+            existing = block_path.read_text(encoding="utf-8") if block_path.exists() else ""
+            if ip not in existing:
+                with block_path.open("a", encoding="utf-8") as f:
+                    f.write(f"{ip}\n")
+    except Exception:
+        pass
+
+
 def _send_lec_notify_email(name: str, email: str, phone: str, lang: str, message: str) -> None:
     """Send notification email to admin when a LEC inquiry is received."""
     import smtplib
@@ -1563,6 +1736,17 @@ def create_app() -> Flask:
             flash("送信に失敗しました。時間をおいて再度お試しください。", "error")
             return redirect(url_for("lec_landing") + "#contact")
 
+        _client_ip = request.headers.get("X-Forwarded-For", request.remote_addr or "").split(",")[0].strip()
+        if _client_ip in _lec_blocked_ips():
+            flash("送信に失敗しました。時間をおいて再度お試しください。", "error")
+            return redirect(url_for("lec_landing") + "#contact")
+        if name.lower() in _lec_blocked_names():
+            flash("送信に失敗しました。時間をおいて再度お試しください。", "error")
+            return redirect(url_for("lec_landing") + "#contact")
+        if _lec_rate_limited(_client_ip):
+            flash("送信が多すぎます。しばらく時間をおいてからお試しください。", "error")
+            return redirect(url_for("lec_landing") + "#contact")
+
         if not name or not email or not message:
             flash("お名前・メールアドレス・お問い合わせ内容は必須です。", "error")
             return redirect(url_for("lec_landing") + "#contact")
@@ -1592,7 +1776,12 @@ def create_app() -> Flask:
 
         _append_event("lec_contact_submit", {"preferred_lang": preferred_lang, "has_video_url": bool(video_url)})
 
-        _send_lec_notify_email(name, email, phone, preferred_lang, message)
+        # スパム判定：スコアが高い場合はクォランティンに保存してメール通知しない
+        _spam_score = _lec_spam_score(name, email, phone, message, _client_ip)
+        if _spam_score >= 60:
+            _lec_quarantine(payload, _spam_score)
+        else:
+            _send_lec_notify_email(name, email, phone, preferred_lang, message)
 
         flash("お問い合わせを受け付けました。通常24時間以内にご返信します。", "success")
         return redirect(url_for("lec_landing") + "#contact")
