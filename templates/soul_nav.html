@@ -3,14 +3,18 @@
 {% block title %}魂タイプ診断｜魂のナビAI – 無料スピリチュアル自己診断{% endblock %}
 
 {% block head_extra %}
+<link rel="canonical" href="https://tamashiinavi.com/navi">
 <link rel="alternate" hreflang="ja" href="https://tamashiinavi.com/navi">
 <link rel="alternate" hreflang="x-default" href="https://tamashiinavi.com/navi">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<meta name="keywords" content="魂タイプ診断,スピリチュアル診断 無料,魂ナビ,魂の使命 診断,スピリチュアル 自己診断,魂タイプ 種類,魂ナビ AI診断">
+<meta name="keywords" content="魂タイプ診断,スピリチュアル診断 無料,魂ナビ,魂の使命 診断,スピリチュアル 自己診断,魂タイプ 種類,魂ナビ AI診断,魂タイプ 相性,スピリチュアル診断 当たる">
 <meta name="application-name" content="魂ナビ診断">
 <meta name="theme-color" content="#6B4FA0">
-<meta property="article:modified_time" content="2026-05-21T00:00:00+09:00">
+<meta property="article:published_time" content="2026-05-01T00:00:00+09:00">
+<meta property="article:modified_time" content="2026-05-29T00:00:00+09:00">
 <meta name="description" content="魂タイプ診断が無料・登録不要で体験できる魂ナビAI。AIとの対話で使命・奉仕・創造など6つの魂タイプを仮説として提示。スピリチュアル自己診断で人生の方向性を探ろう。">
+<meta name="llms-description" content="魂ナビ診断は無料のAI魂タイプ診断サービス。使命・奉仕・創造・探求・調和・変容の6タイプを対話形式で判定。登録不要。URL: https://tamashiinavi.com/navi">
+<meta name="llms-full-description" content="魂ナビ診断（tamashiinavi.com/navi）は、AIとの対話を通じて6種類の魂タイプ（使命タイプ・奉仕タイプ・創造タイプ・探求タイプ・調和タイプ・変容タイプ）を仮説として提示する無料スピリチュアル自己診断サービスです。会員登録不要・完全無料で利用でき、身体感覚（向き・ズレ）を活用した独自の対話型プロセスにより、自己理解と人生の方向性の探索をサポートします。診断後は48時間以内の具体的な行動提案も提供。有料のプレミアムレポートオプションあり。">
 {% endblock %}
 
 {% block extra_schema %}
@@ -48,69 +52,92 @@
       "screenshot": {
         "@type": "ImageObject",
         "url": "https://tamashiinavi.com/static/og-image.png",
-        "caption": "魂ナビ診断のスクリーンショット"
-      },
-      "author": {
-        "@type": "Organization",
-        "@id": "https://tamashiinavi.com/#organization"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "@id": "https://tamashiinavi.com/#organization"
-      },
-      "datePublished": "2024-01-01",
-      "dateModified": "2026-05-21"
+        "caption": "魂ナビ診断 スクリーンショット"
+      }
     },
     {
-      "@type": "ItemList",
-      "@id": "https://tamashiinavi.com/navi#soul-type-list",
-      "name": "魂ナビ診断 魂タイプ一覧",
-      "description": "魂ナビ診断（スピリチュアル自己診断）で判明する6つの魂のタイプ。使命・奉仕・創造・探求・調和・変容。",
-      "url": "https://tamashiinavi.com/navi#soul-type-list",
-      "numberOfItems": 6,
-      "itemListOrder": "https://schema.org/ItemListOrderAscending",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "使命タイプ",
-          "description": "明確なビジョンを持ち、社会や他者に大きな変化をもたらす役割を担う傾向。「何のために生きるか」が常に問いとしてある魂タイプ。"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "奉仕タイプ",
-          "description": "人のサポートや貢献に深い充足感を覚える魂タイプ。自己犠牲との境界線を引くことで本来の力が発揮される。"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "創造タイプ",
-          "description": "表現・制作・アイデアの具現化に喜びを感じる魂タイプ。独自の美意識と世界観が強みとなる。"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "探求タイプ",
-          "description": "真理・知識・未知の領域への探索を人生の軸にする魂タイプ。「なぜ？」を深め続けることが魂の充電になる。"
-        },
-        {
-          "@type": "ListItem",
-          "position": 5,
-          "name": "調和タイプ",
-          "description": "関係性のバランスを整え、場の安心感を生み出す役割の魂タイプ。対立を溶かす直感的な能力を持つ。"
-        },
-        {
-          "@type": "ListItem",
-          "position": 6,
-          "name": "変容タイプ",
-          "description": "自己変革と再生を繰り返しながら成長する魂タイプ。過去の困難が深い洞察と共感力に変わる。"
-        }
-      ]
+      "@type": "Dataset",
+      "@id": "https://tamashiinavi.com/navi#dataset",
+      "name": "魂タイプ分類データセット",
+      "description": "魂ナビ診断が使用する6種類の魂タイプ（使命タイプ・奉仕タイプ・創造タイプ・探求タイプ・調和タイプ・変容タイプ）の分類体系。各タイプの特徴・強み・課題・人生の方向性を構造化したスピリチュアル自己理解フレームワーク。",
+      "url": "https://tamashiinavi.com/navi",
+      "creator": {
+        "@type": "Organization",
+        "@id": "https://tamashiinavi.com/#organization",
+        "name": "魂ナビ"
+      },
+      "inLanguage": "ja",
+      "license": "https://tamashiinavi.com/terms",
+      "keywords": ["魂タイプ", "スピリチュアル診断", "自己理解", "魂の使命", "魂タイプ分類"],
+      "variableMeasured": [
+        "使命タイプ",
+        "奉仕タイプ",
+        "創造タイプ",
+        "探求タイプ",
+        "調和タイプ",
+        "変容タイプ"
+      ],
+      "isAccessibleForFree": true,
+      "dateModified": "2026-05-29"
+    },
+    {
+      "@type": "LearningResource",
+      "@id": "https://tamashiinavi.com/navi#learning",
+      "name": "魂タイプ診断で学ぶ自己理解ワーク",
+      "description": "魂ナビ診断を通じて、自分の魂タイプを理解し、人生の方向性・使命・強みを探求するセルフワーク。AIとの対話形式で5〜10分で完了。スピリチュアルな視点からの自己分析手法を学べる体験型リソース。",
+      "url": "https://tamashiinavi.com/navi",
+      "learningResourceType": "Self-assessment",
+      "educationalLevel": "beginner",
+      "teaches": [
+        "魂タイプの自己理解",
+        "スピリチュアルな自己分析",
+        "人生の方向性の探索",
+        "魂の使命の発見"
+      ],
+      "inLanguage": "ja",
+      "isAccessibleForFree": true,
+      "provider": {
+        "@type": "Organization",
+        "@id": "https://tamashiinavi.com/#organization",
+        "name": "魂ナビ"
+      },
+      "timeRequired": "PT10M",
+      "keywords": ["魂タイプ診断", "スピリチュアル 自己診断", "自己理解 ワーク", "魂の使命"]
+    },
+    {
+      "@type": "Event",
+      "@id": "https://tamashiinavi.com/navi#event",
+      "name": "魂ナビAI診断 常設体験",
+      "description": "魂ナビ診断は24時間365日いつでも無料で体験できる常設のAIスピリチュアル診断イベントです。登録不要・完全匿名で魂タイプ診断を体験できます。",
+      "url": "https://tamashiinavi.com/navi",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+      "startDate": "2026-05-01",
+      "location": {
+        "@type": "VirtualLocation",
+        "url": "https://tamashiinavi.com/navi"
+      },
+      "organizer": {
+        "@type": "Organization",
+        "@id": "https://tamashiinavi.com/#organization",
+        "name": "魂ナビ"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "JPY",
+        "availability": "https://schema.org/InStock",
+        "validFrom": "2026-05-01",
+        "url": "https://tamashiinavi.com/navi"
+      },
+      "isAccessibleForFree": true,
+      "inLanguage": "ja",
+      "keywords": ["魂タイプ診断", "スピリチュアル体験", "AI診断", "無料 スピリチュアル"]
     }
   ]
 }
 </script>
+{% endblock %}
 {% endblock %}
 
 {% block content %}
